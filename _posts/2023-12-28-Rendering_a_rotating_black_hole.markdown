@@ -5,4 +5,4 @@ categories: [physics, general relativity, black holes]
 tags: [black holes]     # TAG names should always be lowercase
 ---
 
-# Rendering a rotating black hole
+![]("images/black_hole_renders/hot_jet.png")
