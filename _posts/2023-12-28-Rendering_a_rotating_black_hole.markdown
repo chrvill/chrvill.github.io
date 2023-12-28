@@ -7,7 +7,7 @@ img_path: '../../images/black_hole_renders'
 math: true
 ---
 
-![](hot_jet.png)
+![](elle.jpg)
 
 $$
 \begin{equation}
