@@ -15,3 +15,5 @@ $$
   \frac{d^2 x^\mu}{d\lambda^2} + \Gamma^\mu_{\rho \sigma}\frac{dx^\rho}{d\lambda}\frac{dx^\sigma}{d\lambda} = 0,
 \end{equation}
 $$
+
+<iframe src="https://giphy.com/embed/ISI5rCda0ppzTcQFnL" width="480" height="254" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/ISI5rCda0ppzTcQFnL"></a></p>
