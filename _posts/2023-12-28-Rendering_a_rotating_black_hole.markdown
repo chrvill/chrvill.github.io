@@ -7,13 +7,6 @@ img_path: '../../images/black_hole_renders'
 math: true
 ---
 
-![](elle.jpg)
+## Introduction
 
-$$
-\begin{equation}
-  \label{eq: geodesic_equation}
-  \frac{d^2 x^\mu}{d\lambda^2} + \Gamma^\mu_{\rho \sigma}\frac{dx^\rho}{d\lambda}\frac{dx^\sigma}{d\lambda} = 0,
-\end{equation}
-$$
-
-<iframe src="https://giphy.com/embed/ISI5rCda0ppzTcQFnL" width="480" height="254" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/ISI5rCda0ppzTcQFnL"></a></p>
+The aim of this post is to describe in detail how one can create a visualization of a rotating black hole. There are of course many resources online describing how one can do this, but we generally found these to lack good explanations. Here we want to remedy this. Naturally, since black holes are consequences of general relativity, you need a fairly solid understanding of general relativity in order to understand the derivations of the equations we use. But the key *equations of motion* we use are just standard differential equations. So an understanding of how to solve differential equations numerically might suffice. 
