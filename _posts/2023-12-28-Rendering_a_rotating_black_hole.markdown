@@ -13,4 +13,4 @@ The aim of this post is to describe in detail how one can create a visualization
 
 Balls
 
-![What is this](../../images/black_hole_renders/hot_jet.png)
+'../../images/black_hole_renders/hot_jet.png'
