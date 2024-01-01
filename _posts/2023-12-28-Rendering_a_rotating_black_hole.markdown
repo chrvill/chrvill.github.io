@@ -13,4 +13,4 @@ The aim of this post is to describe in detail how one can create a visualization
 
 Balls
 
-'../../images/black_hole_renders/hot_jet.png'
+![](images/black_hole_renders/Elle-Fanning-elle-fanning-37950414-245-130.gif)
