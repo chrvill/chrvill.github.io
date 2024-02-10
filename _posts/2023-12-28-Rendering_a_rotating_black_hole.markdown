@@ -206,7 +206,7 @@ $$
 \end{equation}
 $$
 
-From [here](http://physics.unm.edu/Courses/Finley/p581/Handouts/Kerr/kerrnew.pdf) and [here](https://arxiv.org/abs/1506.01473v2) we have that the frame fields for the local ZAMO frame are given by
+From [here](https://citeseerx.ist.psu.edu/document?repid=rep1&type=pdf&doi=c4f5cec0107f3f04c41f87d8130ffe23cc3b3b71) and [here](https://arxiv.org/abs/1506.01473v2) we have that the frame fields for the local ZAMO frame are given by
 
 $$
 \begin{align*}
