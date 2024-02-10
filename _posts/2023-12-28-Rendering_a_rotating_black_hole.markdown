@@ -255,7 +255,9 @@ In order to hopefully alleviate some confusion regarding the approach here we li
 3. Transform the four-momenta of the photons from the local ZAMO frame to the global frame using the ZAMO tetrads
 
 #### Step 1
---------------------------------------------------------------
+___
+
+From above we know how to transform from a local ZAMO frame to the global frame using the ZAMO tetrads.
 
 ## References
 
