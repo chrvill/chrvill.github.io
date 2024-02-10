@@ -535,6 +535,41 @@ Approximations to these color matching functions can be found in [6]. But it tur
 
 ![The color matching functions](miscellaneous/color_matching_functions.png)
 
+While we have color-coded the different color matching functions, the three values $X, Y$ and $Z$ do not directly correspond to red, green and blue. Instead $X, Y$ and $Z$ live in an abstract color space.
+
+### The chromaticity diagram
+
+When we talk about colors we tend to group them into "classes" of colors that are similar, like greens, reds, blues etc. And we have an intuition that some of those colors are actually the same basic colors, just with different brightnesses, or more precisely *luminances*. And the quantity that is the same between different luminances is called the *chromaticity*.
+
+To explain this in more detail we can study the *chromaticity diagram*. This is a 2d plot which shows the chromaticities corresponding to different points in $XYZ$ space. And the color matching functions give us a map between spectra and the $XYZ$ space. Consider now a spectrum consisting entirely of a single wavelength $\lambda_0$ - which is to say monochromatic light. We can represent this mathematically by $I_\lambda\left(\lambda\right) = \delta\left(\lambda - \lambda_0\right)$ (nevermind the units or the scaling), where $\delta\left(x - y\right)$ is the Dirac-delta "function". Plugging this into \eqref{eq: color_X} - \eqref{eq: color_Z} gives
+
+$$
+\begin{align*}
+  X &= \bar{x}\left(\lambda_0\right) \\ \\
+  Y &= \bar{y}\left(\lambda_0\right) \\ \\
+  Z &= \bar{z}\left(\lambda_0\right).
+\end{align*}
+$$
+
+So if we let $\lambda_0$ vary over the visible range we can trace out the curve in $XYZ$ space made by the wavelengths in the visible spectrum. But in order to visualize this space in 2d we define the new coordinates $x$ and $y$ through
+
+$$
+\begin{align*}
+  x &= \frac{X}{X + Y + Z} \label{eq: x_cie1931} \tag{37}\\ \\
+  y &= \frac{Y}{X + Y + Z} \label{eq: y_cie1931} \tag{38}.
+\end{align*}
+$$
+
+It also naturally follows that we can define $z = \frac{Z}{X + Y + Z} = 1 - x - y$. We can now plot the $(x, y)$ coordinates of the monochromatic spectrum as we vary $\lambda_0$, and the resulting curve is called the \textit{spectral locus}, and is shown in the following figure. The marked points show where different wavelengths fall on the spectral locus.
+
+![The spectral locus](miscellaneous/chromaticity_diagram_without_planckian_locus.png)
+
+This spectral locus is the boundary of the chromaticity diagram mentioned earlier, and which is shown in [this](https://en.wikipedia.org/wiki/CIE_1931_color_space) Wikipedia article. Here we have colored in the different points along the spectral locus according to which RGB color they correspond to. But we have not yet explained how we can compute these RGB colors from the $x$ and $y$ values, we get to that later.
+
+We can also calculate the curve in the chromaticity diagram which represents the color of blackbodies at different temperatures. This just involves calculating $X, Y$ and $Z$ from the spectrum $I_\lambda\left(\lambda; T\right)$ for varying $T$. The resulting curve in $(x, y)$ coordinates is called the *Planckian locus* (or equivalently the *blackbody locus*). Plotted together with the spectral locus the result we get is shown in the following figure where the thick curve represents the Planckian locus. We have again calculated the RGB color for each point along the Planckian locus.
+
+![The Planckian locus](miscellaneous/chromaticity_diagram_with_planckian_locus.png)
+
 ## References
 
 [1] Sean M. Carroll. Spacetime and Geometry: An Introduction to General Relativity. Cambridge University Press, 2019
