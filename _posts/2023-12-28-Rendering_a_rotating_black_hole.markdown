@@ -72,6 +72,98 @@ $$
 
 A relativistic effect which is unique to rotating black holes is *frame dragging*. This effect describes how the rotation of the black hole "drags" spacetime along with it, causing initially radially infalling frames to gain a non-zero angular velocity. In Schwarzschild we typically talk of *shell observers*, which are observers stationary in the Schwarzschild coordinates. But due to frame dragging these shell observers are no longer as natural in Kerr. Here it is more natural to talk of frames co-rotating with the black hole, so called *Zero Angular Momentum Observers* (ZAMO). A result of frame dragging is that there exists a region of spacetime called the *ergosphere* where it is impossible to move against the rotation of the black hole.
 
+### Transformation between Cartesian and Boyer-Lindquist coordinates
+
+We will need to convert vectors between Cartesian and BL coordinates multiple times, so a coordinate transformation between these is necessary. This is most easily done by studying an infinitesimal displacement vector $d\vec{r}$ expressed in the two coordinate systems. This can be written as
+
+$$
+\begin{equation}
+  \label{eq: infinitesimal_displacement_Cartesian} \tag{5}
+  d\vec{r} = dx \; \vec{\hat{x}} + dy \; \vec{\hat{y}} + dz \; \vec{\hat{z}}
+\end{equation}
+$$
+
+in Cartesian, and
+
+$$
+\begin{equation}
+  \label{eq: infinitesimal_displacement_spheroidal} \tag{6}
+  d\vec{r} = Rdr \; \vec{\hat{r}} + \Theta d\theta \; \vec{\hat{\theta}} + \Phi d\phi \; \vec{\hat{\phi}}
+\end{equation}
+$$
+
+in BL coordinates. Here $\vec{\hat{r}}, \vec{\hat{\theta}}$ and $\vec{\hat{\phi}}$ are the unit vectors in the BL coordinate system and $R, \Theta$ and $\Phi$ are scaling parameters defined such that $\vec{\hat{r}}, \vec{\hat{\theta}}$ and $\vec{\hat{\phi}}$ are unit vectors. These two expressions describe the same displacement vector, so they are necessarily equal. The easiest way of finding the expressions for the unit vectors is to write $dx, dy$ and $dz$ as total differentials with respect to $r, \theta$ and $\phi$. Then we set the two formulations of $d\vec{r}$ equal to each other and match the coefficients of the $dr, d\theta$ and $d\phi$ terms on both sides. But first, for the total differentials we get
+
+$$
+\begin{align*}
+  dx &= \frac{\partial x}{\partial r} dr + \frac{\partial x}{\partial \theta}d\theta + \frac{\partial x}{\partial \phi}d\phi \\ \\
+  &= \frac{r}{\sqrt{r^2 + a^2}}\sin\theta\cos\phi \; dr + \sqrt{r^2 + a^2}\cos\theta \cos\phi \; d\theta - \sqrt{r^2 + a^2}\sin\theta \sin\phi \; d\phi \\ \\
+  dy &= \frac{\partial y}{\partial r} dr + \frac{\partial y}{\partial \theta} d\theta + \frac{\partial y}{\partial \phi}d\phi \\ \\
+  &= \frac{r}{\sqrt{r^2 + a^2}}\sin\theta\sin\phi \; dr + \sqrt{r^2 + a^2}\cos\theta \sin\phi \: d\theta + \sqrt{r^2 + a^2}\sin\theta \cos\phi \; d\phi \\ \\
+  dz &= \frac{\partial z}{\partial r}dr + \frac{\partial z}{\partial \theta}d\theta + \frac{\partial z}{\partial \phi}d\phi \\ \\
+  &= \cos\theta \; dr - r\sin\theta \; d\theta
+\end{align*}
+$$
+
+Matching the terms containing $dr$ in $\eqref{eq: infinitesimal_displacement_Cartesian}$ and $\eqref{eq: infinitesimal_displacement_spheroidal}$, by inserting the terms in $dx, dy$ and $dz$ containing $dr$ into $\eqref{eq: infinitesimal_displacement_Cartesian}$ we get
+
+$$
+\begin{equation}
+  R\vec{\hat{r}} = \frac{r}{\sqrt{r^2 + a^2}}\sin\theta \cos\phi \; \vec{\hat{x}} + \frac{r}{\sqrt{r^2 + a^2}}\sin\theta \sin\phi \; \vec{\hat{y}} + \cos\theta \;\vec{\hat{z}}
+\end{equation}
+$$
+
+We can then determine the scaling parameter $R$ by finding the norm of $R\vec{\hat{r}}$ and using the defining property $\left|\vec{\hat{r}}\right| = 1$.
+
+$$
+\begin{align*}
+  R^2 &= \frac{r^2}{r^2 + a^2}\sin^2\theta + \cos^2\theta \\ \\
+  &= \frac{r^2 + a^2 \cos^2\theta}{r^2 + a^2} \\ \\
+  \implies R &= \sqrt{\frac{r^2 + a^2\cos^2\theta}{r^2 + a^2}}
+\end{align*}
+$$
+
+And thus the unit vector $\vec{\hat{r}}$ is given by
+
+$$
+\begin{equation}
+  \label{eq: r_unit_vector} \tag{7}
+  \vec{\hat{r}} = \frac{1}{\sqrt{r^2 + a^2\cos^2\theta}}\left[r\sin\theta \cos\phi \; \vec{\hat{x}} + r\sin\theta \sin\phi \; \vec{\hat{y}} + \sqrt{r^2 + a^2}\cos\theta \; \vec{\hat{z}}\right].
+\end{equation}
+$$
+
+Completely analogous procedures can be followed for $\theta$ and $\phi$ by matching the $d\theta$ terms on both sides and then the $d\phi$ terms on both sides. We will skip the steps here, because they are exactly the same as for $\vec{\hat{r}}$, but we end up with the following
+
+$$
+\begin{align*}
+  \vec{\hat{\theta}} &= \frac{1}{\sqrt{r^2 + a^2 \cos^2\theta}}\left[\sqrt{r^2 + a^2}\cos\theta \cos\phi \; \vec{\hat{x}} + \sqrt{r^2 + a^2}\cos\theta \sin\phi \; \vec{\hat{y}} - r\sin\theta \; \vec{\hat{z}}\right] \\ \\
+  \vec{\hat{\phi}} &= -\sin\phi \;\vec{\hat{x}} + \cos\phi \;\vec{\hat{y}}.
+\end{align*}
+$$
+
+We can therefore write the relation between the BL unit vectors and the Cartesian ones in a matrix form as follows
+
+$$
+\begin{equation}  
+  \label{eq: unit_vector_relation} \tag{8}
+  \left[\begin{matrix}
+          \vec{\hat{r}} \\
+          \vec{\hat{\theta}} \\
+          \vec{\hat{\phi}}
+        \end{matrix}\right] = \left[\begin{matrix}
+                                \frac{r\sin\theta \cos\phi}{\sqrt{r^2 + a^2\cos^2\theta}} & \frac{r\sin\theta \sin\phi}{\sqrt{r^2 + a^2\cos^2\theta}} & \frac{\sqrt{r^2 + a^2}\cos\theta}{\sqrt{r^2 + a^2\cos^2\theta}} \\
+                                \frac{\sqrt{r^2 + a^2}\cos\theta \cos\phi}{\sqrt{r^2 + a^2\cos^2\theta}} & \frac{\sqrt{r^2 + a^2}\cos\theta \sin\phi}{\sqrt{r^2 + a^2\cos^2\theta}} & -\frac{r\sin\theta}{\sqrt{r^2 + a^2\cos^2\theta}} \\
+                                -\sin\phi & \cos\phi & 0
+                                \end{matrix}\right] \left[\begin{matrix}
+                                                \vec{\hat{x}} \\
+                                                \vec{\hat{y}} \\
+                                                \vec{\hat{z}}
+                                                          \end{matrix}\right]
+\end{equation}
+$$
+
+Let us call this coordinate transformation matrix $M$. It is fairly easy to check that this is an orthogonal matrix, meaning that $M^{-1} = M^T$ (just compute $M^T M$, which is equal to $\mathbb{I}$ for orthogonal matrices $M$). And in that case the inverse transformation, from BL to Cartesian coordinates, is given by $M^T$. Now, of course this is the coordinate transformation between the Cartesian and BL *basis vectors*. And we want the transformation between \textit{vector components}. But it turns out the coordinate transformation for the vector components is the same as for the basis vectors, as is shown by Lutz Lehmann [here](https://math.stackexchange.com/questions/3493647/do-coordinate-components-transform-in-the-same-or-opposite-way-as-their-bases).
+
 ## General relativistic raymarching
 
 ### Geodesics
@@ -80,7 +172,7 @@ In order to visualize the black hole we need to trace *geodesics* in the Kerr sp
 
 $$
 \begin{equation}
-  \label{eq: geodesic_equation} \tag{5}
+  \label{eq: geodesic_equation} \tag{9}
   \frac{d^2 x^\mu}{d\lambda^2} + \Gamma^\mu_{\rho \sigma}\frac{dx^\rho}{d\lambda}\frac{dx^\sigma}{d\lambda} = 0,
 \end{equation}
 $$
@@ -91,7 +183,7 @@ We of course have the normalization requirement
 
 $$
 \begin{equation}
-    \label{eq: normalization} \tag{6}
+    \label{eq: normalization} \tag{10}
     p_\nu p^\nu = \mu
 \end{equation}
 $$
@@ -100,7 +192,7 @@ with $\mu = 0$ for massless particles like photons and $\mu = -1$ for massive pa
 
 $$
 \begin{equation}
-    \label{eq: normalization_explicit} \tag{7}
+    \label{eq: normalization_explicit} \tag{11}
     g_{tt} \left(p^t\right)^2 + g_{rr}\left(p^r\right)^2 + g_{\theta\theta} \left(p^\theta\right)^2 + g_{\phi \phi}\left(p^\phi\right)^2 + 2g_{t\phi} p^t p^\phi = \mu
 \end{equation}
 $$
@@ -109,7 +201,7 @@ When we choose initial directions for our rays we will essentially provide the s
 
 $$
 \begin{equation}
-    \label{eq: p^t expression} \tag{8}
+    \label{eq: p^t expression} \tag{12}
     p^t = -\frac{g_{t\phi}}{g_{tt}} p^\phi \pm \sqrt{\left(\frac{g_{t\phi}}{g_{tt}} p^\phi\right)^2 - \frac{1}{g_{tt}}\left(g_{rr} \left(p^r\right)^2 + g_{\theta\theta} \left(p^\theta\right)^2 + g_{\phi \phi} \left(p^\phi\right)^2 - \mu\right)}
 \end{equation}
 $$
@@ -122,7 +214,7 @@ Numerically \eqref{eq: geodesic_equation} is just a completely standard second o
 
 $$
 \begin{equation}
-    \label{eq: general_diff_eq} \tag{9}
+    \label{eq: general_diff_eq} \tag{13}
   \frac{dy}{dt} = f(t, y).
 \end{equation}
 $$
@@ -174,9 +266,9 @@ $$
 
 where $\epsilon$ is a tolerance value we can choose in order to specify the level of accuracy we want to achieve. Then, if $TE > \epsilon$ the error is too big and so we replace $h$ with $h_\text{new}$ and repeat the step. We perform this iteration until $TE < \epsilon$. And then in the next step we use this value of $h_\mathrm{new}$ as the new $h$.
 
-## Relativistic aberration
+### Relativistic aberration
 
-### Tetrads
+#### Tetrads
 
 Before we explain aberration we will do a short detour explaining what *tetrads* are.
 
@@ -184,7 +276,7 @@ From the equivalence principle we know that we can always transform to a local i
 
 $$
 \begin{equation}
-    \label{eq: vierbein_metric_diagonalization} \tag{10}
+    \label{eq: vierbein_metric_diagonalization} \tag{14}
     g_{\mu \nu} e_m^{\mu} e_n^{\nu} = \eta_{m n},
 \end{equation}
 $$
@@ -201,7 +293,7 @@ Using this we can also write
 
 $$
 \begin{equation}
-    \label{eq: inverse_vierbein_def} \tag{11}
+    \label{eq: inverse_vierbein_def} \tag{15}
     \eta_{mn} e^{*m}_{\mu} e^{*n}_{\nu} = g_{\mu \nu}.
 \end{equation}
 $$
@@ -210,10 +302,10 @@ From [here](https://citeseerx.ist.psu.edu/document?repid=rep1&type=pdf&doi=c4f5c
 
 $$
 \begin{align*}
-  e_t^{\mu} &= \delta_t^{\mu} \sqrt{\frac{\Lambda}{\Delta \Sigma}} + \delta_\phi^\mu \frac{2ar}{\sqrt{\Lambda \Delta \Sigma}} \label{eq: vierbein_tmu} \tag{12} \hspace{1.1cm}\\ \\
-  e_r^{\mu} &= \delta_r^{\mu} \sqrt{\frac{\Delta}{\Sigma}} \label{eq: vierbein_rmu} \tag{13} \\ \\
-  e_{\theta}^{\mu} &= \delta_\theta^\mu \frac{1}{\sqrt{\Sigma}} \label{eq: vierbein_thetamu} \tag{14} \\ \\
-  e_{\phi}^{\mu} &= \delta_\phi^\mu \sqrt{\frac{\Sigma}{\Lambda}}\frac{1}{\sin \theta}. \label{eq: vierbein_phimu} \tag{15}
+  e_t^{\mu} &= \delta_t^{\mu} \sqrt{\frac{\Lambda}{\Delta \Sigma}} + \delta_\phi^\mu \frac{2ar}{\sqrt{\Lambda \Delta \Sigma}} \label{eq: vierbein_tmu} \tag{16} \hspace{1.1cm}\\ \\
+  e_r^{\mu} &= \delta_r^{\mu} \sqrt{\frac{\Delta}{\Sigma}} \label{eq: vierbein_rmu} \tag{17} \\ \\
+  e_{\theta}^{\mu} &= \delta_\theta^\mu \frac{1}{\sqrt{\Sigma}} \label{eq: vierbein_thetamu} \tag{18} \\ \\
+  e_{\phi}^{\mu} &= \delta_\phi^\mu \sqrt{\frac{\Sigma}{\Lambda}}\frac{1}{\sin \theta}. \label{eq: vierbein_phimu} \tag{19}
 \end{align*}
 $$
 
@@ -221,10 +313,10 @@ while the co-frame fields are given by
 
 $$
 \begin{align*}
-  e^{*t}_{\mu} &= \delta_\mu^t \sqrt{\frac{\Delta \Sigma}{\Lambda}} \label{eq: vierbein^tmu} \tag{16} \\ \\
-  e^{*r}_{\mu} &= \delta_\mu^r \sqrt{\frac{\Sigma}{\Delta}} \label{eq: vierbein^rmu} \tag{17} \\ \\
-  e^{*\theta}_{\mu} &= \delta_\mu^\theta \sqrt{\Sigma} \label{eq: vierbein^thetamu} \tag{18} \\ \\
-  e^{*\phi}_{\mu} &= -\delta_\mu^t \frac{2ar\sin\theta}{\sqrt{\Lambda \Sigma}} + \delta_{\mu}^{\phi} \sin\theta \sqrt{\frac{\Lambda}{\Sigma}}. \label{eq: vierbein^phimu} \tag{19}
+  e^{*t}_{\mu} &= \delta_\mu^t \sqrt{\frac{\Delta \Sigma}{\Lambda}} \label{eq: vierbein^tmu} \tag{20} \\ \\
+  e^{*r}_{\mu} &= \delta_\mu^r \sqrt{\frac{\Sigma}{\Delta}} \label{eq: vierbein^rmu} \tag{21} \\ \\
+  e^{*\theta}_{\mu} &= \delta_\mu^\theta \sqrt{\Sigma} \label{eq: vierbein^thetamu} \tag{22} \\ \\
+  e^{*\phi}_{\mu} &= -\delta_\mu^t \frac{2ar\sin\theta}{\sqrt{\Lambda \Sigma}} + \delta_{\mu}^{\phi} \sin\theta \sqrt{\frac{\Lambda}{\Sigma}}. \label{eq: vierbein^phimu} \tag{23}
 \end{align*}
 $$
 
@@ -244,7 +336,7 @@ $$
 \end{equation}
 $$
 
-### Implementing aberration
+#### Implementing aberration
 
 Our approach to initializing the light-rays emitted by the camera is to emit rays as described in section \ref{sec: initializing_rays}. These initial values for the rays describe the $x$-, $y$- and $z$-components of the initial four-momenta of the rays. We have to convert these to BL coordinates, and then calculate $p^t$ from those components using the requirement that $p^\mu p_\mu = 0$ for photons. One might then assume that we can then just plug in this initial four-momentum $p^\mu$ of each ray into the geodesic equation to calculate the evolution of the position and four-momentum of each ray. But this is not correct in general. If the camera is moving then these initial $p^\mu$ values that we choose for the rays emitted by the camera are expressed in the instantaneous rest frame of the camera. And the geodesic equation is working in the global frame. So we have to perform the transformation from the instantaneous camera rest frame to the global frame before we can proceed to solving the geodesic equation. By implementing this transformation we will also get the effect of *relativistic aberration* for free. Relativistic aberration denotes the changes in angles between different reference frames when the frames are moving at relativistic speeds relative to each other. This aberration causes the distribution of the rays we emit from our camera to change in the global frame depending on the four-velocity of the camera. And this manifests in the simulations through changes in the field of view and an apparent "bending" of the accretion disk.
 
@@ -254,14 +346,14 @@ In order to hopefully alleviate some confusion regarding the approach here we li
 2. Lorentz transform the initial photon four-momenta from the instantaneous camera rest frame to the local ZAMO frame
 3. Transform the four-momenta of the photons from the local ZAMO frame to the global frame using the ZAMO tetrads
 
-#### Step 1
+##### Step 1
 ___
 
 From above we know how to transform from a local ZAMO frame to the global frame using the ZAMO tetrads. So we will first have to transform from the instantaneous camera rest frame to the local ZAMO frame, in order to then use the tetrads from Appendix \ref{app: tetrads} to finally transform to the global frame. Let the camera have four-velocity $u^\mu$ in the global coordinate frame. Also note for later that this four-velocity will be expressed in BL coordinates. Imagine then a ZAMO frame at the same position as the camera. The four-velocity of the camera in the ZAMO tetrad frame is given by
 
 $$
 \begin{equation}
-    \label{eq: local_camera_four_vel} \tag{20}
+    \label{eq: local_camera_four_vel} \tag{24}
     \tilde{u}^m = e^m_{\mu} u^{\mu},
 \end{equation}
 $$
@@ -270,21 +362,21 @@ Since this four-velocity is measured in a local inertial frame it can also be ex
 
 $$
 \begin{equation}
-  \label{eq: ZAMO_four_velocity_camera} \tag{21}
+  \label{eq: ZAMO_four_velocity_camera} \tag{25}
   \tilde{u}^m = \gamma\left(1, \vec{v}\right),
 \end{equation}
 $$
 
-where $\gamma = \frac{1}{\sqrt{1 - \vec{v}^2}}$ and $\vb{v}$ is the local velocity of the camera in the ZAMO frame. Then $\gamma = \tilde{u}^t$, and so the components $v^i$ of the local velocity $\vec{v}$ of the camera in the ZAMO frame are given by
+where $\gamma = \frac{1}{\sqrt{1 - \vec{v}^2}}$ and $\vec{v}$ is the local velocity of the camera in the ZAMO frame. Then $\gamma = \tilde{u}^t$, and so the components $v^i$ of the local velocity $\vec{v}$ of the camera in the ZAMO frame are given by
 
 $$
 \begin{equation}
-  \label{eq: ZAMO_local_camera_velocity} \tag{22}
+  \label{eq: ZAMO_local_camera_velocity} \tag{26}
   v^i = \frac{\tilde{u}^i}{\gamma} = \frac{\tilde{u}^i}{\tilde{u}^t}.
 \end{equation}
 $$
 
-#### Step 2
+##### Step 2
 ___
 
 Consider now the rays that we emit from our camera. As mentioned, we first need to transform to the local ZAMO frame. This is just a Lorentz transformation, whose general form is the following (see for example [2])
@@ -299,7 +391,7 @@ $$
 \end{equation}
 $$
 
-in Cartesian coordinates. So we first have to convert the velocity vector $\vb{v}$ from BL coordinates to Cartesian coordinates. From Appendix \ref{sec: coordinate_transformation} we know that the components of the velocity vector in Cartesian components are  
+in Cartesian coordinates. So we first have to convert the velocity vector $\vec{v}$ from BL coordinates to Cartesian coordinates. From Appendix \ref{sec: coordinate_transformation} we know that the components of the velocity vector in Cartesian components are  
 
 $$
 \begin{align*}
@@ -309,25 +401,25 @@ $$
 \end{align*}
 $$
 
-when the components are $v^r, v^\theta$ and $v^\phi$ in BL coordinates. Let us call the four-momentum of the initial photon rays $\tilde{p}\indices{^m}$ in the camera rest frame. In the ZAMO frame the four-momentum is then given by the primed
+when the components are $v^r, v^\theta$ and $v^\phi$ in BL coordinates. Let us call the four-momentum of the initial photon rays $\tilde{p}{^m}$ in the camera rest frame. In the ZAMO frame the four-momentum is then given by the primed
 
 $$
 \begin{equation}
-    \label{eq: camera_four_mom_ZAMO} \tag{23}
+    \label{eq: camera_four_mom_ZAMO} \tag{27}
     \tilde{p}'^m = \Lambda^m_n\left(\vec{v}\right) \tilde{p}^n
 \end{equation}
 $$
 
 Then we should of course move back into BL coordinates, since that is the coordinate system we work prefer here. And that coordinate transformation is simply given by the matrix in \eqref{eq: unit_vector_relation}.
 
-#### Step 3
+##### Step 3
 ___
 
 The final step is then rather simple. The four-momentum of the ray in the global frame is simply
 
 $$
 \begin{equation}
-    \label{eq: camera_four_mom_global} \tag{24}
+    \label{eq: camera_four_mom_global} \tag{28}
     p^\mu = e_m^{\mu} \tilde{p}'^m,
 \end{equation}
 $$
@@ -356,7 +448,7 @@ Consider an observer at some point $P$ in spacetime with four-velocity $u^\mu$ i
 
 $$
 \begin{equation}
-  \label{eq: redshift_definition} \tag{25}
+  \label{eq: redshift_definition} \tag{29}
   \nu = -p^\mu u_\mu = -g_{\mu \rho} p^\mu u^\rho,
 \end{equation}
 $$
@@ -365,12 +457,45 @@ which is of course coordinate invariant. Here redshift is of interest because we
 
 $$
 \begin{equation}
-  \label{eq: redshift_factor} \tag{26}
+  \label{eq: redshift_factor} \tag{30}
   1 + z = \frac{\lambda_\mathrm{camera}}{\lambda_\mathrm{disk}} = \frac{\nu_\mathrm{disk}}{\nu_\mathrm{camera}} = \frac{g_{\mu \nu}\left(r, \theta, \phi\right) p^\mu\left(\lambda = \lambda_1\right) u^\nu_\mathrm{disk}}{g_{\mu \nu}\left(R, \Theta, \Phi\right) p^\mu \left(\lambda = 0\right) u^\nu_\mathrm{camera}}
 \end{equation}
 $$
 
 where $\nu_\mathrm{disk}$ and $\nu_\mathrm{camera}$ are the frequencies measured at the disk and the camera respectively, and likewise $\lambda_\mathrm{disk}$ and $\lambda_\mathrm{camera}$ are the measured wavelengths at the disk and camera respectively. This general expression has the advantage that it does not assume anything about the motion of neither the disk nor the camera. So this places no restrictions on how we can move our camera around or what kind of velocity distribution the disk can have. Also note that by "redshift" we really mean both redshift and blueshift. We are just referring to both decrease and increase in wavelength under the same umbrella term for simplicity, which is really just a habit from cosmology. It is also important to note that $\eqref{eq: redshift_factor}$ accounts for both the Doppler-like redshift caused by motion and the gravitational redshift. Both of these two kinds of redshift are baked into the metric itself.
+
+### Relativistic beaming
+
+This redshift also causes a change in the brightness that is observed by the camera. Discussion of this can be found in [4]. According to Liouville's theorem the quantity $I_\nu/\nu^3$ is invariant. And the intensity $I_\nu$ is defined in terms of differentials, such that $I_\nu d\nu = - I_\lambda d\lambda$, since $\lambda = \frac{1}{\nu}$. We therefore have
+
+$$
+\begin{equation}
+  I_\nu = -I_\lambda \frac{d\lambda}{d\nu} = I_\lambda \frac{1}{\nu^2} = I_\lambda \lambda^2
+\end{equation}
+$$
+
+Therefore the quantity $I_\lambda \lambda^5$ is invariant. This means that the brightness $I_\lambda$ that is observed by the camera is
+
+$$
+\begin{equation}
+  I_\lambda = \left(\frac{\lambda'}{\lambda}\right)^5 I_\lambda'
+\end{equation}
+$$
+
+where $\lambda'$ is the emitted wavelength and $\lambda$ the observed one. And $I_\lambda'$ is the intensity at emission. Therefore
+
+$$
+\begin{equation}
+  \label{eq: beaming} \tag{31}
+  I_\lambda = \left(1 + z\right)^{-5} I_\lambda'
+\end{equation}
+$$
+
+is the observed intensity. This causes an increase(decrease) when the light is blueshifted(redshifted), as one might intuitively expect.
+
+### Light travel time delay
+
+
 
 ## References
 
@@ -379,3 +504,5 @@ where $\nu_\mathrm{disk}$ and $\nu_\mathrm{camera}$ are the frequencies measured
 [2] Masud Mansuripur. An exact derivation of the thomas precession rate using the lorentz transformation. In Henri-Jean M. Drouhin, Jean-Eric Wegrowe, and Manijeh Razeghi, editors, Spintronics XIII. SPIE, August 2020
 
 [3] Z. Kh. Kurmakaev. Circular orbits in the Kerr metric. , 18:110, August 1974
+
+[4] Eric Bruneton. Real-time high-quality rendering of non-rotating black holes, 2020
