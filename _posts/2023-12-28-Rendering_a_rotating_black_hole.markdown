@@ -206,6 +206,45 @@ $$
 \end{equation}
 $$
 
+From [here](http://physics.unm.edu/Courses/Finley/p581/Handouts/Kerr/kerrnew.pdf) and [here](https://arxiv.org/abs/1506.01473v2) we have that the frame fields for the local ZAMO frame are given by
+
+$$
+\begin{align*}
+  e_t^{\mu} &= \delta_t^{\mu} \sqrt{\frac{\Lambda}{\Delta \Sigma}} + \delta_\phi^\mu \frac{2ar}{\sqrt{\Lambda \Delta \Sigma}} \label{eq: vierbein_tmu} \tag{12} \hspace{1.1cm}\\ \\
+  e_r^{\mu} &= \delta_r^{\mu} \sqrt{\frac{\Delta}{\Sigma}} \label{eq: vierbein_rmu} \tag{13} \\ \\
+  e_{\theta}^{\mu} &= \delta_\theta^\mu \frac{1}{\sqrt{\Sigma}} \label{eq: vierbein_thetamu} \tag{14} \\ \\
+  e_{\phi}^{\mu} &= \delta_\phi^\mu \sqrt{\frac{\Sigma}{\Lambda}}\frac{1}{\sin \theta}. \label{eq: vierbein_phimu} \tag{15}
+\end{align*}
+$$
+
+while the co-frame fields are given by
+
+$$
+\begin{align*}
+  e^{*t}_{\mu} &= \delta_\mu^t \sqrt{\frac{\Delta \Sigma}{\Lambda}} \label{eq: vierbein^tmu} \tag{16} \\ \\
+  e^{*r}_{\mu} &= \delta_\mu^r \sqrt{\frac{\Sigma}{\Delta}} \label{eq: vierbein^rmu} \tag{17} \\ \\
+  e^{*\theta}_{\mu} &= \delta_\mu^\theta \sqrt{\Sigma} \label{eq: vierbein^thetamu} \tag{18} \\ \\
+  e^{*\phi}_{\mu} &= -\delta_\mu^t \frac{2ar\sin\theta}{\sqrt{\Lambda \Sigma}} + \delta_{\mu}^{\phi} \sin\theta \sqrt{\frac{\Lambda}{\Sigma}}. \label{eq: vierbein^phimu} \tag{19}
+\end{align*}
+$$
+
+To transform a vector $x^m$ from the local ZAMO frame to the global frame we then do the following
+
+$$
+\begin{equation}
+    x'^\mu = e\indices{_m^\mu} x^m.
+\end{equation}
+$$
+
+And the inverse naturally follows
+
+$$
+\begin{equation}
+    x^m = e^{*m}_{\mu} x'^\mu.
+\end{equation}
+$$
+
+### Implementing aberration
 
 Our approach to initializing the light-rays emitted by the camera is to emit rays as described in section \ref{sec: initializing_rays}. These initial values for the rays describe the $x$-, $y$- and $z$-components of the initial four-momenta of the rays. We have to convert these to BL coordinates, and then calculate $p^t$ from those components using the requirement that $p^\mu p_\mu = 0$ for photons. One might then assume that we can then just plug in this initial four-momentum $p^\mu$ of each ray into the geodesic equation to calculate the evolution of the position and four-momentum of each ray. But this is not correct in general. If the camera is moving then these initial $p^\mu$ values that we choose for the rays emitted by the camera are expressed in the instantaneous rest frame of the camera. And the geodesic equation is working in the global frame. So we have to perform the transformation from the instantaneous camera rest frame to the global frame before we can proceed to solving the geodesic equation. By implementing this transformation we will also get the effect of *relativistic aberration* for free. Relativistic aberration denotes the changes in angles between different reference frames when the frames are moving at relativistic speeds relative to each other. This aberration causes the distribution of the rays we emit from our camera to change in the global frame depending on the four-velocity of the camera. And this manifests in the simulations through changes in the field of view and an apparent "bending" of the accretion disk.
 
