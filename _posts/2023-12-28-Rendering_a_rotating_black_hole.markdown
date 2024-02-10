@@ -620,6 +620,112 @@ $$
 \end{equation}
 $$
 
+The problem of finding the RGB values for some given set of $XYZ$ values then translates into finding the coordinate transformation between the RGB coordinates and $XYZ$ coordinates. We can write the transformation as
+
+$$
+\begin{equation}
+  \label{eq: general_XYZ_to_RGB_relation} \tag{39}
+  \left[\begin{matrix}
+          R \\
+          G \\
+          B
+        \end{matrix}\right] = M\left[\begin{matrix}
+                                      X \\
+                                      Y \\
+                                      Z
+                                     \end{matrix}\right]
+\end{equation}
+$$
+
+where $M$ is the transformation matrix we want to find. The standard way of specifying the primaries of an RGB color space is by giving the $x, y$ and $Y$ values of the primaries. So in order to work with the $X, Y$ and $Z$ values we first have to calculate the unknown $X$ and $Z$ values. From \eqref{eq: x_cie1931} we see that
+
+$$
+\begin{equation}
+    X = \left(X + Y + Z\right)x = \frac{x}{y}Y.
+\end{equation}
+$$
+
+And likewise $Z = \frac{z}{y}Y$. Now we want to find the linear transformation $M$ relating the primaries expressed in the RGB basis to the primaries expressed in the XYZ basis, that is
+
+$$
+\begin{equation}
+  \left[\begin{matrix}
+          1 & 0 & 0 \\
+          0 & 1 & 0 \\
+          0 & 0 & 1
+        \end{matrix}\right] = M\left[\begin{matrix}
+                                        X_\mathrm{R} & X_\mathrm{G} & X_\mathrm{B} \\
+                                        Y_\mathrm{R} & Y_\mathrm{G} & Y_\mathrm{B} \\
+                                        Z_\mathrm{R} & Z_\mathrm{G} & Z_\mathrm{B}
+                                     \end{matrix}\right] \equiv MA
+\end{equation}
+$$
+
+where we have defined the matrix $A$ as the matrix containing the $XYZ$ coordinates of the primaries. Then the coordinate transformation matrix $M$ from earlier is just $A^{-1}$. We have of course just assumed that $A$ has an inverse, but we are physicists here, not mathematicians.
+
+In order to actually compute the values of the entries in $M$ we need to know the $x, y$ and $Y$ values of the primaries. sRGB, which is the color space we will be working with, has the following primaries
+
+$$
+\begin{equation}
+  \left[\begin{matrix}
+          x_\mathrm{R} \\
+          y_\mathrm{R} \\
+          Y_\mathrm{R}
+        \end{matrix}\right] = \left[\begin{matrix}
+                                      0.64 \\
+                                      0.33 \\
+                                      0.2126
+                                    \end{matrix}\right], \quad\quad
+  \left[\begin{matrix}
+          x_\mathrm{G} \\
+          y_\mathrm{G} \\
+          Y_\mathrm{G}
+        \end{matrix}\right] = \left[\begin{matrix}
+                                      0.3 \\
+                                      0.6 \\
+                                      0.7152
+                                    \end{matrix}\right], \quad\quad
+  \left[\begin{matrix}
+          x_\mathrm{B} \\
+          y_\mathrm{B} \\
+          Y_\mathrm{B}
+        \end{matrix}\right] = \left[\begin{matrix}
+                                      0.15 \\
+                                      0.06 \\
+                                      0.0722
+                                    \end{matrix}\right].
+\end{equation}
+$$
+
+With these values we get
+
+$$
+\begin{equation}
+  M = \left[\begin{matrix}
+              3.24156456 & -1.53766524 & -0.49870224 \\
+              -0.96920119 & 1.87588535 & 0.04155324 \\
+              0.05562416 & -0.20395525 & 1.05685902
+            \end{matrix}\right]
+\end{equation}
+$$
+
+It is also typically advised to perform a final non-linear correction after this linear transformation. But our results looked better without this non-linear correction, so we chose to omit it.
+
+Remember that the reason we wanted to find the transformation from $XYZ$ to RGB was that we know how to calculate the $XYZ$ values corresponding to a given spectrum. So with this coordinate transformation in hand we can convert a spectrum into an RGB color. This is of interest to us here because we know the temperature $T$ and redshift $(1 + z)$ of points on the accretion disk. So we can calculate the blackbody spectrum of each point and convert that to an RGB color to display on screen. Incorporating redshift into this is actually very easy. Consider a blackbody spectrum redshifted such that $\lambda_\text{shifted} = \left(1 + z\right)\lambda$. Then
+
+$$
+\begin{align*}
+    I_{\lambda}\left(\lambda_\text{shifted}; T\right) &= \frac{2h c^2 \left(1 + z\right)^5}{\lambda_\text{shifted}^5} \frac{1}{e^{hc \left(1 + z\right)/\lambda_\text{shifted} k_B T} - 1} \\ \\
+    &= \frac{2hc^2 \left(1 + z\right)^5}{\lambda_\text{shifted}^5} \frac{1}{e^{hc/\lambda_\text{shifted} k_B T_\text{shifted}} - 1}, \alignlabel{eq: redshifted_spectrum}
+\end{align*}
+$$
+
+with $T_\text{shifted} \equiv \frac{T}{1 + z}$. Notice now that this is also a blackbody spectrum, evaluated at a "redshifted temperature". And we have an additional vertical scaling by $(1 + z)^5$. From setion earlier we know that relativistic beaming modifies the observed intensity by a factor $(1 + z)^{-5}$, and when applying this to \eqref{eq: redshifted_spectrum} these factors of $(1 + z)$ cancel out. This means that we can actually just use the unmodified blackbody spectrum $I_\lambda$, just with a temperature $T_\mathrm{shifted} = \frac{T}{1 + z}$. So this accounts for relativistic beaming.
+
+We can plot the map showing the blackbody color for different combinations of $T$ and $1 + z$. This is shown in the following figure for temperatures $T \in \left[200, 10000\right]$ K and for $(1 + z) \in \left[0.1, 2\right]$.
+
+![Temperature-redshift map](miscellaneous/temp_redshift_map.png)
+
 ## References
 
 [1] Sean M. Carroll. Spacetime and Geometry: An Introduction to General Relativity. Cambridge University Press, 2019
