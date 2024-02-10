@@ -257,8 +257,87 @@ In order to hopefully alleviate some confusion regarding the approach here we li
 #### Step 1
 ___
 
-From above we know how to transform from a local ZAMO frame to the global frame using the ZAMO tetrads.
+From above we know how to transform from a local ZAMO frame to the global frame using the ZAMO tetrads. So we will first have to transform from the instantaneous camera rest frame to the local ZAMO frame, in order to then use the tetrads from Appendix \ref{app: tetrads} to finally transform to the global frame. Let the camera have four-velocity $u^\mu$ in the global coordinate frame. Also note for later that this four-velocity will be expressed in BL coordinates. Imagine then a ZAMO frame at the same position as the camera. The four-velocity of the camera in the ZAMO tetrad frame is given by
+
+$$
+\begin{equation}
+    \label{eq: local_camera_four_vel} \tag{20}
+    \tilde{u}^m = e^m_{\mu} u^{\mu},
+\end{equation}
+$$
+
+Since this four-velocity is measured in a local inertial frame it can also be expressed as
+
+$$
+\begin{equation}
+  \label{eq: ZAMO_four_velocity_camera} \tag{21}
+  \tilde{u}^m = \gamma\left(1, \vec{v}\right),
+\end{equation}
+$$
+
+where $\gamma = \frac{1}{\sqrt{1 - \vec{v}^2}}$ and $\vb{v}$ is the local velocity of the camera in the ZAMO frame. Then $\gamma = \tilde{u}^t$, and so the components $v^i$ of the local velocity $\vec{v}$ of the camera in the ZAMO frame are given by
+
+$$
+\begin{equation}
+  \label{eq: ZAMO_local_camera_velocity} \tag{22}
+  v^i = \frac{\tilde{u}^i}{\gamma} = \frac{\tilde{u}^i}{\tilde{u}^t}.
+\end{equation}
+$$
+
+#### Step 2
+___
+
+Consider now the rays that we emit from our camera. As mentioned, we first need to transform to the local ZAMO frame. This is just a Lorentz transformation, whose general form is the following (see for example [2])
+
+$$
+\begin{equation}
+  \Lambda^m_{\;\;n} = \left[\begin{matrix}\gamma && -\gamma v^x && -\gamma v^y && -\gamma v^z\ \\
+                          -\gamma v^x && 1 + \left(\gamma - 1\right)\frac{\left(v^x\right)^2}{\vec{v}^2} && \left(\gamma - 1\right) \frac{v^x v^y}{\vec{v}^2} && \left(\gamma - 1\right)\frac{v^x v^z}{\vec{v}^2} \\
+                          -\gamma v^y && \left(\gamma - 1\right)\frac{v^x v^y}{\vec{v}^2} && 1 + \left(\gamma - 1\right)\frac{\left(v^y\right)^2}{\vec{v}^2} && \left(\gamma - 1\right)\frac{v^y v^z}{\vec{v}^2} \\
+                          -\gamma v^z && \left(\gamma - 1\right)\frac{v^x v^z}{\vec{v}^2} && \left(\gamma - 1\right)\frac{v^y v^z}{\vec{v}^2} && 1 + \left(\gamma - 1\right)\frac{\left(v^z\right)^2}{\vec{v}^2}
+                         \end{matrix}\right]
+\end{equation}
+$$
+
+in Cartesian coordinates. So we first have to convert the velocity vector $\vb{v}$ from BL coordinates to Cartesian coordinates. From Appendix \ref{sec: coordinate_transformation} we know that the components of the velocity vector in Cartesian components are  
+
+$$
+\begin{align*}
+  v^x &= \frac{1}{\sqrt{r^2 + a^2\cos^2\theta}}\left[r\sin\theta \cos\phi \,v^r + \sqrt{r^2 + a^2}\cos\theta \cos\phi \,v^\theta\right] - \sin\phi \,v^\phi \\ \\
+  v^y &= \frac{1}{\sqrt{r^2 + a^2 \cos^2\theta}}\left[r\sin\theta \sin\phi \,v^r + \sqrt{r^2 + a^2}\cos\theta \sin\phi \,v^\theta\right] + \cos\phi \,v^\phi \\ \\
+  v^z &= \frac{1}{\sqrt{r^2 + a^2 \cos^2\theta}}\left[\sqrt{r^2 + a^2}\cos\theta \,v^r - r\sin\theta \,v^\theta\right].
+\end{align*}
+$$
+
+when the components are $v^r, v^\theta$ and $v^\phi$ in BL coordinates. Let us call the four-momentum of the initial photon rays $\tilde{p}\indices{^m}$ in the camera rest frame. In the ZAMO frame the four-momentum is then given by the primed
+
+$$
+\begin{equation}
+    \label{eq: camera_four_mom_ZAMO} \tag{23}
+    \tilde{p}'^m = \Lambda^m_n\left(\vec{v}\right) \tilde{p}^n
+\end{equation}
+$$
+
+Then we should of course move back into BL coordinates, since that is the coordinate system we work prefer here. And that coordinate transformation is simply given by the matrix in \eqref{eq: unit_vector_relation}.
+
+#### Step 3
+___
+
+The final step is then rather simple. The four-momentum of the ray in the global frame is simply
+
+$$
+\begin{equation}
+    \label{eq: camera_four_mom_global} \tag{24}
+    p^\mu = e_m^{\mu} \tilde{p}'^m,
+\end{equation}
+$$
+
+with the understanding that $\tilde{p}'^m$ is expressed in BL coordinates, as described at the end of Step 2.
+
+Having implemented this we have a fully general approach which takes into account relativistic aberration. And this is implemented purely through a coordinate transformation from the camera's rest frame to the global frame, which is in any case necessary.
 
 ## References
 
 [1] Sean M. Carroll. Spacetime and Geometry: An Introduction to General Relativity. Cambridge University Press, 2019
+
+[2] Masud Mansuripur. An exact derivation of the thomas precession rate using the lorentz transformation. In Henri-Jean M. Drouhin, Jean-Eric Wegrowe, and Manijeh Razeghi, editors, Spintronics XIII. SPIE, August 2020
