@@ -162,7 +162,7 @@ $$
 \end{equation}
 $$
 
-Let us call this coordinate transformation matrix $M$. It is fairly easy to check that this is an orthogonal matrix, meaning that $M^{-1} = M^T$ (just compute $M^T M$, which is equal to $\mathbb{I}$ for orthogonal matrices $M$). And in that case the inverse transformation, from BL to Cartesian coordinates, is given by $M^T$. Now, of course this is the coordinate transformation between the Cartesian and BL *basis vectors*. And we want the transformation between \textit{vector components}. But it turns out the coordinate transformation for the vector components is the same as for the basis vectors, as is shown by Lutz Lehmann [here](https://math.stackexchange.com/questions/3493647/do-coordinate-components-transform-in-the-same-or-opposite-way-as-their-bases).
+Let us call this coordinate transformation matrix $M$. It is fairly easy to check that this is an orthogonal matrix, meaning that $M^{-1} = M^T$ (just compute $M^T M$, which is equal to $\mathbb{I}$ for orthogonal matrices $M$). And in that case the inverse transformation, from BL to Cartesian coordinates, is given by $M^T$. Now, of course this is the coordinate transformation between the Cartesian and BL *basis vectors*. And we want the transformation between \mathrmit{vector components}. But it turns out the coordinate transformation for the vector components is the same as for the basis vectors, as is shown by Lutz Lehmann [here](https://math.stackexchange.com/questions/3493647/do-coordinate-components-transform-in-the-same-or-opposite-way-as-their-bases).
 
 ## General relativistic raymarching
 
@@ -260,11 +260,11 @@ The matrix $B$ and vectors $CH$ and $CT$ can be found in the article linked to. 
 
 $$
 \begin{equation}
-  h_\text{new} = 0.9 h \left(\frac{\epsilon}{TE}\right)^{1/5}
+  h_\mathrm{new} = 0.9 h \left(\frac{\epsilon}{TE}\right)^{1/5}
 \end{equation}
 $$
 
-where $\epsilon$ is a tolerance value we can choose in order to specify the level of accuracy we want to achieve. Then, if $TE > \epsilon$ the error is too big and so we replace $h$ with $h_\text{new}$ and repeat the step. We perform this iteration until $TE < \epsilon$. And then in the next step we use this value of $h_\mathrm{new}$ as the new $h$.
+where $\epsilon$ is a tolerance value we can choose in order to specify the level of accuracy we want to achieve. Then, if $TE > \epsilon$ the error is too big and so we replace $h$ with $h_\mathrm{new}$ and repeat the step. We perform this iteration until $TE < \epsilon$. And then in the next step we use this value of $h_\mathrm{new}$ as the new $h$.
 
 ### Relativistic aberration
 
@@ -272,7 +272,7 @@ where $\epsilon$ is a tolerance value we can choose in order to specify the leve
 
 Before we explain aberration we will do a short detour explaining what *tetrads* are.
 
-From the equivalence principle we know that we can always transform to a local inertial frame. And in contrast to Schwarzschild spacetime where shell observers are natural frames we will instead work with ZAMO frames, since these exist even inside the ergosphere. But the question is how we perform this transformation. How can we transform from the global BL coordinates to the local ZAMO coordinates? This is where the concept of a \textit{vierbein}, also called a *frame field*, is extremely useful (An introduction to vierbeins can be found [here](https://jila.colorado.edu/~ajsh/courses/astr5770_21/text.html})). A vierbein is a set of orthonormal axes which form a local inertial frame. So we want the vierbeins to take us from the global coordinate system to the local one, which is to say from the metric $g_{\mu \nu}$ to the Minkowski metric $\eta_{\mu \nu}$. This means that
+From the equivalence principle we know that we can always transform to a local inertial frame. And in contrast to Schwarzschild spacetime where shell observers are natural frames we will instead work with ZAMO frames, since these exist even inside the ergosphere. But the question is how we perform this transformation. How can we transform from the global BL coordinates to the local ZAMO coordinates? This is where the concept of a \mathrmit{vierbein}, also called a *frame field*, is extremely useful (An introduction to vierbeins can be found [here](https://jila.colorado.edu/~ajsh/courses/astr5770_21/text.html})). A vierbein is a set of orthonormal axes which form a local inertial frame. So we want the vierbeins to take us from the global coordinate system to the local one, which is to say from the metric $g_{\mu \nu}$ to the Minkowski metric $\eta_{\mu \nu}$. This means that
 
 $$
 \begin{equation}
@@ -521,7 +521,7 @@ $$
 
 where $h$ and $k_B$ are Planck's constant and Boltzmann's constant respectively. $T$ is the temperature of the disk and $\lambda$ wavelength. This is the *blackbody distribution*, and describes the amount of radiation emitted as a function of wavelength. We now need a way to convert an intensity distribution, like the blackbody distribution, to an RGB color.
 
-The relative amounts of the visible wavelengths that are emitted determine the color of the object. Unfortunately our eyes do not perceive and respond to all visible wavelengths of light equally. So converting an intensity spectrum $I_\lambda$, which represents the intensity distribution that is actually observed, to the color our eyes actually see is far from trivial. The procedure for calculating an RGB color comes in two main steps: converting a spectrum to so-called \textit{tristimulus values}, and then converting the tristimulus values to RGB values. We found [5], [this](https://color.org/chardata/rgb/sRGB.pdf) and [this](https://en.wikipedia.org/wiki/SRGB) to be particularly helpful here. Assume now that we have a blackbody at some temperature $T$. We can find the tristimulus values $X, Y$ and $Z$ using the so-called *color matching functions* $\bar{x}, \bar{y}$ and $\bar{z}$, which describe how our eyes respond to different wavelengths. The $X, Y$ and $Z$ values are calculated in the following way
+The relative amounts of the visible wavelengths that are emitted determine the color of the object. Unfortunately our eyes do not perceive and respond to all visible wavelengths of light equally. So converting an intensity spectrum $I_\lambda$, which represents the intensity distribution that is actually observed, to the color our eyes actually see is far from trivial. The procedure for calculating an RGB color comes in two main steps: converting a spectrum to so-called \mathrmit{tristimulus values}, and then converting the tristimulus values to RGB values. We found [5], [this](https://color.org/chardata/rgb/sRGB.pdf) and [this](https://en.wikipedia.org/wiki/SRGB) to be particularly helpful here. Assume now that we have a blackbody at some temperature $T$. We can find the tristimulus values $X, Y$ and $Z$ using the so-called *color matching functions* $\bar{x}, \bar{y}$ and $\bar{z}$, which describe how our eyes respond to different wavelengths. The $X, Y$ and $Z$ values are calculated in the following way
 
 $$
 \begin{align*}
@@ -560,7 +560,7 @@ $$
 \end{align*}
 $$
 
-It also naturally follows that we can define $z = \frac{Z}{X + Y + Z} = 1 - x - y$. We can now plot the $(x, y)$ coordinates of the monochromatic spectrum as we vary $\lambda_0$, and the resulting curve is called the \textit{spectral locus}, and is shown in the following figure. The marked points show where different wavelengths fall on the spectral locus.
+It also naturally follows that we can define $z = \frac{Z}{X + Y + Z} = 1 - x - y$. We can now plot the $(x, y)$ coordinates of the monochromatic spectrum as we vary $\lambda_0$, and the resulting curve is called the \mathrmit{spectral locus}, and is shown in the following figure. The marked points show where different wavelengths fall on the spectral locus.
 
 ![The spectral locus](miscellaneous/chromaticity_diagram_without_planckian_locus.png)
 
@@ -711,16 +711,16 @@ $$
 
 It is also typically advised to perform a final non-linear correction after this linear transformation. But our results looked better without this non-linear correction, so we chose to omit it.
 
-Remember that the reason we wanted to find the transformation from $XYZ$ to RGB was that we know how to calculate the $XYZ$ values corresponding to a given spectrum. So with this coordinate transformation in hand we can convert a spectrum into an RGB color. This is of interest to us here because we know the temperature $T$ and redshift $(1 + z)$ of points on the accretion disk. So we can calculate the blackbody spectrum of each point and convert that to an RGB color to display on screen. Incorporating redshift into this is actually very easy. Consider a blackbody spectrum redshifted such that $\lambda_\text{shifted} = \left(1 + z\right)\lambda$. Then
+Remember that the reason we wanted to find the transformation from $XYZ$ to RGB was that we know how to calculate the $XYZ$ values corresponding to a given spectrum. So with this coordinate transformation in hand we can convert a spectrum into an RGB color. This is of interest to us here because we know the temperature $T$ and redshift $(1 + z)$ of points on the accretion disk. So we can calculate the blackbody spectrum of each point and convert that to an RGB color to display on screen. Incorporating redshift into this is actually very easy. Consider a blackbody spectrum redshifted such that $\lambda_\mathrm{shifted} = \left(1 + z\right)\lambda$. Then
 
 $$
 \begin{align*}
-    I_{\lambda}\left(\lambda_\text{shifted}; T\right) &= \frac{2h c^2 \left(1 + z\right)^5}{\lambda_\text{shifted}^5} \frac{1}{e^{hc \left(1 + z\right)/\lambda_\text{shifted} k_B T} - 1} \\ \\
-    &= \frac{2hc^2 \left(1 + z\right)^5}{\lambda_\text{shifted}^5} \frac{1}{e^{hc/\lambda_\text{shifted} k_B T_\text{shifted}} - 1}, \label{eq: redshifted_spectrum} \tag{40}
+    I_{\lambda}\left(\lambda_\mathrm{shifted}; T\right) &= \frac{2h c^2 \left(1 + z\right)^5}{\lambda_\mathrm{shifted}^5} \frac{1}{e^{hc \left(1 + z\right)/\lambda_\mathrm{shifted} k_B T} - 1} \\ \\
+    &= \frac{2hc^2 \left(1 + z\right)^5}{\lambda_\mathrm{shifted}^5} \frac{1}{e^{hc/\lambda_\mathrm{shifted} k_B T_\mathrm{shifted}} - 1}, \label{eq: redshifted_spectrum} \tag{40}
 \end{align*}
 $$
 
-with $T_\text{shifted} \equiv \frac{T}{1 + z}$. Notice now that this is also a blackbody spectrum, evaluated at a "redshifted temperature". And we have an additional vertical scaling by $(1 + z)^5$. From setion earlier we know that relativistic beaming modifies the observed intensity by a factor $(1 + z)^{-5}$, and when applying this to \eqref{eq: redshifted_spectrum} these factors of $(1 + z)$ cancel out. This means that we can actually just use the unmodified blackbody spectrum $I_\lambda$, just with a temperature $T_\mathrm{shifted} = \frac{T}{1 + z}$. So this accounts for relativistic beaming.
+with $T_\mathrm{shifted} \equiv \frac{T}{1 + z}$. Notice now that this is also a blackbody spectrum, evaluated at a "redshifted temperature". And we have an additional vertical scaling by $(1 + z)^5$. From setion earlier we know that relativistic beaming modifies the observed intensity by a factor $(1 + z)^{-5}$, and when applying this to \eqref{eq: redshifted_spectrum} these factors of $(1 + z)$ cancel out. This means that we can actually just use the unmodified blackbody spectrum $I_\lambda$, just with a temperature $T_\mathrm{shifted} = \frac{T}{1 + z}$. So this accounts for relativistic beaming.
 
 We can plot the map showing the blackbody color for different combinations of $T$ and $1 + z$. This is shown in the following figure for temperatures $T \in \left[200, 10000\right]$ K and for $(1 + z) \in \left[0.1, 2\right]$.
 
