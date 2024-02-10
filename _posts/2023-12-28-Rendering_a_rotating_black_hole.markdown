@@ -113,7 +113,7 @@ $$
 \end{equation}
 $$
 
-We can then determine the scaling parameter $R$ by finding the norm of $R\vec{\hat{r}}$ and using the defining property $\left|\vec{\hat{r}}\right| = 1$.
+We can then determine the scaling parameter $R$ by finding the norm of $R\vec{\hat{r}}$ and using the defining property $\lvert\vec{\hat{r}}\rvert = 1$.
 
 $$
 \begin{align*}
@@ -495,7 +495,18 @@ is the observed intensity. This causes an increase(decrease) when the light is b
 
 ### Light travel time delay
 
+One aspect of the visualizations which might not be obvious is that we have to take into account how long it takes light to travel from each part of the disk to the camera. Since it takes different amounts of time for light from different parts of the disk to reach us the photons that we receive at some time $t$ must have been emitted from the different parts of the disk at different times. So if we for example take our image at global time $t$ and it takes a time $t_\mathrm{A}$ for light from a point A on the disk to reach us, then the light that reaches us at time $t$ must have left A at time $t - t_\mathrm{A}$. So when the travel time $t_\mathrm{A}$ differs between the points on the disk the parts of the disk we see will correspond to different emission times. Let us assume we have a function $f(\vec{x}, t)$ which calculates the density at the position $\vec{x}$ on the disk evaluated at global time $t$. Then the density that the camera actually observes at point $\vec{x}_i$ when it takes an image at time $t$ is $f(\vec{x}_i, t - t_i)$, where $t$ is the time when the image is taken and $t_i$ is the time it takes light to travel from point $\vec{x}_i$ on the disk to the camera.
 
+A convenient aspect of the geodesic tracing here is that we already calculate this travel time in the global coordinate system when we solve the geodesic equation. And since we assume that each point on the disk moves along a circular orbit this correction due to the travel time only requires a correction for the angle that a given point on the disk moves during the travel time. Furthermore, since the four-velocity of the points on the disk is constant this angular correction is particularly simple:
+
+$$
+\begin{equation}
+    \label{eq: light_travel_delay_angle} \tag{32}
+    \Delta \phi = \int_0^{t_\mathrm{travel}} \frac{d\phi}{dt'} dt' = \int_0^{t_\mathrm{travel}} \frac{d\phi}{d\tau} \frac{d\tau}{dt'} dt' = \frac{u^\phi}{u^t}t_\mathrm{travel},
+\end{equation}
+$$
+
+where $u^\phi = \frac{d\phi}{d\tau}$ is the $\phi$-component of the four-velocity of the relevant point on the disk, and $\tau$ is the proper time of that same point. And $u^t = \frac{dt}{d\tau}$ is the time-component of the four-velocity of the point on the disk. $t$ is again the travel time from the camera to the relevant point on the disk.
 
 ## References
 
