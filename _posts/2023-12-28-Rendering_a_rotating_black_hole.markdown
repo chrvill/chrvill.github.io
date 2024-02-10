@@ -174,6 +174,47 @@ $$
 
 where $\epsilon$ is a tolerance value we can choose in order to specify the level of accuracy we want to achieve. Then, if $TE > \epsilon$ the error is too big and so we replace $h$ with $h_\text{new}$ and repeat the step. We perform this iteration until $TE < \epsilon$. And then in the next step we use this value of $h_\mathrm{new}$ as the new $h$.
 
+## Relativistic aberration
+
+### Tetrads
+
+Before we explain aberration we will do a short detour explaining what *tetrads* are.
+
+From the equivalence principle we know that we can always transform to a local inertial frame. And in contrast to Schwarzschild spacetime where shell observers are natural frames we will instead work with ZAMO frames, since these exist even inside the ergosphere. But the question is how we perform this transformation. How can we transform from the global BL coordinates to the local ZAMO coordinates? This is where the concept of a \textit{vierbein}, also called a *frame field*, is extremely useful (An introduction to vierbeins can be found [here](https://jila.colorado.edu/~ajsh/courses/astr5770_21/text.html})). A vierbein is a set of orthonormal axes which form a local inertial frame. So we want the vierbeins to take us from the global coordinate system to the local one, which is to say from the metric $g_{\mu \nu}$ to the Minkowski metric $\eta_{\mu \nu}$. This means that
+
+$$
+\begin{equation}
+    \label{eq: vierbein_metric_diagonalization} \tag{10}
+    g_{\mu \nu} e_m^{\mu} e_n^{\nu} = \eta_{m n},
+\end{equation}
+$$
+
+where $e_m^{\mu}$ is such a vierbein field or a frame field. Keep in mind that Latin indices are here used to refer to the indices in the local inertial frame. We also have the dual vierbein field $e^{*m}_{\mu}$, also called the co-frame field, defined through
+
+$$
+\begin{equation}
+  e_m^{\mu} e^{*m}_{\nu} = \delta_{\nu}^{\mu}, \quad e_m^{\mu} e^{*n}_{\mu} = \delta_m^n.
+\end{equation}
+$$
+
+Using this we can also write
+
+$$
+\begin{equation}
+    \label{eq: inverse_vierbein_def} \tag{11}
+    \eta_{mn} e^{*m}_{\mu} e^{*n}_{\nu} = g_{\mu \nu}.
+\end{equation}
+$$
+
+
+Our approach to initializing the light-rays emitted by the camera is to emit rays as described in section \ref{sec: initializing_rays}. These initial values for the rays describe the $x$-, $y$- and $z$-components of the initial four-momenta of the rays. We have to convert these to BL coordinates, and then calculate $p^t$ from those components using the requirement that $p^\mu p_\mu = 0$ for photons. One might then assume that we can then just plug in this initial four-momentum $p^\mu$ of each ray into the geodesic equation to calculate the evolution of the position and four-momentum of each ray. But this is not correct in general. If the camera is moving then these initial $p^\mu$ values that we choose for the rays emitted by the camera are expressed in the instantaneous rest frame of the camera. And the geodesic equation is working in the global frame. So we have to perform the transformation from the instantaneous camera rest frame to the global frame before we can proceed to solving the geodesic equation. By implementing this transformation we will also get the effect of *relativistic aberration* for free. Relativistic aberration denotes the changes in angles between different reference frames when the frames are moving at relativistic speeds relative to each other. This aberration causes the distribution of the rays we emit from our camera to change in the global frame depending on the four-velocity of the camera. And this manifests in the simulations through changes in the field of view and an apparent "bending" of the accretion disk.
+
+In order to hopefully alleviate some confusion regarding the approach here we list the steps here before we get into the mathematical details.
+
+* Compute the local velocity of the camera in the local ZAMO frame
+* Lorentz transform the initial photon four-momenta from the instantaneous camera rest frame to the local ZAMO frame
+* Transform the four-momenta of the photons from the local ZAMO frame to the global frame using the ZAMO tetrads
+
 ## References
 
 [1] Sean M. Carroll. Spacetime and Geometry: An Introduction to General Relativity. Cambridge University Press, 2019
