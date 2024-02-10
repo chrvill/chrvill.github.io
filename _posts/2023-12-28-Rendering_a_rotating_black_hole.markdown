@@ -336,8 +336,46 @@ with the understanding that $\tilde{p}'^m$ is expressed in BL coordinates, as de
 
 Having implemented this we have a fully general approach which takes into account relativistic aberration. And this is implemented purely through a coordinate transformation from the camera's rest frame to the global frame, which is in any case necessary.
 
+## The accretion disk
+
+### The four-velocity of the accretion disk
+
+The accretion disk is in reality moving in a spiral towards the black hole. But when dealing with the physics here we will simplify and assume all points in the disk move in circular orbits. From [3] we know that the four-velocity of a massive particle in a prograde circular orbit in the equatorial plane around a Kerr black hole is given by $u^\mu = \left(u^t, 0, 0, u^\phi\right)$, where
+
+$$
+\begin{equation}
+  u^\phi = \frac{\sqrt{Mr}}{r\sqrt{r^2 - 3Mr + 2\lvert a\rvert \sqrt{Mr}}}.
+\end{equation}
+$$
+
+And $u^t$ is of course determined by the condition $u^\mu u_\mu = -1$.
+
+### Redshift
+
+Consider an observer at some point $P$ in spacetime with four-velocity $u^\mu$ in some coordinate system. Assume we also have a photon at the same point $P$ in spacetime with four-momentum $p^\mu = \frac{dx^\mu}{d\lambda}$ in that same coordinate system. The frequency that the observer measures for the photon at $P$ is
+
+$$
+\begin{equation}
+  \label{eq: redshift_definition} \tag{25}
+  \nu = -p^\mu u_\mu = -g_{\mu \rho} p^\mu u^\rho,
+\end{equation}
+$$
+
+which is of course coordinate invariant. Here redshift is of interest because we have an "observer" at the accretion disk around the black hole that emits light with certain frequencies, and that light is then observed by the camera at another point in spacetime\footnote{Of course in our simulation it is the other way around, but in reality the photon would be emitted by the accretion disk and be observed by the camera.}. And since we have solved the geodesic equation for the rays we already know the four-momentum of the photons at all points along their geodesics. In particular, we know their four-momenta at the disk and at the camera. Consider a point on the disk at coordinates $\left(r, \theta, \phi\right)$ and let the camera be at $\left(R, \Theta, \Phi\right)$. Let the parameter $\lambda$ equal 0 at the camera and $\lambda_1 > 0$ at the point on the disk. We will call the four-velocity of the relevant point on the disk $u^\mu_\mathrm{disk}$ and the four-velocity of the camera $u^\mu_\mathrm{camera}$. Then the redshift $1 + z$ for the light emitted at the disk and observed by our camera is given by
+
+$$
+\begin{equation}
+  \label{eq: redshift_factor} \tag{26}
+  1 + z = \frac{\lambda_\mathrm{camera}}{\lambda_\mathrm{disk}} = \frac{\nu_\mathrm{disk}}{\nu_\mathrm{camera}} = \frac{g_{\mu \nu}\left(r, \theta, \phi\right) p^\mu\left(\lambda = \lambda_1\right) u^\nu_\mathrm{disk}}{g_{\mu \nu}\left(R, \Theta, \Phi\right) p^\mu \left(\lambda = 0\right) u^\nu_\mathrm{camera}}
+\end{equation}
+$$
+
+where $\nu_\mathrm{disk}$ and $\nu_\mathrm{camera}$ are the frequencies measured at the disk and the camera respectively, and likewise $\lambda_\mathrm{disk}$ and $\lambda_\mathrm{camera}$ are the measured wavelengths at the disk and camera respectively. This general expression has the advantage that it does not assume anything about the motion of neither the disk nor the camera. So this places no restrictions on how we can move our camera around or what kind of velocity distribution the disk can have. Also note that by "redshift" we really mean both redshift and blueshift. We are just referring to both decrease and increase in wavelength under the same umbrella term for simplicity, which is really just a habit from cosmology. It is also important to note that $\eqref{eq: redshift_factor}$ accounts for both the Doppler-like redshift caused by motion and the gravitational redshift. Both of these two kinds of redshift are baked into the metric itself.
+
 ## References
 
 [1] Sean M. Carroll. Spacetime and Geometry: An Introduction to General Relativity. Cambridge University Press, 2019
 
 [2] Masud Mansuripur. An exact derivation of the thomas precession rate using the lorentz transformation. In Henri-Jean M. Drouhin, Jean-Eric Wegrowe, and Manijeh Razeghi, editors, Spintronics XIII. SPIE, August 2020
+
+[3] Z. Kh. Kurmakaev. Circular orbits in the Kerr metric. , 18:110, August 1974
