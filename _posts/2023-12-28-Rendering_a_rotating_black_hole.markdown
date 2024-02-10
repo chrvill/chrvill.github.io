@@ -206,7 +206,7 @@ $$
 \end{equation}
 $$
 
-From [here](http://physics.unm.edu/Courses/Finley/p581/Handouts/Kerr/kerrnew.pdf) and [here](https://arxiv.org/abs/1506.01473v2) we have that the frame fields for the local ZAMO frame are given by
+From http://physics.unm.edu/Courses/Finley/p581/Handouts/Kerr/kerrnew.pdf and [here](https://arxiv.org/abs/1506.01473v2) we have that the frame fields for the local ZAMO frame are given by
 
 $$
 \begin{align*}
@@ -250,9 +250,9 @@ Our approach to initializing the light-rays emitted by the camera is to emit ray
 
 In order to hopefully alleviate some confusion regarding the approach here we list the steps here before we get into the mathematical details.
 
-* Compute the local velocity of the camera in the local ZAMO frame
-* Lorentz transform the initial photon four-momenta from the instantaneous camera rest frame to the local ZAMO frame
-* Transform the four-momenta of the photons from the local ZAMO frame to the global frame using the ZAMO tetrads
+1. Compute the local velocity of the camera in the local ZAMO frame
+2. Lorentz transform the initial photon four-momenta from the instantaneous camera rest frame to the local ZAMO frame
+3. Transform the four-momenta of the photons from the local ZAMO frame to the global frame using the ZAMO tetrads
 
 ## References
 
