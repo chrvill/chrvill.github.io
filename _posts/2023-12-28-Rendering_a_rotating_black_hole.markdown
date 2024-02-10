@@ -70,7 +70,49 @@ $$
 \end{align*}
 $$
 
-A relativistic effect which is unique to rotating black holes is *frame dragging*. This effect describes how the rotation of the black hole "drags" spacetime along with it, causing initially radially infalling frames to gain a non-zero angular velocity. In Schwarzschild we typically talk of *shell observers*, which are observers stationary in the Schwarzschild coordinates. But due to frame dragging these shell observers are no longer as natural in Kerr. Here it is more natural to talk of frames co-rotating with the black hole, so called *Zero Angular Momentum Observers* (ZAMO). A result of frame dragging is that there exists a region of spacetime called the *ergosphere* where it is impossible to move against the rotation of the black hole.
+### Dimensional analysis
+
+Let us introduce the dimensionless quantities
+
+$$
+\begin{equation}
+  r' = \frac{r}{M}, \quad a' = \frac{a}{M}, \quad t' = \frac{t}{M}
+\end{equation}
+$$
+
+Then
+
+$$
+\begin{align*}
+  \Sigma &= M^2 \left(\left(r'\right)^2 + \left(a'\right)^2\cos^2\theta\right) \equiv M^2 \Sigma' \\ \\
+  \Delta &= M^2 \left(\left(r'\right)^2 - 2r' + \left(a'\right)^2\right) \equiv M^2 \Delta', \\
+  \Lambda &= M^4 \left[\left(\left(r'\right)^2 + \left(a'\right)^2\right)^2 - \left(a'\right)^2 \Delta' \sin^2\theta\right] \equiv M^4 \Lambda'
+\end{align*}
+$$
+
+meaning that
+
+$$
+\begin{align*}
+  g_{tt}           &= -\left(1 - \frac{2M^2 r'}{M^2 \Sigma'}\right) = -\left(1 - \frac{2r'}{\Sigma'}\right) \\ \\
+  g_{rr}           &= \frac{M^2 \Sigma'}{M^2 \Delta'} = \frac{\Sigma'}{\Delta'} \\ \\
+  g_{\theta\theta} &= M^2 \Sigma' \\ \\
+  g_{\phi \phi}    &= \frac{M^4 \Lambda'}{M^2 \Sigma'}\sin^2\theta = M^2 \frac{\Lambda'}{\Sigma'}\sin^2\theta \\ \\
+  g_{t\phi}        &= -\frac{2M r' a' \sin^2\theta}{\Sigma'},
+\end{align*}
+$$
+
+in which case the line element can be written as
+
+$$
+\begin{align*}
+  ds^2 &= -\left(1 - \frac{2r'}{\Sigma'}\right) M^2 \left(dt'\right)^2 + \frac{\Sigma'}{\Delta'}M^2 \left(dr'\right)^2 + M^2 \Sigma' d\theta^2  \\ \\
+  &+ M^2 \frac{\Lambda'}{\Sigma'}\sin^2\theta d\phi^2 - M^2 \frac{4r' a'\sin^2\theta}{\Sigma'} d\phi dt'
+\end{align*}
+$$
+
+If we now divide everything by $M^2$ we can completely eliminate it from the equations by also defining $ds' = \frac{ds}{M}$. For reasons of brevity we will omit all the primes with the implicit understanding that all quantities are dimensionless. And if we ever want to convert to normal physics units we need to multiply by $M$ and add appropriate factors of $G$ and $c$.
+
 
 ### Transformation between Cartesian and Boyer-Lindquist coordinates
 
