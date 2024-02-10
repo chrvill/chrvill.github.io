@@ -531,9 +531,9 @@ $$
 \end{align*}
 $$
 
-Approximations to these color matching functions can be found in [6]. But it turns out that at low temperatures these approximations are not accurate enough anymore. So we will instead be using the lookup table given in [7]. In Figure \ref{fig: color_matching_functions} we have plotted the color matching functions as functions of wavelength. The $x$-axis represents wavelength $\lambda$ in nm, while the $y$-axis represents the output of the color matching functions, which can be taken to have units such that $X, Y$ and $Z$ are dimensionless.
+Approximations to these color matching functions can be found in [6]. But it turns out that at low temperatures these approximations are not accurate enough anymore. So we will instead be using the lookup table given in [7]. In the following figure we have plotted the color matching functions as functions of wavelength. The $x$-axis represents wavelength $\lambda$ in nm, while the $y$-axis represents the output of the color matching functions, which can be taken to have units such that $X, Y$ and $Z$ are dimensionless.
 
-![The color matching functions](/miscellaneous/color_matching_functions.png)
+![The color matching functions](miscellaneous/color_matching_functions.png)
 
 ## References
 
