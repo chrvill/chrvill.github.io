@@ -433,7 +433,7 @@ $$
 \end{equation}
 $$
 
-in Cartesian coordinates. So we first have to convert the velocity vector $\vec{v}$ from BL coordinates to Cartesian coordinates. From Appendix \ref{sec: coordinate_transformation} we know that the components of the velocity vector in Cartesian components are  
+in Cartesian coordinates. So we first have to convert the velocity vector $\vec{v}$ from BL coordinates to Cartesian coordinates. From the section on the coordinate transformation between Cartesian and BL coordinates we know that the components of the velocity vector in Cartesian components are given by 
 
 $$
 \begin{align*}
