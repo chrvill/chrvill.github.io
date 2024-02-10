@@ -574,7 +574,7 @@ We can also calculate the curve in the chromaticity diagram which represents the
 
 There are many different RGB color spaces designed for outputting colors to a screen, and these different RGB color spaces are defined by their so-called *primaries*. When choosing an RGB color space we choose which primaries red, green and blue to use. These primaries correspond to the vertices in the colored triangle in the following figure. The set of points inside the triangle between the primaries is called the *gamut* of the RGB space, and makes up the colors that the given RGB space can represent. And since different RGB spaces have different primaries the sets of colors that they can represent are therefore also different.
 
-![Chromaticity diagram with sRGB gamut](miscellaneous/SRGB_chromaticity_CIE1931.svg){: width="700" height="400" background-color="#FFFFFF"}
+![Chromaticity diagram with sRGB gamut](miscellaneous/SRGB_chromaticity_CIE1931.svg){: width="700" height="400" background-color="white"}
 
 The points inside the gamut are linear combinations of the primaries, so the primaries form a basis for the RGB space. Red $R$, green $G$ and blue $B$, being the primaries, are of course written as
 
