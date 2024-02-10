@@ -3,7 +3,7 @@ title: Rendering a rotating black hole
 date: 2023-12-28
 categories: [physics, general relativity, black holes]
 tags: [black holes]
-img_path: '../../images/black_hole_renders'
+img_path: '../../images'
 math: true
 ---
 
@@ -508,6 +508,33 @@ $$
 
 where $u^\phi = \frac{d\phi}{d\tau}$ is the $\phi$-component of the four-velocity of the relevant point on the disk, and $\tau$ is the proper time of that same point. And $u^t = \frac{dt}{d\tau}$ is the time-component of the four-velocity of the point on the disk. $t$ is again the travel time from the camera to the relevant point on the disk.
 
+## Color theory
+
+Using $\eqref{eq: redshift_factor}$ we can compute the redshift for all points on the disk. But the computer screen of course renders RGB colors, not wavelengths directly. The disk emits photons at all wavelengths, and the distribution of photons emitted as a function of wavelength is not uniform. Here we will assume that the disk is a perfect *blackbody* - meaning it is a perfect absorber of light - the so-called *intensity distribution* is given by
+
+$$
+\begin{equation}
+  \label{eq: blackbody distribution} \tag{33}
+  I_{\lambda}\left(\lambda; T\right) = \frac{2h c^2}{\lambda^5} \frac{1}{e^{hc/\lambda k_B T} - 1},
+\end{equation}  
+$$
+
+where $h$ and $k_B$ are Planck's constant and Boltzmann's constant respectively. $T$ is the temperature of the disk and $\lambda$ wavelength. This is the *blackbody distribution*, and describes the amount of radiation emitted as a function of wavelength. We now need a way to convert an intensity distribution, like the blackbody distribution, to an RGB color.
+
+The relative amounts of the visible wavelengths that are emitted determine the color of the object. Unfortunately our eyes do not perceive and respond to all visible wavelengths of light equally. So converting an intensity spectrum $I_\lambda$, which represents the intensity distribution that is actually observed, to the color our eyes actually see is far from trivial. The procedure for calculating an RGB color comes in two main steps: converting a spectrum to so-called \textit{tristimulus values}, and then converting the tristimulus values to RGB values. We found [5], [this](https://color.org/chardata/rgb/sRGB.pdf) and [this](https://en.wikipedia.org/wiki/SRGB) to be particularly helpful here. Assume now that we have a blackbody at some temperature $T$. We can find the tristimulus values $X, Y$ and $Z$ using the so-called *color matching functions* $\bar{x}, \bar{y}$ and $\bar{z}$, which describe how our eyes respond to different wavelengths. The $X, Y$ and $Z$ values are calculated in the following way
+
+$$
+\begin{align*}
+  X &= \int_{\mathrm{380 nm}}^{\mathrm{780 nm}} I_\lambda \left(\lambda; T\right) \bar{x}\left(\lambda\right)d\lambda \label{eq: color_X} \tag{34} \\ \\
+  Y &= \int_{\mathrm{380 nm}}^{\mathrm{780 nm}} I_\lambda \left(\lambda; T\right) \bar{y}\left(\lambda\right)d\lambda \label{eq: color_Y} \tag{35} \\ \\
+  Z &= \int_{\mathrm{380 nm}}^{\mathrm{780 nm}} I_\lambda \left(\lambda; T\right) \bar{z}\left(\lambda\right)d\lambda. \label{eq: color_Z} \tag{36}
+\end{align*}
+$$
+
+Approximations to these color matching functions can be found in [6]. But it turns out that at low temperatures these approximations are not accurate enough anymore. So we will instead be using the lookup table given in [7]. In Figure \ref{fig: color_matching_functions} we have plotted the color matching functions as functions of wavelength. The $x$-axis represents wavelength $\lambda$ in nm, while the $y$-axis represents the output of the color matching functions, which can be taken to have units such that $X, Y$ and $Z$ are dimensionless.
+
+![The color matching functions](/miscellaneous/color_matching_functions.png)
+
 ## References
 
 [1] Sean M. Carroll. Spacetime and Geometry: An Introduction to General Relativity. Cambridge University Press, 2019
@@ -517,3 +544,9 @@ where $u^\phi = \frac{d\phi}{d\tau}$ is the $\phi$-component of the four-velocit
 [3] Z. Kh. Kurmakaev. Circular orbits in the Kerr metric. , 18:110, August 1974
 
 [4] Eric Bruneton. Real-time high-quality rendering of non-rotating black holes, 2020
+
+[5] Philippe Colantoni. Color space transformations. 2006
+
+[6] Chris Wyman et al. Simple analytic approximations to the cie xyz color matching functions. 2013
+
+[7] Kasajima Ichiro. Plotting colors on color circle: Interconversion between xyz values and rgb color system. Current Trends in Analytical and Bioanalytical Chemistry, 1, 05 2017
