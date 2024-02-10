@@ -206,7 +206,7 @@ $$
 \end{equation}
 $$
 
-From http://physics.unm.edu/Courses/Finley/p581/Handouts/Kerr/kerrnew.pdf and [here](https://arxiv.org/abs/1506.01473v2) we have that the frame fields for the local ZAMO frame are given by
+From [here](http://physics.unm.edu/Courses/Finley/p581/Handouts/Kerr/kerrnew.pdf) and [here](https://arxiv.org/abs/1506.01473v2) we have that the frame fields for the local ZAMO frame are given by
 
 $$
 \begin{align*}
@@ -232,7 +232,7 @@ To transform a vector $x^m$ from the local ZAMO frame to the global frame we the
 
 $$
 \begin{equation}
-    x'^\mu = e\indices{_m^\mu} x^m.
+    x'^\mu = e_m^{\mu} x^m.
 \end{equation}
 $$
 
@@ -253,6 +253,9 @@ In order to hopefully alleviate some confusion regarding the approach here we li
 1. Compute the local velocity of the camera in the local ZAMO frame
 2. Lorentz transform the initial photon four-momenta from the instantaneous camera rest frame to the local ZAMO frame
 3. Transform the four-momenta of the photons from the local ZAMO frame to the global frame using the ZAMO tetrads
+
+#### Step 1
+--------------------------------------------------------------
 
 ## References
 
