@@ -391,7 +391,7 @@ In order to hopefully alleviate some confusion regarding the approach here we li
 ##### Step 1
 ___
 
-From above we know how to transform from a local ZAMO frame to the global frame using the ZAMO tetrads. So we will first have to transform from the instantaneous camera rest frame to the local ZAMO frame, in order to then use the tetrads from Appendix \ref{app: tetrads} to finally transform to the global frame. Let the camera have four-velocity $u^\mu$ in the global coordinate frame. Also note for later that this four-velocity will be expressed in BL coordinates. Imagine then a ZAMO frame at the same position as the camera. The four-velocity of the camera in the ZAMO tetrad frame is given by
+From above we know how to transform from a local ZAMO frame to the global frame using the ZAMO tetrads. So we will first have to transform from the instantaneous camera rest frame to the local ZAMO frame, in order to then use the tetrads from above to finally transform to the global frame. Let the camera have four-velocity $u^\mu$ in the global coordinate frame. Also note for later that this four-velocity will be expressed in BL coordinates. Imagine then a ZAMO frame at the same position as the camera. The four-velocity of the camera in the ZAMO tetrad frame is given by
 
 $$
 \begin{equation}
@@ -433,7 +433,7 @@ $$
 \end{equation}
 $$
 
-in Cartesian coordinates. So we first have to convert the velocity vector $\vec{v}$ from BL coordinates to Cartesian coordinates. From the section on the coordinate transformation between Cartesian and BL coordinates we know that the components of the velocity vector in Cartesian components are given by 
+in Cartesian coordinates. So we first have to convert the velocity vector $\vec{v}$ from BL coordinates to Cartesian coordinates. From the section on the coordinate transformation between Cartesian and BL coordinates we know that the components of the velocity vector in Cartesian components are given by
 
 $$
 \begin{align*}
@@ -468,7 +468,7 @@ $$
 
 with the understanding that $\tilde{p}'^m$ is expressed in BL coordinates, as described at the end of Step 2.
 
-Having implemented this we have a fully general approach which takes into account relativistic aberration. And this is implemented purely through a coordinate transformation from the camera's rest frame to the global frame, which is in any case necessary.
+Having implemented this we have a fully general approach which takes into account relativistic aberration. And this is implemented purely through a coordinate transformation from the camera's rest frame to the global frame, which is in any case necessary if we want the camera to move freely around.
 
 ## The accretion disk
 
