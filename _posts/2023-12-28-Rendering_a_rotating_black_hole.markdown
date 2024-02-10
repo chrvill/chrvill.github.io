@@ -568,7 +568,7 @@ This spectral locus is the boundary of the chromaticity diagram mentioned earlie
 
 We can also calculate the curve in the chromaticity diagram which represents the color of blackbodies at different temperatures. This just involves calculating $X, Y$ and $Z$ from the spectrum $I_\lambda\left(\lambda; T\right)$ for varying $T$. The resulting curve in $(x, y)$ coordinates is called the *Planckian locus* (or equivalently the *blackbody locus*). Plotted together with the spectral locus the result we get is shown in the following figure where the thick curve represents the Planckian locus. We have again calculated the RGB color for each point along the Planckian locus.
 
-![The Planckian locus](miscellaneous/chromaticity_diagram_with_planckian_locus.png)
+![The Planckian locus](miscellaneous/chromaticity_diagram_with_planckian.png)
 
 ## References
 
