@@ -210,6 +210,8 @@ Let us call this coordinate transformation matrix $M$. It is fairly easy to chec
 
 ### Geodesics
 
+#### About geodesics 
+
 In order to visualize the black hole we need to trace *geodesics* in the Kerr spacetime, which we do by solving the *geodesic equation*
 
 $$
