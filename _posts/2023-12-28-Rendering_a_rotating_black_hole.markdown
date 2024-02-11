@@ -14,12 +14,15 @@ math: true
 
 ### 1.2 Topics we cover
 
-### 1.3 Physics vs rendering
+### 1.3 General disclaimer
+
+___
 
 ## 2 Fundamental black hole physics
 
-
 ### 2.1 Special relativity
+
+### 2.2 General relativity
 
 ### 2.3 The metric
 
@@ -29,6 +32,8 @@ math: true
 
 ### 2.4 Geodesics
 
+___
+
 ## 3 Tracing geodesics in curved spacetime
 
 ### 3.3 Coordinate systems
@@ -37,59 +42,50 @@ math: true
 
 ### 3.5 Initial conditions
 
-### 3.6 Flat/Schwarzschild/Kerr example
+### 3.6 Flat/Schwarzschild/Kerr example (+Integration schemes)
 
+___
 
 ## 4 A simple pin-hole camera model
 
-### 4.4 Raymarching
+### 4.1 Raymarching & Schwarzschild example
 
-### 4.5 Rendering a sphere
+#### 4.1.1 Reference frames
 
-### 4.6 Reference frames
+### 4.2 Extension to Kerr and Boyer-Lindquist coordinates
 
-### 4.7 Coordinate transformation from Cartesian to BL
+### 4.3 Examples
 
-### 4.8 Examples
+### 4.4 2D thin disk
 
-### 4.9 2D thin disk
+### 4.5 Problems and limitations
 
-### 4.10 Examples
-
-### 4.11 Problems and limitations
-
+___
 
 ## 5 The non-stationary camera
 
-### 5.1 What does this mean
-
-### 5.2 Basic frame of reference transformation
+### 5.1 Basic frame of reference transformation
 
 ### 5.3 The ZAMO and ergosphere
 
 ### 5.4 Rest frame to ZAMO to global transformation
 
-### 5.5 Examples
+#### 5.4.1 Relativistic aberration
 
-### 5.6 Aberration of light 
+### 5.5 Free-falling camera
 
-### 5.7 Free-falling camera
+#### 5.5.1 Examples
 
-### 5.8 Examples
-
+___
 
 ## 6 Redshift 
 
 ### 6.1 Why does it happen
 
-### 6.2 What do we want
+### 6.2 Gravitational & Doppler redshift
 
-### 6.3 Gravitational redshift
-
-### 6.4 Velocity distributions
-
-### 6.5 Velocity redshift
-
+### 6.3 Velocity distribution for the accretion disk
+___
 
 ## 7 Colors
 
@@ -99,14 +95,15 @@ math: true
 
 ### 7.3 Redshift and apparent temperature
 
-### 7.4 Color matching functions
+### 7.4 Color theory
 
 ### 7.5 From temperature to color
 
-### 7.6 Example 1: Doppler beaming
+### 7.6 Example 1: Redshift
 
-### 7.7 Example 2: Dopple shift
+### 7.7 Example 2: Relativistic beaming
 
+___
 
 ## 8 Review
 
@@ -114,8 +111,9 @@ math: true
 
 ### 8.2 Why it's about to get a lot worse
 
+___
 
-## 9The volumetric accretion disk
+## 9 The volumetric accretion disk
 
 ### 9.1 Disk models
 
@@ -131,6 +129,7 @@ math: true
 
 ### 9.7 Examples
 
+___
 
 ## 10 Light travel delay
 
@@ -144,6 +143,7 @@ math: true
 
 ### 10.5 Example
 
+___
 
 ## 11 The astrophysical jet
 
@@ -165,6 +165,7 @@ math: true
 
 ### 11.9 Why does it look even weirder
 
+___
 
 ## 12 Improving the renders
 
@@ -176,6 +177,7 @@ math: true
 
 ### 12.4 FFT Bloom
 
+___
 
 ## 13 Test cases
 
@@ -187,6 +189,7 @@ math: true
 
 ### 13.4 Contemporary example comparisons
 
+___
 
 ## 14 Conclusion
 
@@ -196,5 +199,6 @@ math: true
 
 ### 14.3 Special thanks
 
+___
 
 ## 15 Gallery
