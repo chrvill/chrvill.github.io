@@ -3,13 +3,12 @@ title: Rendering a rotating black hole
 date: 2023-12-28
 categories: [physics, general relativity, black holes]
 tags: [black holes]
-img_path: '../images'
 math: true
 ---
 
 ![Animation](https://github.com/chrvill/chrvill.github.io/blob/main/images/black_hole_renders/black_hole_animation.gif)
 
-## Introduction
+## 1 Introduction
 
 The aim of this post is to describe in detail how one can create a visualization of a rotating black hole. There are of course many resources online describing how one can do this, but we generally found these to lack good explanations. Here we want to hopefully remedy this. Naturally, since black holes are consequences of general relativity, you need a fairly solid understanding of general relativity in order to understand the derivations of the equations we use. But the key *equations of motion* we use are just standard differential equations. So an understanding of how to solve differential equations numerically might suffice.
 
@@ -21,6 +20,88 @@ Our simulation takes into account the following relativistic effects:
 * Relativistic aberration
 
 In addition to this the camera is allowed to follow any arbitrary geodesic, and the effects of redshift and aberration become very apparent when the camera is moving. In order to get realistic colors, also taking into account how the redshift affects the colors, we have had to convert a blackbody spectrum to RGB colors. This is not trivial, and is therefore explained in detail here. It should also be noted that this is exclusively a simulation of the *relativistic effects* related to a black hole, while the accretion disk and jet are not physically simulated. They are just procedural volumes where we have chosen velocity distributions. The velocity distribution for the disk assumes the particles in the disk move on circular orbits, which is admittedly not true according to the animations, but it is close. For the jet, however, we chose a completely arbitrary velocity distribution in order to get roughly the desired effect.  
+
+## 2 Fundamental black hole physics
+
+Black holes are a product of the theory of *general relativity* (GR), so we need to discuss the GR in order to describe how one can create a visualization of a black hole. Relativity is commonly divided into special relativity (SR) and GR in pop-science, despite the fact that GR entirely encompasses SR. The distinction is made because SR assumes a spacetime with no matter- or energy-content, while GR allows an arbitrary distribution of matter and energy. Central to both GR and SR is the concept of *spacetime*. Spacetime can be thought of as a combination of the familiar 3 spatial dimensions and the 1 dimension of time, commonly described as a (3 + 1)-dimensional spacetime. 
+
+### Special relativity
+
+Before we talk about GR it is instructional to discuss SR and introduce the relevant mathematical framework in the simpler context of SR. 
+
+When a particle moves through normal 3-dimensional space we can trace out its path to describe its motion through space. Completely analogously we can trace out a particle's path through *spacetime* to describe its motion in spacetime. This trajectory through spacetime is called the *worldline* of the particle. The following figure shows what is called a *spacetime diagram* limited to one spatial dimension, here chosen as the $x$-direction, and the time dimension $t$. The solid curve represents the worldline of some massive particle, and the dashed line represents the worldline of a massless particle like a photon.
+
+![Spacetime diagram](../images/miscellaneous/spacetime_diagram.png)
+
+Photons always move at the speed of light $c$ in all locally inertial reference frames. Here *local* means that we are talking about a small region in spacetime, meaning a small interval of time and/or a small region of space. And *inertial* means non-accelerating. For a photon moving in the $x$-direction its $x$-coordinate is given by $x(t) = ct$, where $t$ is time. Here, however, we use so-called *natural units* in which $c \equiv 1$. Then $x(t) = t$, so the worldline of a photon is linear with a slope of 1, as shown in the spacetime diagram above. Notice that all physical particles (which have to move at or below the speed of light) must have a slope which is greater than or equal to 1 at all points along their worldlines. It should also be noted that this discussion is implicitly assuming that we are talking about the spacetime dealt with in SR - so-called *Minkowski spacetime*. There are a few nuances that make the discussion in a general spacetime more complicated, but the discussion above paints a sufficiently reasonable picture for us here. 
+
+The so-called *line element* (also called the *spacetime interval*) is central to relativity. It describes the geometry of spacetime, specifically how to compute distances. We denote the line element by $ds^2$, and in our normal 3-dimensional space, called *Euclidean* space, it is given by 
+
+$$
+\begin{equation}
+  \label{eq: Euclidean_metric} \tag{1}
+  ds^2 = dx^2 + dy^2 + dz^2
+\end{equation}
+$$
+
+where $dx, dy$ and $dz$ are infinitesimal displacements along the $x-, y-$ and $z-$directions. Equation $\eqref{eq: Euclidean_metric}$ is just the Pythagorean theorem, thus justifying our interpretation of the line element as a measure of distance. In index notation we can write the line element as
+
+$$
+\begin{equation}
+  \label{eq: Euclidean_metric_index_notation} \tag{2}
+  ds^2 = \sum_{i = 1}^n \sum_{j = 1}^n \delta_{ij} dx^i dx^j,
+\end{equation}
+$$
+
+where we have collected $dx, dy$ and $dz$ into the vector $dx^i = (dx, dy, dz)$ and where $n$ is the dimension of the Euclidean space. And $\delta_{ij}$ is the Kronecker-delta, defined as $\delta_{ij} = 1$ if $i = j$ and $\delta_{ij} = 0$ if $i \neq j$. We now introduce a new notation that is standard when working with relativity, namely the \textit{Einstein notation convention}. With this convention we omit the summation symbols in expressions like $\eqref{eq: Euclidean_metric_index_notation}$ with the understanding that any time we have a repeated index that index is summed over. We can then write the line element of Euclidean space as
+
+$$
+\begin{equation}
+  \label{eq: Euclidean_metric_einstein_convention} \tag{3}
+  ds^2 = \delta_{ij} dx^i dx^j
+\end{equation}
+$$
+
+As mentioned earlier, SR deals with Minkowski spacetime. But this spacetime is not just a simple extension of Euclidean space where time is treated the same as the spatial dimensions. Instead the Minkowski line element is given by
+
+$$
+\begin{equation}
+  \label{eq: Minkowski_metric} \tag{4}
+  ds^2 = -dt^2 + dx^2 + dy^2 + dz^2
+\end{equation}
+$$
+
+where $dt$ is an infinitesimal interval of time. In analogy with $\eqref{eq: Euclidean_metric_einstein_convention}$ we can write the Minkowski line element as
+
+$$
+\begin{equation}
+  \label{eq: Minkowski_metric_tensor_notation} \tag{5}
+  ds^2 = \eta_{\mu \nu} dx^\mu dx^\nu
+\end{equation}
+$$
+
+where $dx^\mu = (dt, dx, dy, dz)$ and $\eta_{\mu \nu}$ is the Minkowski \textit{metric tensor} and is given by
+
+$$
+\begin{equation}
+  \label{eq: Minkowski_metric_tensor} \tag[6]
+  \eta_{\mu \nu} = \left(\begin{matrix}
+                      -1 & 0 & 0 & 0 \\
+                      0 & 1 & 0 & 0 \\
+                      0 & 0 & 1 & 0 \\
+                      0 & 0 & 0 & 1
+                   \end{matrix}\right) = \mathrm{diag}\left(-1, 1, 1, 1\right).
+\end{equation}
+$$
+
+Note that we have transitioned from using Latin letters like $i$ and $j$ to represent indices to using Greek letters like $\mu$ and $\nu$, in accordance with the standard notation in relativity. Similarly to how $\eqref{eq: Euclidean_metric_einstein_convention}$ tells us how to calculate distances in Euclidean space $\eqref{eq: Minkowski_metric_tensor_notation}$ tells us how to calculate distances in Minkowski spacetime. Consider now two events separated by a time $d\tau$ which are located at the same position, meaning $dx = dy = dz = 0$. Then $ds^2 = -d\tau^2$, where $\tau$ is called the \textit{proper time} between the two events. This proper time is always the time measured in the rest frame of the events, where the two events occur at the same location. Events which are such that the line element can be written in terms of a proper time like this are said to have \textit{timelike separation}. A very important property of the line element is that it has the same value in all reference frames. So this means that some other observer measuring the line element between the two events, where $dx, dy$ and $dz$ are not necessarily 0, will measure $dt, dx, dy$ and $dz$ to be in accordance with
+
+$$
+\begin{equation}
+    ds^2 = -dt^2 + dx^2 + dy^2 + dz^2 \equiv -d\tau^2.
+\end{equation}
+$$
+
 
 ### Notation and terminology
 
@@ -215,7 +296,7 @@ Let us call this coordinate transformation matrix $M$. It is fairly easy to chec
 
 In normal raymarching one typically just casts straight lines to model how light moves in so-called *flat spacetime* - spacetime with negligible gravity. But in curved spacetime light no longer follows these straight paths through space. Instead it follows the curved-space generalization of "straight paths", namely *geodesics*. In "normal" spaces (meaning not spacetime, simply space. The proper terminology is *Euclidean* space) a geodesic can be thought of as the path which minimizes the length between two points $A$ and $B$. In Euclidean space (think of a plane, for example) this just reduces to a straight line as we expect. But we can get more interesting geodesics if we consider a sphere, for example. This is shown in the following figure, where the red curve shows the geodesic between two points $A$ and $B$ on the sphere. 
 
-![Sphere geodesic](miscellaneous/A-geodesic-on-the-surface-of-a-sphere.png)
+![Sphere geodesic](../images/miscellaneous/A-geodesic-on-the-surface-of-a-sphere.png)
 
 This red line, the geodesic, is the shortest possible path between $A$ and $B$ if we are constrained to move on the spherical surface. You might also notice that the geodesic lies along a line of constant longitude, meaning that lines of constant longitude represent "straight" lines on the sphere. What this concept of a path being "straight" here really means is simply that you can follow such a path without having to steer - you can just move in your forwards direction. It might not be obvious, however, that lines of constant latitude are *not* geodesics on the sphere - they are not "straight". This is to say that if you were constrained to the surface of a sphere you could move along lines of constant longitude without steering, but not along lines of constant latitude. The concept of geodesics is the reason why the flight path of a plane can look unreasonable when projected into a two dimensional map, even though it is actually the shortest path.
 
@@ -588,7 +669,7 @@ $$
 
 Approximations to these color matching functions can be found in [6]. But it turns out that at low temperatures these approximations are not accurate enough anymore. So we will instead be using the lookup table given in [7]. In the following figure we have plotted the color matching functions as functions of wavelength. The $x$-axis represents wavelength $\lambda$ in nm, while the $y$-axis represents the output of the color matching functions, which can be taken to have units such that $X, Y$ and $Z$ are dimensionless.
 
-![The color matching functions](miscellaneous/color_matching_functions.png)
+![The color matching functions](../images/miscellaneous/color_matching_functions.png)
 
 While we have color-coded the different color matching functions, the three values $X, Y$ and $Z$ do not directly correspond to red, green and blue. Instead $X, Y$ and $Z$ live in an abstract color space.
 
@@ -617,19 +698,19 @@ $$
 
 It also naturally follows that we can define $z = \frac{Z}{X + Y + Z} = 1 - x - y$. We can now plot the $(x, y)$ coordinates of the monochromatic spectrum as we vary $\lambda_0$, and the resulting curve is called the *spectral locus*, and is shown in the following figure. The marked points show where different wavelengths fall on the spectral locus.
 
-![The spectral locus](miscellaneous/chromaticity_diagram_without_planckian_locus.png)
+![The spectral locus](../images/miscellaneous/chromaticity_diagram_without_planckian_locus.png)
 
 This spectral locus is the boundary of the chromaticity diagram mentioned earlier, and which is shown in [this](https://en.wikipedia.org/wiki/CIE_1931_color_space) Wikipedia article. Here we have colored in the different points along the spectral locus according to which RGB color they correspond to. But we have not yet explained how we can compute these RGB colors from the $x$ and $y$ values, we get to that later.
 
 We can also calculate the curve in the chromaticity diagram which represents the color of blackbodies at different temperatures. This just involves calculating $X, Y$ and $Z$ from the spectrum $I_\lambda\left(\lambda; T\right)$ for varying $T$. The resulting curve in $(x, y)$ coordinates is called the *Planckian locus* (or equivalently the *blackbody locus*). Plotted together with the spectral locus the result we get is shown in the following figure where the thick curve represents the Planckian locus. We have again calculated the RGB color for each point along the Planckian locus.
 
-![The Planckian locus](miscellaneous/chromaticity_diagram_with_planckian.png)
+![The Planckian locus](../images/miscellaneous/chromaticity_diagram_with_planckian.png)
 
 ### Transformation from $XYZ$ to RGB
 
 There are many different RGB color spaces designed for outputting colors to a screen, and these different RGB color spaces are defined by their so-called *primaries*. When choosing an RGB color space we choose which primaries red, green and blue to use. These primaries correspond to the vertices in the colored triangle in the following figure. The set of points inside the triangle between the primaries is called the *gamut* of the RGB space, and makes up the colors that the given RGB space can represent. And since different RGB spaces have different primaries the sets of colors that they can represent are therefore also different.
 
-![Chromaticity diagram with sRGB gamut](miscellaneous/SRGB_chromaticity_CIE1931.svg){: width="700" height="400" background-color=white}
+![Chromaticity diagram with sRGB gamut](../images/miscellaneous/SRGB_chromaticity_CIE1931.svg){: width="700" height="400" background-color=white}
 
 The points inside the gamut are linear combinations of the primaries, so the primaries form a basis for the RGB space. Red $R$, green $G$ and blue $B$, being the primaries, are of course written as
 
@@ -779,7 +860,7 @@ with $T_\mathrm{shifted} \equiv \frac{T}{1 + z}$. Notice now that this is also a
 
 We can plot the map showing the blackbody color for different combinations of $T$ and $1 + z$. This is shown in the following figure for temperatures $T \in \left[200, 10000\right]$ K and for $(1 + z) \in \left[0.1, 2\right]$.
 
-![Temperature-redshift map](miscellaneous/temp_redshift_map.png)
+![Temperature-redshift map](../images/miscellaneous/temp_redshift_map.png)
 
 ## References
 
