@@ -204,15 +204,23 @@ $$
 \end{equation}
 $$
 
-Let us call this coordinate transformation matrix $M$. It is fairly easy to check that this is an orthogonal matrix, meaning that $M^{-1} = M^T$ (just compute $M^T M$, which is equal to $\mathbb{I}$ for orthogonal matrices $M$). And in that case the inverse transformation, from BL to Cartesian coordinates, is given by $M^T$. Now, of course this is the coordinate transformation between the Cartesian and BL *basis vectors*. And we want the transformation between \mathrmit{vector components}. But it turns out the coordinate transformation for the vector components is the same as for the basis vectors, as is shown by Lutz Lehmann [here](https://math.stackexchange.com/questions/3493647/do-coordinate-components-transform-in-the-same-or-opposite-way-as-their-bases).
+Let us call this coordinate transformation matrix $M$. It is fairly easy to check that this is an orthogonal matrix, meaning that $M^{-1} = M^T$ (just compute $M^T M$, which is equal to $\mathbb{I}$ for orthogonal matrices $M$). And in that case the inverse transformation, from BL to Cartesian coordinates, is given by $M^T$. Now, of course this is the coordinate transformation between the Cartesian and BL *basis vectors*. And we want the transformation between *vector components*. But it turns out the coordinate transformation for the vector components is the same as for the basis vectors, as is shown by Lutz Lehmann [here](https://math.stackexchange.com/questions/3493647/do-coordinate-components-transform-in-the-same-or-opposite-way-as-their-bases).
 
 ## General relativistic raymarching
 
 ### Geodesics
 
-#### About geodesics 
+In normal raymarching one typically just casts straight lines to model how light moves in so-called *flat spacetime* - spacetime with negligible gravity. But in curved spacetime light no longer follows these straight paths through space. Instead it follows the curved-space generalization of "straight paths", namely *geodesics*. In "normal" spaces (meaning not spacetime, simply space. The proper terminology is *Euclidean* space) a geodesic can be thought of as the path which minimizes the length between two points $A$ and $B$. In Euclidean space (think of a plane, for example) this just reduces to a straight line as we expect. But we can get more interesting geodesics if we consider a sphere, for example. This is shown in the following figure, where the red curve shows the geodesic between two points $A$ and $B$ on the sphere. 
 
-In order to visualize the black hole we need to trace *geodesics* in the Kerr spacetime, which we do by solving the *geodesic equation*
+![Sphere geodesic](miscellaneous/A-geodesic-on-the-surface-of-a-sphere.png)
+
+This red line, the geodesic, is the shortest possible path between $A$ and $B$ if we are constrained to move on the spherical surface. You might also notice that the geodesic lies along a line of constant longitude, meaning that lines of constant longitude represent "straight" lines on the sphere. What this concept of a path being "straight" here really means is simply that you can follow such a path without having to steer - you can just move in your forwards direction. It might not be obvious, however, that lines of constant latitude are *not* geodesics on the sphere - they are not "straight". This is to say that if you were constrained to the surface of a sphere you could move along lines of constant longitude without steering, but not along lines of constant latitude. The concept of geodesics is the reason why the flight path of a plane can look unreasonable when projected into a two dimensional map, even though it is actually the shortest path.
+
+The mathematics behind geodesics carries over to curved spacetime, but the intuition is harder to grasp. Rather than being the path of shortest spatial distance between two points it is the path of *longest proper time*, which is the time measured by an observer following the path. Let us assume we have two observers, which we creatively call Alice and Bob, moving along two different paths from point $A$ to point $B$ in spacetime. Alice moves along a geodesic between these points, while Bob does not. This then means that Alice will measure a longer time from $A$ to $B$ on her clock than Bob will measure on his clock. 
+
+In relativity the geodesic also has the interpretation of being the path an unaccelerated particle follows. In our previous analogy then, Alice is in unaccelerated free-fall, while Bob accelerates in some way. Now, a possible cause for confusion is the fact that in classical physics we tend to say that an object accelerates due to gravity. But in GR this is not the case anymore - an object moving only under the influence of gravity is said to be unaccelerated. This means that an object moving only under the influence of gravity, so called free-fall will follow a geodesic. That is why we say that in GR gravity is the manifestation of spacetime curvature - a collection of matter curves spacetime, therefore causing geodesics to also be curved. And the effect we perceive as gravity is simply caused by the fact that geodesics deviate from straight lines through space. Our photons are unaccelerated and therefore follow geodesics. 
+
+In order to visualize the black hole we therefore need to trace geodesics in the Kerr spacetime, which we do by solving the *geodesic equation*
 
 $$
 \begin{equation}
@@ -316,7 +324,7 @@ where $\epsilon$ is a tolerance value we can choose in order to specify the leve
 
 Before we explain aberration we will do a short detour explaining what *tetrads* are.
 
-From the equivalence principle we know that we can always transform to a local inertial frame. And in contrast to Schwarzschild spacetime where shell observers are natural frames we will instead work with ZAMO frames, since these exist even inside the ergosphere. But the question is how we perform this transformation. How can we transform from the global BL coordinates to the local ZAMO coordinates? This is where the concept of a \mathrmit{vierbein}, also called a *frame field*, is extremely useful (An introduction to vierbeins can be found [here](https://jila.colorado.edu/~ajsh/courses/astr5770_21/text.html})). A vierbein is a set of orthonormal axes which form a local inertial frame. So we want the vierbeins to take us from the global coordinate system to the local one, which is to say from the metric $g_{\mu \nu}$ to the Minkowski metric $\eta_{\mu \nu}$. This means that
+From the equivalence principle we know that we can always transform to a local inertial frame. And in contrast to Schwarzschild spacetime where shell observers are natural frames we will instead work with ZAMO frames, since these exist even inside the ergosphere. But the question is how we perform this transformation. How can we transform from the global BL coordinates to the local ZAMO coordinates? This is where the concept of a *vierbein*, also called a *frame field*, is extremely useful (An introduction to vierbeins can be found [here](https://jila.colorado.edu/~ajsh/courses/astr5770_21/text.html})). A vierbein is a set of orthonormal axes which form a local inertial frame. So we want the vierbeins to take us from the global coordinate system to the local one, which is to say from the metric $g_{\mu \nu}$ to the Minkowski metric $\eta_{\mu \nu}$. This means that
 
 $$
 \begin{equation}
@@ -565,7 +573,7 @@ $$
 
 where $h$ and $k_B$ are Planck's constant and Boltzmann's constant respectively. $T$ is the temperature of the disk and $\lambda$ wavelength. This is the *blackbody distribution*, and describes the amount of radiation emitted as a function of wavelength. We now need a way to convert an intensity distribution, like the blackbody distribution, to an RGB color.
 
-The relative amounts of the visible wavelengths that are emitted determine the color of the object. Unfortunately our eyes do not perceive and respond to all visible wavelengths of light equally. So converting an intensity spectrum $I_\lambda$, which represents the intensity distribution that is actually observed, to the color our eyes actually see is far from trivial. The procedure for calculating an RGB color comes in two main steps: converting a spectrum to so-called \mathrmit{tristimulus values}, and then converting the tristimulus values to RGB values. We found [5], [this](https://color.org/chardata/rgb/sRGB.pdf) and [this](https://en.wikipedia.org/wiki/SRGB) to be particularly helpful here. Assume now that we have a blackbody at some temperature $T$. We can find the tristimulus values $X, Y$ and $Z$ using the so-called *color matching functions* $\bar{x}, \bar{y}$ and $\bar{z}$, which describe how our eyes respond to different wavelengths. The $X, Y$ and $Z$ values are calculated in the following way
+The relative amounts of the visible wavelengths that are emitted determine the color of the object. Unfortunately our eyes do not perceive and respond to all visible wavelengths of light equally. So converting an intensity spectrum $I_\lambda$, which represents the intensity distribution that is actually observed, to the color our eyes actually see is far from trivial. The procedure for calculating an RGB color comes in two main steps: converting a spectrum to so-called *tristimulus values*, and then converting the tristimulus values to RGB values. We found [5], [this](https://color.org/chardata/rgb/sRGB.pdf) and [this](https://en.wikipedia.org/wiki/SRGB) to be particularly helpful here. Assume now that we have a blackbody at some temperature $T$. We can find the tristimulus values $X, Y$ and $Z$ using the so-called *color matching functions* $\bar{x}, \bar{y}$ and $\bar{z}$, which describe how our eyes respond to different wavelengths. The $X, Y$ and $Z$ values are calculated in the following way
 
 $$
 \begin{align*}
@@ -604,7 +612,7 @@ $$
 \end{align*}
 $$
 
-It also naturally follows that we can define $z = \frac{Z}{X + Y + Z} = 1 - x - y$. We can now plot the $(x, y)$ coordinates of the monochromatic spectrum as we vary $\lambda_0$, and the resulting curve is called the \mathrmit{spectral locus}, and is shown in the following figure. The marked points show where different wavelengths fall on the spectral locus.
+It also naturally follows that we can define $z = \frac{Z}{X + Y + Z} = 1 - x - y$. We can now plot the $(x, y)$ coordinates of the monochromatic spectrum as we vary $\lambda_0$, and the resulting curve is called the *spectral locus*, and is shown in the following figure. The marked points show where different wavelengths fall on the spectral locus.
 
 ![The spectral locus](miscellaneous/chromaticity_diagram_without_planckian_locus.png)
 
