@@ -7,6 +7,8 @@ img_path: '../images'
 math: true
 ---
 
+![Example animation](https://github.com/chrvill/chrvill.github.io/blob/main/images/black_hole_renders/black_hole_animation.gif)
+
 ## Introduction
 
 The aim of this post is to describe in detail how one can create a visualization of a rotating black hole. There are of course many resources online describing how one can do this, but we generally found these to lack good explanations. Here we want to hopefully remedy this. Naturally, since black holes are consequences of general relativity, you need a fairly solid understanding of general relativity in order to understand the derivations of the equations we use. But the key *equations of motion* we use are just standard differential equations. So an understanding of how to solve differential equations numerically might suffice.
@@ -24,6 +26,7 @@ In addition to this the camera is allowed to follow any arbitrary geodesic, and 
 
 We use
 
+* The *Einstein notation convention*, so that $\sum_\mu a^\mu b_\mu \to a^\mu b_\mu$
 * The metric signature (-, +, +, +)
 * Natural units, with $c = G = 1$
 
