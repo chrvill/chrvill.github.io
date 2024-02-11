@@ -6,15 +6,15 @@ tags: [black holes]
 math: true
 ---
 
-![Animation](https://github.com/chrvill/chrvill.github.io/blob/main/images/black_hole_renders/black_hole_animation.gif)
+![alt text](../images/miscellaneous/geodesics.gif)
 
 ## 1 Introduction
 
-### Goal
+### 1.1 Goal
 
-### Topics we cover
+### 1.2 Topics we cover
 
-### Physics vs rendering
+### 1.3 Physics vs rendering
 
 ## 2 Fundamental black hole physics
 
@@ -29,172 +29,172 @@ math: true
 
 ### 2.4 Geodesics
 
-## Tracing geodesics in curved spacetime
+## 3 Tracing geodesics in curved spacetime
 
-### Coordinate systems
+### 3.3 Coordinate systems
 
-### Metric and equations of motion
+### 3.4 Metric and equations of motion
 
-### Initial conditions
+### 3.5 Initial conditions
 
-### Flat/Schwarzschild/Kerr example
+### 3.6 Flat/Schwarzschild/Kerr example
 
 
-## A simple pin-hole camera model
+## 4 A simple pin-hole camera model
 
-### Raymarching
+### 4.4 Raymarching
 
-### Rendering a sphere
+### 4.5 Rendering a sphere
 
-### Reference frames
+### 4.6 Reference frames
 
-### Coordinate transformation from Cartesian to BL
+### 4.7 Coordinate transformation from Cartesian to BL
 
-### Examples
+### 4.8 Examples
 
-### 2D thin disk
+### 4.9 2D thin disk
 
-### Examples
+### 4.10 Examples
 
-### Problems and limitations
+### 4.11 Problems and limitations
 
 
-## The non-stationary camera
+## 5 The non-stationary camera
 
-### What does this mean
+### 5.1 What does this mean
 
-### Basic frame of reference transformation
+### 5.2 Basic frame of reference transformation
 
-### The ZAMO and ergosphere
+### 5.3 The ZAMO and ergosphere
 
-### Rest frame to ZAMO to global transformation
+### 5.4 Rest frame to ZAMO to global transformation
 
-### Examples
+### 5.5 Examples
 
-### Aberration of light 
+### 5.6 Aberration of light 
 
-### Free-falling camera
+### 5.7 Free-falling camera
 
-### Examples
+### 5.8 Examples
 
 
-## Redshift 
+## 6 Redshift 
 
-### Why does it happen
+### 6.1 Why does it happen
 
-### What do we want
+### 6.2 What do we want
 
-### Gravitational redshift
+### 6.3 Gravitational redshift
 
-### Velocity distributions
+### 6.4 Velocity distributions
 
-### Velocity redshift
+### 6.5 Velocity redshift
 
 
-## Colors
+## 7 Colors
 
-### What colors are hot things
+### 7.1 What colors are hot things
 
-### Why a blackbody
+### 7.2 Why a blackbody
 
-### Redshift and apparent temperature
+### 7.3 Redshift and apparent temperature
 
-### Color matching functions
+### 7.4 Color matching functions
 
-### From temperature to color
+### 7.5 From temperature to color
 
-### Example 1: Doppler beaming
+### 7.6 Example 1: Doppler beaming
 
-### Example 2: Dopple shift
+### 7.7 Example 2: Dopple shift
 
 
-## Review
+## 8 Review
 
-### What we have so far
+### 8.1 What we have so far
 
-### Why it's about to get a lot worse
+### 8.2 Why it's about to get a lot worse
 
 
-## The volumetric accretion disk
+## 9The volumetric accretion disk
 
-### Disk models
+### 9.1 Disk models
 
-### Basic volume rendering 
+### 9.2 Basic volume rendering 
 
-### Challenges
+### 9.3 Challenges
 
-### Procedural voronoi based disk noise
+### 9.4 Procedural voronoi based disk noise
 
-### Examples
+### 9.5 Examples
 
-### Temperature distributions
+### 9.6 Temperature distributions
 
-### Examples
+### 9.7 Examples
 
 
-## Light travel delay
+## 10 Light travel delay
 
-### What
+### 10.1 What
 
-### Simple non-relativistic example
+### 10.2 Simple non-relativistic example
 
-### Relativistic example
+### 10.3 Relativistic example
 
-### Disk delay angle
+### 10.4 Disk delay angle
 
-### Example
+### 10.5 Example
 
 
-## The astrophysical jet
+## 11 The astrophysical jet
 
-### Jet models
+### 11.1 Jet models
 
-### Procedural jet model with special coordinates
+### 11.2 Procedural jet model with special coordinates
 
-### Velocity distribution
+### 11.3 Velocity distribution
 
-### Temperature distribution
+### 11.4 Temperature distribution
 
-### Examples
+### 11.5 Examples
 
-### Why does it look so weird
+### 11.6 Why does it look so weird
 
-### Delaying the jet
+### 11.7 Delaying the jet
 
-### Examples
+### 11.8 Examples
 
-### Why does it look even weirder
+### 11.9 Why does it look even weirder
 
 
-## Improving the renders
+## 12 Improving the renders
 
-### Super sampling
+### 12.1 Super sampling
 
-### Anti aliasing
+### 12.2 Anti aliasing
 
-### Physical motion blur
+### 12.3 Physical motion blur
 
-### FFT Bloom
+### 12.4 FFT Bloom
 
 
-## Test cases
+## 13 Test cases
 
-### Example 1
+### 13.1 Example 1
 
-### Example 2 
+### 13.2 Example 2 
 
-### Example 3
+### 13.3 Example 3
 
-### Contemporary example comparisons
+### 13.4 Contemporary example comparisons
 
 
-## Conclusion
+## 14 Conclusion
 
-### Limitations
+### 14.1 Limitations
 
-### Improvements
+### 14.2 Improvements
 
-### Special thanks
+### 14.3 Special thanks
 
 
-## Gallery
+## 15 Gallery
