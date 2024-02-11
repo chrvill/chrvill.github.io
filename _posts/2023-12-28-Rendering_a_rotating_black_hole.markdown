@@ -7,7 +7,7 @@ img_path: '../images'
 math: true
 ---
 
-![Example animation](https://github.com/chrvill/chrvill.github.io/blob/main/images/black_hole_renders/black_hole_animation.gif)
+![Animation](https://github.com/chrvill/chrvill.github.io/blob/main/images/black_hole_renders/black_hole_animation.gif)
 
 ## Introduction
 
