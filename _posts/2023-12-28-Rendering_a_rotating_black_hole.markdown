@@ -10,6 +10,12 @@ math: true
 
 ## 1 Introduction
 
+### Goal
+
+### Topics we cover
+
+### Physics vs rendering
+
 ## 2 Fundamental black hole physics
 
 
@@ -104,6 +110,10 @@ math: true
 
 ## Review
 
+### What we have so far
+
+### Why it's about to get a lot worse
+
 
 ## The volumetric accretion disk
 
@@ -163,6 +173,8 @@ math: true
 ### Anti aliasing
 
 ### Physical motion blur
+
+### FFT Bloom
 
 
 ## Test cases
