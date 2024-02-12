@@ -353,7 +353,7 @@ along a geodesic. Consider now the expression for $L$ at $\theta = \pi/2$ as $r 
 
 $$
 \begin{equation}
-  %\label{eq: frame_dragging_p_phi}
+  \label{eq: frame_dragging_p_phi}
   p^\phi = -\frac{g_{t\phi}}{g_{\phi \phi}}p^t,
 \end{equation}
 $$
@@ -378,7 +378,7 @@ Consider this at the surface where $\Sigma = 2r$, meaning $g_{tt} = 0$. Then the
 
 $$
 \begin{equation}
-  %\label{eq: frame_dragging_angular_velocity}
+  \label{eq: frame_dragging_angular_velocity}
   \frac{d\phi}{dt} = 0, \quad \frac{d\phi}{dt} = - \frac{2g_{t\phi}}{g_{\phi \phi}} = \frac{a}{2 + a^2}
 \end{equation}
 $$
@@ -422,7 +422,7 @@ $$
 \end{equation}
 $$
 
-From [here](http://physics.unm.edu/Courses/Finley/p581/Handouts/Kerr/kerrnew.pdf) and [here](https://arxiv.org/abs/1506.01473v2) we have that the frame fields for the local ZAMO frame are given by
+From (gotta find that paper again) and [here](https://arxiv.org/abs/1506.01473v2) we have that the frame fields for the local ZAMO frame are given by
 
 $$
 \begin{align*}
