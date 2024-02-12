@@ -526,13 +526,15 @@ when the components are $v^r$, $v^\theta$ and $v^\phi$ in BL coordinates. Let's 
 
 $$
 \begin{equation}
-    %\label{eq: camera_four_mom_ZAMO}
+    \label{eq: camera_four_mom_ZAMO}
     \tilde{p}^m = \Lambda^m_n\left(\vec{v}\right) \tilde{p}'^n
 \end{equation}
 $$
 
 Then we move back into BL coordinates. And the coordinate transformation is then simply given by the matrix in $\eqref{eq: unit_vector_relation}$. 
+
 ___
+
 ##### Step 3
 
 The final step is then rather simple. The four-momentum of the ray in the global frame is simply 
