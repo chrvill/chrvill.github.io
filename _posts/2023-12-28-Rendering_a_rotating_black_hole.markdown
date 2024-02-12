@@ -20,93 +20,36 @@ ___
 
 ## 2 Fundamental black hole physics
 
-Black holes are product of the theory of *general relativity* (GR), so we need to discuss GR in order to describe how one can create a visualization of a black hole. GR is infamously hard, so we will not do the subject justice in this post, but will have to include quite an extensive amount of math nonetheless. 
-
 ### 2.1 Special relativity
-
-Special relativity is based on two postulates:
-
-1. The laws of physics take the same form in all inertial reference frames.
-2. The speed of light measured in all inertial frames is always the same
-
-A consequence of these postulates is that there exists no inertial frames moving at the speed of light relative to any other inertial frames. Because then light would be at rest in such a frame, and so the second postulate would be broken. This is to say that questions such as "what would you see moving at the speed of light?" or "what does a photon measure?" are fundamentally flawed, because there does not exist any frames moving at the speed of light. So relativity cannot answer these questions. 
-
-Central to both GR and SR is the concept of *spacetime*. Spacetime can be thought of as a combination of the familiar 3 spatial dimensions and the 1 dimension of time, commonly described as a (3 + 1)-dimensional spacetime. 
-
-Have to add more here....
-
-
 
 ### 2.2 General relativity and the metric 
 
-General relativity is like the big brother of special relativity. One can describe special relativity with the exact same mathematical framework as is used in general relativity, but in special relativity the math all reduces to much simpler forms. This is because special relativity assumes that spacetime has no matter- or energy-contents, while general relativity allows an arbitrary matter- and energy-distribution. 
-
-General relativity is grounded in very large part on the *equivalence principle*. One formulation of this principle is that *locally* the laws of physics reduce to those of special relativity, and that it is impossible to detect the existence of a gravitational field locally. Locality in this context means that we are considering infinitesimal regions of spacetime, which is to say infinitesimal intervals of time and/or infinitesimal separations in space. So said in a simpler way, if you only consider a small region around yourself and a short interval of time you are fine using only special relativity. And in this small region of space and short interval of time you will not feel gravity. In practice this means that whenever some observer wants to measure something local to them they can use special relativity instead of having to use the full machinery of general relativity. 
-
-Spacetime in special relativity is called *Minkowski spacetime*, which is also called *flat* spacetime. This is spacetime in the absence of gravity. While general relativity deals with the general case (naturally) where spacetime is allowed to have *curvature*. This curvature is set up by the matter- and energy-content which is present, and the curvature and matter/energy content are related through the *Einstein field equations* (roughly). 
-
-In everyday life we are used to the fact that objects move along straight lines through space when they are not accelerating, that we can have lines which are parallel everywhere, and that distances between points can be calculated using the Pythagorean theorem. However, these phenomena and this intuition come from special relativity and do not in general hold in curved spacetime. In particular, the Pythagorean theorem no longer holds in curved spacetime - we instead need a generalization that describes curved spacetime. This is where the *metric* becomes important. Essentially the metric is a matrix that tells you how to compute distances between points in spacetime, and it encodes the geometry of spacetime. 
-
-As an example we can take the metric for Minkowski spacetime, which is to say the metric describing special relativity. The following is the metric (also called the line element)
-
-$$
-\begin{equation}
-    \label{eq: metric_minkowski}
-    ds^2 = -dt^2 + dx^2 + dy^2 + dz^2
-\end{equation}
-$$
-
-where $dt$ is an infinitesimal interval of time and $dx, dy$ and $dz$ are infinitesimal distanes along the $x$, $y$ and $z$ directions. Notice that if we take $dt = 0$ this reduces to the Pythagorean theorem. But with $dt \neq 0$ this tells us that if we want to compute the spacetime distance between two points in spacetime the contribution to the distance from the infinitesimal interval of time is different from the contributions from the infinitesimal spatial increments, due to the minus sign in front of the $dt^2$-term. This metric is written in *Cartesian coordinates* $x, y, z$. But a fundamental principle of general relativity is that the coordinate system one chooses to express physical quantities in is completely irrelevant - the physics should be the same no matter which coordinate system you use. So let us move to spherical coordinates $r, \theta, \phi$. These are related to the Cartesian coordinates $x, y, z$ through
-
-$$
-\begin{align*}
-    x &= r\sin\left(\theta\right)\cos\left(\phi\right) \\
-    y &= r\sin\left(\theta\right)\sin\left(\phi\right) \\ 
-    z &= r\cos\left(\theta\right)
-\end{align*}
-$$
-
-Now we want to rewrite the metric $ds^2$ in terms of $dr, d\theta$ and $d\phi$. All these quantities $dx, dy, dz$ and $dr, d\theta, d\phi$ are so-called *differentials*, so in order to do the switch $dx, dy, dz \to dr, d\theta, d\phi$ we have to use calculus. But omitting all the unnecessary details here the metric we get in spherical coordinates is 
-
-$$
-\begin{equation}
-    ds^2 = -dt^2 + dr^2 + r^2\left(d\theta^2 + \sin^2\left(\theta\right) d\phi^2\right)
-\end{equation}
-$$
-
-The point of rewriting the metric to spherical coordinates was just to introduce spherical coordinates, and to explain that the coordinates that we use are irrelevant to the physics. We are completely free to choose whatever coordinates we want, and furthermore the coordinates do not even need to have a clear physical interpretation. 
-
 #### 2.2.1 The Schwarzschild solution
-
-We mentioned before that the curvature of the spacetime and its matter- and energy-contents are related through the Einstein field equations. That is a slight oversimplification, and it's more accurate to say that the *metric* is related to the matter- and energy-contents through the Einstein field equations. And the curvature is then related to the metric. So we have this equation which tells us that, given an matter/energy distribution, spits out the form that the metric for that spacetime must take. However, the process of actually finding the solution for the metric given the matter/energy distribution is very complicated, because the Einstein field equations are extremely nasty. 
-
-The only hope we have of finding analytical solutions to the Einstein field equations is to assume that the metric, which we're solving for, has some sort of symmetry. Symmetries in physics are extremely important, and roughly describe the fact that under certain circumstances some types of transformations can leave our equations unchanged. For example, let's say you are moving through completely empty space. Then it doesn't matter whether you're 1 meter to the right or 1 meter to the left, there's no reason to expect your motion to be any different in empty space. This is a symmetry of empty space - the fact that you can just add some arbitrary vector to your current position, and it doesn't change the physics. As a sidenote, this is called *translational symmetry* and leads to conservation of momentum. If this is interesting look up *Noether's theorem*. 
-
-As another example assume you're moving in an orbit around the Earth. Now, the gravitational potential energy is only dependent on your distance from the center of the Earth. So in this case it shouldn't matter if you rotated your orbit by say $90^\circ$ - the energy is still the same. In this case we have *rotational symmetry*, also called *axial symmetry*, and this symmetry leads to conservation of angular momentum.
-
-Now comes the actual relevant point to us here. Let us say that we want to model the spacetime around some massive object. What assumptions can we make here that simplify the math? Or put another way, which symmetries does this system possess? The key thing to notice here is that it doesn't matter what angle we view this system from - it looks the same from all angles. The only thing that matters is the distance from the central massive object. This is to say that we have *spherical symmetry*. Another assumption we can make is that the massive object is the same at all times, which is to say it's *static*. These two assumptions, spherical symmetry and a static spacetime, allow us to drastically simplify the possible form that the metric can take. The only thing we still have to resolve here is that even with these two assumptions there is a free parameter in the metric. But the key to fixing that parameter in place is that we know how the gravitational field should look around a massive object in Newtonian physics, which corresponds to the low-velocity, weak-gravity regime. Evaluating the form of the metric in the low-velocity, weak-gravity limit fixes the free parameter, and the free parameter can be identified as the *mass* of the central object. The final form of the metric is 
-
-$$
-\begin{equation}
-    \label{eq: schwarzschild_metric} \tag{2}
-    ds^2 = -\left(1 - \frac{2M}{r}\right)dt^2 + \left(1 - \frac{2M}{r}\right)^{-1} dr^2 + r^2 \left(d\theta^2 + \sin^2\left(\theta\right) d\phi^2\right),
-\end{equation}
-$$
-
-where $M$ is the mass of the central object. This is called the *Schwarzschild metric*. You might notice that the last parenthesis is the same as in the Minkowski metric. And that's because both the Schwarzschild metric and the Minkowski metric exhibit spherical symmetry. The Schwarzschild metric describes the spacetime around a *non-rotating*, *charge-neutral* black hole. 
 
 #### 2.2.2 The Kerr solution
 
-The Schwarzschild metric is very useful, particularly in analytical work, because it's simple enough that we can do many calculations by hand. But it's still complicated enough to not be trivial and to exhibit some interesting phenomena. So we could've used this metric to visualize a non-rotating black hole. But we wanted to go a bit further and look at a *rotating* black hole instead. Consider now again what assumptions we can make about the rotating black hole which simplifies the math. We can no longer assume spherical symmetry, because the black hole is rotating around some axis, which breaks this symmetry. But the spacetime will be rotationally symmetric around the axis that the black hole rotates around. The spacetime is also not static anymore, because the black hole is rotating. But it's rotating in the same exact same way all the time, which means the spacetime is *stationary*. Exactly what this means isn't that important here, but the point is that even with these weaker assumptions there still exists an analytical solution. This is the *Kerr metric* given by
+The spacetime around a rotating (charge-neutral) black hole is described by the *Kerr metric*. This metric is commonly given in Boyer-Lindquist (BL) coordinates, where the line element takes the following form
 
 $$
 \begin{equation}
-    \label{eq: Kerr_metric} \tag{3}
+    \label{eq: Kerr_metric} \tag{1}
     ds^2 = g_{tt}dt^2 + g_{rr}dr^2 + g_{\theta\theta}d\theta^2 + g_{\phi\phi}d\phi^2 + g_{t\phi}\left(dtd\phi + d\phi dt\right),
 \end{equation}
 $$
 
-with 
+with
+
+$$
+\begin{align*}
+    g_{tt} &= -\left(1 - \frac{2Mr}{\Sigma}\right), \\ \\
+    g_{rr} &= \frac{\Sigma}{\Delta}, \\ \\
+    g_{\theta\theta} &= \Sigma, \\ \\
+    g_{\phi\phi} &= \frac{\Lambda}{\Sigma}\sin^2 \theta,\\ \\
+    g_{t\phi} &= -\frac{2M r a \sin^2 \theta}{\Sigma}
+\end{align*}
+$$
+
+and
 
 $$
 \begin{align*}
@@ -116,121 +59,256 @@ $$
 \end{align*}
 $$
 
+
 and where $a = \frac{J}{M}$ describes the angular momentum of the black hole, where $J$ is the angular momentum of the black hole and $M$ is its mass. The parameter $a$ can go from $a = 0$ to $\vert a \vert = M$. The transformation from BL to Cartesian coordinates is given by (see for example [1])
 
 $$
 \begin{align*}
-    x &= \sqrt{r^2 + a^2}\sin\theta\cos\phi, \label{eq: x_BL} \tag{4} \\
-    y &= \sqrt{r^2 + a^2}\sin\theta\sin\phi, \label{eq: y_BL} \tag{5} \\
-    z &= r\cos\theta. \label{eq: z_BL} \tag{6}
+    x &= \sqrt{r^2 + a^2}\sin\theta\cos\phi, \label{eq: x_BL} \tag{2} \\
+    y &= \sqrt{r^2 + a^2}\sin\theta\sin\phi, \label{eq: y_BL} \tag{3} \\
+    z &= r\cos\theta. \label{eq: z_BL} \tag{4}
 \end{align*}
 $$
 
-These BL coordinates are similar to the spherical coordinates we encountered earlier, but they aren't exactly the same. This metric is the one we'll use throughout. 
+In order for the math to be cleaner in the code we'll introduce the dimensionless quantities
+
+$$
+\begin{equation}
+  r' = \frac{r}{M}, \quad a' = \frac{a}{M}, \quad t' = \frac{t}{M}
+\end{equation}
+$$
+
+Then
+
+$$
+\begin{align*}
+  \Sigma &= M^2 \left(\left(r'\right)^2 + \left(a'\right)^2\cos^2\theta\right) \equiv M^2 \Sigma' \\ \\
+  \Delta &= M^2 \left(\left(r'\right)^2 - 2r' + \left(a'\right)^2\right) \equiv M^2 \Delta', \\
+  \Lambda &= M^4 \left[\left(\left(r'\right)^2 + \left(a'\right)^2\right)^2 - \left(a'\right)^2 \Delta' \sin^2\theta\right] \equiv M^4 \Lambda'
+\end{align*}
+$$
+
+meaning that 
+
+$$
+\begin{align*}
+  g_{tt}           &= -\left(1 - \frac{2M^2 r'}{M^2 \Sigma'}\right) = -\left(1 - \frac{2r'}{\Sigma'}\right) \\ \\
+  g_{rr}           &= \frac{M^2 \Sigma'}{M^2 \Delta'} = \frac{\Sigma'}{\Delta'} \\ \\
+  g_{\theta\theta} &= M^2 \Sigma' \\ \\
+  g_{\phi \phi}    &= \frac{M^4 \Lambda'}{M^2 \Sigma'}\sin^2\theta = M^2 \frac{\Lambda'}{\Sigma'}\sin^2\theta \\ \\
+  g_{t\phi}        &= -\frac{2M r' a' \sin^2\theta}{\Sigma'},
+\end{align*}
+$$
+
+in which case the line element can be written as 
+
+$$
+\begin{align*}
+  ds^2 &= -\left(1 - \frac{2r'}{\Sigma'}\right) M^2 \left(dt'\right)^2 + \frac{\Sigma'}{\Delta'}M^2 \left(dr'\right)^2 + M^2 \Sigma' d\theta^2  \\ \\
+  &+ M^2 \frac{\Lambda'}{\Sigma'}\sin^2\theta d\phi^2 - M^2 \frac{4r' a'\sin^2\theta}{\Sigma'} d\phi dt'
+\end{align*}
+$$
+
+If we now divide everything by $M^2$ we can completely eliminate it from the equations by also defining $ds' = \frac{ds}{M}$. For reasons of brevity we will omit all the primes with the implicit understanding that all quantities are dimensionless. And if we ever want to convert to normal physics units we need to multiply by $M$ and add appropriate factors of $G$ and $c$.
+
+#### Coordinate transformation between Cartesian and Boyer-Lindquist coordinates
+
+We will need to convert vectors between Cartesian and BL coordinates multiple times, so a coordinate transformation between these systems is necessary. Deriving this is most easily done by studying an infinitesimal displacement vector $d\vec{r}$ expressed in the two coordinate systems. This can be written as 
+
+$$
+\begin{equation}
+  \label{eq: infinitesimal_displacement_Cartesian}
+  d\vec{r} = dx \; \vec{\hat{x}} + dy \; \vec{\hat{y}} + dz \; \vec{\hat{z}}
+\end{equation}
+$$
+
+in Cartesian, and 
+
+$$
+\begin{equation}
+  \label{eq: infinitesimal_displacement_spheroidal}
+  d\vec{r} = Rdr \; \vec{\hat{r}} + \Theta d\theta \; \vec{\hat{\theta}} + \Phi d\phi \; \vec{\hat{\phi}}
+\end{equation}
+$$
+
+in BL coordinates. Here $\vec{\hat{r}}, \vec{\hat{\theta}}$ and $\vec{\hat{\phi}}$ are the unit vectors in the BL coordinate system and $R, \Theta$ and $\Phi$ are scaling parameters defined such that $\vec{\hat{r}}, \vec{\hat{\theta}}$ and $\vec{\hat{\phi}}$ are unit vectors. These two expressions describe the same displacement vector, so they are necessarily equal. The easiest way of finding the expressions for the unit vectors is to write $dx, dy$ and $dz$ as total differentials with respect to $r, \theta$ and $\phi$. Then we set the two formulations of $d\vec{r}$ equal to each other and match the coefficients of the $dr, d\theta$ and $d\phi$ terms on both sides. But first, for the total differentials we get
+
+$$
+\begin{align*}
+  dx &= \frac{\partial x}{\partial r} dr + \frac{\partial x}{\partial \theta}d\theta + \frac{\partial x}{\partial \phi}d\phi \\ \\
+  &= \frac{r}{\sqrt{r^2 + a^2}}\sin\theta\cos\phi \; dr + \sqrt{r^2 + a^2}\cos\theta \cos\phi \; d\theta - \sqrt{r^2 + a^2}\sin\theta \sin\phi \; d\phi \\ \\
+  dy &= \frac{\partial y}{\partial r} dr + \frac{\partial y}{\partial \theta} d\theta + \frac{\partial y}{\partial \phi}d\phi \\ \\
+  &= \frac{r}{\sqrt{r^2 + a^2}}\sin\theta\sin\phi \; dr + \sqrt{r^2 + a^2}\cos\theta \sin\phi \: d\theta + \sqrt{r^2 + a^2}\sin\theta \cos\phi \; d\phi \\ \\
+  dz &= \frac{\partial z}{\partial r}dr + \frac{\partial z}{\partial \theta}d\theta + \frac{\partial z}{\partial \phi}d\phi \\ \\
+  &= \cos\theta \; dr - r\sin\theta \; d\theta
+\end{align*}
+$$
+
+Matching the terms containing $dr$ in $\eqref{eq: infinitesimal_displacement_Cartesian}$ and $\eqref{eq: infinitesimal_displacement_spheroidal}$, by inserting the terms in $dx, dy$ and $dz$ containing $dr$ into $\eqref{eq: infinitesimal_displacement_Cartesian}$ we get
+
+$$
+\begin{equation}
+  R\vec{\hat{r}} = \frac{r}{\sqrt{r^2 + a^2}}\sin\theta \cos\phi \; \vec{\hat{x}} + \frac{r}{\sqrt{r^2 + a^2}}\sin\theta \sin\phi \; \vec{\hat{y}} + \cos\theta \;\vec{\hat{z}}
+\end{equation}
+$$
+
+We can then determine the scaling parameter $R$ by finding the norm of $R\vec{\hat{r}}$ and using the defining property $\left|\vec{\hat{r}}\right| = 1$.
+
+$$
+\begin{align*}
+  R^2 &= \frac{r^2}{r^2 + a^2}\sin^2\theta + \cos^2\theta \\ \\
+  &= \frac{r^2 + a^2 \cos^2\theta}{r^2 + a^2} \\ \\
+  \implies R &= \sqrt{\frac{r^2 + a^2\cos^2\theta}{r^2 + a^2}}
+\end{align*}
+$$
+
+And thus the unit vector $\vec{\hat{r}}$ is given by
+
+$$
+\begin{equation}
+  \label{eq: r_unit_vector}
+  \vec{\hat{r}} = \frac{1}{\sqrt{r^2 + a^2\cos^2\theta}}\left[r\sin\theta \cos\phi \; \vec{\hat{x}} + r\sin\theta \sin\phi \; \vec{\hat{y}} + \sqrt{r^2 + a^2}\cos\theta \; \vec{\hat{z}}\right].
+\end{equation}
+$$
+
+Completely analogous procedures can be followed for $\theta$ and $\phi$ by matching the $d\theta$ terms on both sides and then the $d\phi$ terms on both sides. We will skip the steps here, because they are exactly the same as for $\vec{\hat{r}}$, but we end up with the following
+
+$$
+\begin{align*}
+  \vec{\hat{\theta}} &= \frac{1}{\sqrt{r^2 + a^2 \cos^2\theta}}\left[\sqrt{r^2 + a^2}\cos\theta \cos\phi \; \vec{\hat{x}} + \sqrt{r^2 + a^2}\cos\theta \sin\phi \; \vec{\hat{y}} - r\sin\theta \; \vec{\hat{z}}\right] \\ \\
+  \vec{\hat{\phi}} &= -\sin\phi \;\vec{\hat{x}} + \cos\phi \;\vec{\hat{y}}.
+\end{align*}
+$$
+
+We can therefore write the relation between the BL unit vectors and the Cartesian ones in a matrix form as follows
+
+$$
+\begin{equation}  
+  \label{eq: unit_vector_relation}
+  \left[\begin{matrix}
+          \vec{\hat{r}} \\ \\
+          \vec{\hat{\theta}} \\ \\
+          \vec{\hat{\phi}}
+        \end{matrix}\right] = \left[\begin{matrix}
+                                \frac{r\sin\theta \cos\phi}{\sqrt{r^2 + a^2\cos^2\theta}} & \frac{r\sin\theta \sin\phi}{\sqrt{r^2 + a^2\cos^2\theta}} & \frac{\sqrt{r^2 + a^2}\cos\theta}{\sqrt{r^2 + a^2\cos^2\theta}} \\ \\
+                                \frac{\sqrt{r^2 + a^2}\cos\theta \cos\phi}{\sqrt{r^2 + a^2\cos^2\theta}} & \frac{\sqrt{r^2 + a^2}\cos\theta \sin\phi}{\sqrt{r^2 + a^2\cos^2\theta}} & -\frac{r\sin\theta}{\sqrt{r^2 + a^2\cos^2\theta}} \\ \\
+                                -\sin\phi & \cos\phi & 0
+                                \end{matrix}\right] \left[\begin{matrix}
+                                                \vec{\hat{x}} \\ \\ 
+                                                \vec{\hat{y}} \\ \\
+                                                \vec{\hat{z}}
+                                                          \end{matrix}\right]
+\end{equation}
+$$
+
+Let us call this coordinate transformation matrix $M$. It is fairly easy to check that this is an orthogonal matrix, meaning that $M^{-1} = M^T$ (just compute $M^T M$, which is equal to $\mathbb{I}$ for orthogonal matrices $M$). And in that case the inverse transformation, from BL to Cartesian coordinates, is given by $M^T$. Now, of course this is the coordinate transformation between the Cartesian and BL *basis vectors*. And we want the transformation between *vector components*. But it turns out the coordinate transformation for the vector components is the same as for the basis vectors, as is shown by Lutz Lehmann [here](https://math.stackexchange.com/questions/3493647/do-coordinate-components-transform-in-the-same-or-opposite-way-as-their-bases). 
 
 ### 2.3 Geodesics
-
-In normal raymarching one typically just casts straight lines to model how light moves in flat spacetime. But in curved spacetime light no longer follows these straight paths through space. Instead it follows the curved-space generalization of "straight paths", namely *geodesics*. In "normal" spaces (meaning not spacetime, simply space. The proper terminology is *Euclidean* space) a geodesic can be thought of as the path which minimizes the length between two points $A$ and $B$. In Euclidean space (think of a plane, for example) this just reduces to a straight line as we expect. But we can get more interesting geodesics if we consider a sphere, for example. This is shown in the following figure, where the red curve shows the geodesic between two points $A$ and $B$ on the sphere. 
-
-![Sphere geodesic](../images/miscellaneous/A-geodesic-on-the-surface-of-a-sphere.png)
-
-This red line, the geodesic, is the shortest possible path between $A$ and $B$ if we are constrained to move on the spherical surface. You might also notice that the geodesic lies along a line of constant longitude, meaning that lines of constant longitude represent "straight" lines on the sphere. What this concept of a path being "straight" here really means is simply that you can follow such a path without having to steer - you can just move in your forwards direction. It might not be obvious, however, that lines of constant latitude are *not* geodesics on the sphere - they are not "straight". This is to say that if you were constrained to the surface of a sphere you could move along lines of constant longitude without steering, but not along lines of constant latitude. The concept of geodesics is the reason why the flight path of a plane can look unreasonable when projected into a two dimensional map, even though it is actually the shortest path.
-
-The mathematics behind geodesics carries over to curved spacetime, but the intuition is harder to grasp. Rather than being the path of shortest spatial distance between two points it is the path of *longest proper time*, which is the time measured by an observer following the path. Let us assume we have two observers, which we creatively call Alice and Bob, moving along two different paths from point $A$ to point $B$ in spacetime. Alice moves along a geodesic between these points, while Bob does not. This then means that Alice will measure a longer time from $A$ to $B$ on her clock than Bob will measure on his clock. 
-
-In relativity the geodesic also has the interpretation of being the path an unaccelerated particle follows. In our previous analogy then, Alice is in unaccelerated free-fall, while Bob accelerates in some way. Now, a possible cause for confusion is the fact that in classical physics we tend to say that an object accelerates due to gravity. But in GR this is not the case anymore - an object moving only under the influence of gravity is said to be unaccelerated. This means that an object moving only under the influence of gravity, so called free-fall will follow a geodesic. That is why we say that in GR gravity is the manifestation of spacetime curvature - a collection of matter curves spacetime, therefore causing geodesics to also be curved. And the effect we perceive as gravity is simply caused by the fact that geodesics deviate from straight lines through space. Our photons are unaccelerated and therefore follow geodesics. 
 ___
 
 ## 3 Tracing geodesics in curved spacetime
 
-### 3.1 Equations of motion
-
-#### 3.1.1 Example of Newtonian gravity
-
-It's instructional to consider *classical mechanics*, and in particular *Newtonian gravity*, and to briefly discuss the equations of motion in that framework. The Newtonian picture of classical mechanics is based on Newton's laws, the 2nd of which being
-
-$$
-\begin{equation}
-    \sum \vec{F} = m \vec{a},
-\end{equation}
-$$
-
-with $\sum \vec{F}$ representing the sum of all the forces acting on a body with mass $m$, and $\vec{a}$ being the acceleration of that body. Newton also gave us his famous law of gravity 
-
-$$
-\begin{equation}
-    \vec{F}_g = -\frac{Gm_1 m_2}{r^2} \vec{\hat{r}}.
-\end{equation}
-$$
-
-Here $\vec{F}_g$ represents the gravitational force between two bodies with masses $m_1$ and $m_2$ a distance $r$ from each other. $\vec{\hat{r}}$ is the unit vector pointing from one of the masses towards the other and $G$ is the gravitational constant. Consider now the two-body problem, in which case the only force acting on the two bodies is the gravitational force between them. Then 
-
-$$
-\begin{align*}
-    \sum \vec{F}_1 &= -\frac{G m_1 m_2}{r^2} \vec{\hat{r}} = m_1 \vec{a}_1 \\ \\
-    \sum \vec{F}_2 &= \frac{G m_1 m_2}{r^2} \vec{\hat{r}} = m_2 \vec{a}_2
-\end{align*}
-$$
-
-$\vec{a}_1$ and $\vec{a}_2$ are the accelerations of body 1 and 2 respectively. The acceleration is the second time derivative of the position, so these two equations can be written as 
-
-$$
-\begin{align*}
-    \frac{d^2 \vec{r}_1}{dt^2} &= -\frac{G m_2}{r^2} \vec{\hat{r}} \label{eq: Newtonian_EOM_1} \tag{7} \\ \\
-    \frac{d^2 \vec{r}_2}{dt^2} &= \frac{G m_1}{r^2} \vec{\hat{r}} \label{eq: Newtonian_EOM_2} \tag{8}
-\end{align*}
-$$
-
-where $\vec{r}_1$ and $\vec{r}_2$ are the position vectors of body 1 and 2 respectively. These two equations are coupled differential equations (DEs), and are called the *equations of motion* for the two-body system. Solving a system's equations of motion tells us how the system evolves over time - in this specific example a solution to the equations of motion tells us how the two bodies move in space. The two-body problem is a particularly simple problem where there actually exists a closed form analytical solution. However, this is not the case for most physical systems. In general we have to use numerical methods to solve the equations of motion. In order to see how this can be done we rewrite the two *second order* DEs above as a set of four *first order* DEs:
-
-$$
-\begin{align*}
-    \frac{d\vec{r}_1}{dt} &= \vec{v}_1 \label{eq: EOM_1} \tag{9} \\ \\
-    \frac{d\vec{v}_1}{dt} &= -\frac{G m_2}{r^2} \vec{\hat{r}} \label{eq: EOM_2} \tag{10} \\ \\
-    \frac{d\vec{r}_2}{dt} &= \vec{v}_2 \label{eq: EOM_3} \tag{11} \\ \\
-    \frac{d\vec{v}_2}{dt} &= \frac{G m_1}{r^2} \vec{\hat{r}} \label{eq: EOM_4} \tag{12}
-\end{align*}
-$$
-
-In $\eqref{eq: EOM_1}$ and $\eqref{eq: EOM_3}$ we just define the velocities $\vec{v}_1$ and $\vec{v}_2$ of bodies 1 and 2 as the time derivatives of their positions. And in equations $\eqref{eq: EOM_2}$ and $\eqref{eq: EOM_4}$ we have just plugged these definitions into $\eqref{eq: Newtonian_EOM_1}$ and $\eqref{eq: Newtonian_EOM_2}$. This system of four coupled, first order DEs can be solved fairly easily numerically, and we will go into details on how this can be done later. This procedure of transforming $n$ second order DEs into $2n$ first order DEs is completely general, one just has to use the appropriate right hand side in $\eqref{eq: EOM_1} - \eqref{eq: EOM_}$. 
-
 #### 3.1.2 The geodesic equation 
 
-In order to form the equations of motion for particles moving only under the influence of gravity in classical mechanics we used Newton's 2nd law together with Newton's law of gravity. That gave us the DEs we had to solve - the equations of motion. Here in this project we want to find and solve the equations of motion for particles moving along geodesics in the Kerr spacetime. For that we need the *geodesic equation*
+In order to visualize the black hole we need to trace *geodesics* in the Kerr spacetime, which we do by solving the *geodesic equation*
 
 $$
 \begin{equation}
-    \label{eq: geodesic_eq_general} \tag{13}
-    \frac{d^2 x^\mu}{d\lambda^2} + \Gamma^{\mu}_{\rho \sigma} \frac{dx^\rho}{d\lambda} \frac{dx^\sigma}{d\lambda} = 0.
+  \label{eq: geodesic_equation} \tag{5}
+  \frac{d^2 x^\mu}{d\lambda^2} + \Gamma^\mu_{\rho \sigma}\frac{dx^\rho}{d\lambda}\frac{dx^\sigma}{d\lambda} = 0,
 \end{equation}
 $$
 
-Here $x^\mu$ is the so-called *four-position* describing the position of some particle in spacetime. It is essentially a vector with four components, and can be written as $x^\mu = \left(t, x, y, z\right)$ in Cartesian coordinates. So it specifies the spatial position of the particle $(x, y, z)$ along with the point in time $t$. $\lambda$ is a so-called *affine parameter* for the geodesic, and can be thought of as a parameter that parametrizes the geodesic - so by varying $\lambda$ you can trace out the geodesic. $\Gamma^\mu_{\rho \sigma}$ are the so-called *Christoffel symbols* of the metric. These encode the geometry at each point in spacetime, and is what allows the curvature of spacetime to influence the path that a freely falling particle falls along. You might notice now that the first term in $\eqref{eq: geodesic_eq_general}$ looks very similar to the terms on the left-hand side of $\eqref{eq: Newtonian_EOM_1}$ and $\eqref{eq: Newtonian_EOM_2}$. However, an aspect that makes the geodesic equation substantially more complicated is that there are implicit sums over $\rho$ and $\sigma$. This means that the geodesic equation is really 
+where $x^\mu$ is the four-position of a photon, and $\lambda$ is an affine parameter for the geodesic, chosen such that $p^\mu \equiv \frac{dx^\mu}{d\lambda}$ is the four-momentum of the photon. $\Gamma^\mu_{\rho \sigma}$ are the *Christoffel symbols* of the metric. Equation $\eqref{eq: geodesic_equation}$ is completely general, and we of course need explicit expressions for the geodesic equation for each value of $\mu$. But computing the Christoffel symbols tends to be very tedious work, and certainly so for the Kerr metric. So instead of deriving the Christoffel symbols by hand we use the Sympy package in Python to derive them, and thus also explicit expressions for each component of the geodesic equation. Code for doing this can be found [here](https://github.com/chrvill/Geodesic_EOM_deriver).
+
+We have the normalization requirement
 
 $$
 \begin{equation}
-    \label{eq: geodesic_eq_explicit_sums} \tag{14}
-    \frac{d^2 x^\mu}{d\lambda^2} + \sum_{\rho} \sum_{\sigma} \Gamma^\mu_{\rho \sigma} \frac{dx^\rho}{d\lambda} \frac{dx^\sigma}{d\lambda} = 0,
+    \label{eq: normalization} \tag{6}
+    p_\nu p^\nu = \mu
 \end{equation}
 $$
 
-where $\rho$ and $\sigma$ take on the values $0, 1, 2, 3$, which is to say that it is an index. So we will for example have a term like $\Gamma^\mu_{00} \frac{dx^0}{d\lambda} \frac{dx^0}{d\lambda}$ for $\rho = 0$, $\sigma = 0$, for example. And the superscript $\mu$ can also take on the values $0, 1, 2, 3$, however there is not a sum over it. Instead it tells you which component of $\frac{d^2 x^\mu}{d\lambda^2}$ we are talking about. For example for $\mu = 0$ we get an equation telling us how $x^0$ evolves. There are 4 values for all the indices, which means that we have 4 different equations of motion, one for each of the components of $x^\mu = (t, x, y, z)$. So the equation for $x^0$, for $\mu = 0$, tells us how $t$ evolves over time. And likewise for the three other values. The double sum in $\eqref{eq: geodesic_eq_explicit_sums}$ therefore have $4^2 = 16$ terms
-
-The Christoffel symbols are given by 
+with $\mu = 0$ for massless particles like photons and $\mu = -1$ for massive particles (This is really the normalization of the four-*velocity* of a massive particle, not the four-momentum. But the difference is only a factor of $m^2$, with $m$ being the mass of the particle in question.). This can be written explicitly as 
 
 $$
 \begin{equation}
-    \label{eq: Christoffel_symbol_definition} \tag{14}
-    \Gamma^\mu_{\rho \sigma} = \frac{1}{2} g^{\mu \nu} \left(\partial_\rho g_{\sigma \nu} + \partial_\sigma g_{\rho \nu} - \partial_\nu g_{\rho \sigma}\right)
+    \label{eq: normalization_explicit} \tag{7}
+    g_{tt} \left(p^t\right)^2 + g_{rr}\left(p^r\right)^2 + g_{\theta\theta} \left(p^\theta\right)^2 + g_{\phi \phi}\left(p^\phi\right)^2 + 2g_{t\phi} p^t p^\phi = \mu
 \end{equation}
 $$
 
-where $\partial_\mu = \frac{\partial}{\partial x^\mu}$ is the partial derivative with respect to the coordinate $x^\mu$. 
+When we choose initial directions for our rays we will essentially provide the spatial components of the four-momentum, so we need to compute $p^t$ from $p^r, p^\theta$ and $p^\phi$. Solving \eqref{eq: normalization_explicit} for $p^t$ gives
+
+$$
+\begin{equation}
+    \label{eq: p^t expression} \tag{8}
+    p^t = -\frac{g_{t\phi}}{g_{tt}} p^\phi \pm \sqrt{\left(\frac{g_{t\phi}}{g_{tt}} p^\phi\right)^2 - \frac{1}{g_{tt}}\left(g_{rr} \left(p^r\right)^2 + g_{\theta\theta} \left(p^\theta\right)^2 + g_{\phi \phi} \left(p^\phi\right)^2 - \mu\right)}
+\end{equation}
+$$
+
+But we have to find out which sign is appropriate. Consider a case where $p^\phi = 0$, which is only possible outside the ergosphere. Then, since $p^t$ needs to be positive we need to use the $+$ sign outside the ergosphere. Arguing for which sign is appropriate inside the ergosphere proved trickier, but we found that we had to use the $-$ sign inside the ergosphere in order for $p^t$ to increase continuously as you pass the boundary of the ergosphere. 
 
 ### 3.2 Initial conditions
 
-### 3.3 Flat/Schwarzschild/Kerr example (+Integration schemes)
+### 3.3 Numerically integrating the equations of motion
 
+Numerically \eqref{eq: geodesic_equation} is just a completely standard second order differential equation. So in that sense solving it is just like solving any other second order differential equation numerically. However it should be noted that some of the Christoffel symbols will diverge as the photon approaches the event horizon, which needs to be taken into consideration when solving the geodesic equation. Assume for the purposes of this discussion that we have a first order differential equation of the form
+
+$$
+\begin{equation}
+    \label{eq: general_diff_eq} \tag{9}
+  \frac{dy}{dt} = f(t, y).
+\end{equation}
+$$
+
+Our second order equations of motion can of course be expressed in terms of first order DEs by just by writing the corresponding equations for $\frac{dx^\mu}{d\lambda}$ and $\frac{d^2 x^\mu}{d\lambda^2}$. With an appropriate choice of variable timestep the geodesic equation could most likely be solved using for example the 4th order Runge-Kutta integration scheme. But here, due to an unrelated error that will be discussed later, we chose to use the \textit{Runge-Kutta-Fehlberg} scheme, abbreviated RKF45. This is, as the name implies, also in the family of Runge-Kutta methods. The main benefit of using this scheme is that it allows us to calculate an adaptive timestep $h$ very easily - the scheme itself can choose a small timestep when needed and revert to a bigger timestep when things evolve slowly. The scheme itself is similar to 4th order Runge-Kutta, and is described in detail [here]https://en.wikipedia.org/wiki/Runge%E2%80%93Kutta%E2%80%93Fehlberg_method), where we use the table listed under "FORMULA 2". It is a 4th order accurate method where we perform a few more function evaluations in order to obtain a measure of the error associated with the scheme. When the right hand side of the differential equation is not explicitly a function of time, like here, the algorithm can be written as
+
+$$
+\begin{align*}
+  k_1 &= f\left(y\right) \\ \\
+  k_2 &= f\left(y + B_{21} k_1 h\right) \\ \\
+  k_3 &= f\left(y + B_{31} k_1 h + B_{32} k_2 h\right) \\ \\
+  k_4 &= f\left(y + B_{41} k_1 h + B_{42} k_2 h + B_{43} k_3 h\right) \\ \\
+  k_5 &= f\left(y + B_{51} k_1 h + B_{52} k_3 h + B_{53} k_3 h + B_{54} k_4 h\right) \\ \\
+  k_6 &= f\left(y + B_{61} k_1 h + B_{62} k_2 h + B_{63} k_3 h + B_{64} k_4 h + B_{65} k_5 h\right),
+\end{align*}
+$$
+
+which can be written more succinctly as 
+
+$$
+\begin{equation}
+    k_n = f\left(y + \sum_{i = 1}^{n - 1} B_{ni}k_i h\right).
+\end{equation}
+$$
+
+The approximation to the function value at the next step is then
+
+$$
+\begin{equation}
+  y(t + h) = y(t) + CH_1 k_1 + CH_2 k_2 + CH_3 k_3 + CH_4 k_4 + CH_5 k_5 + CH_6 k_6,
+\end{equation}
+$$
+
+and the estimate of the error is
+
+$$
+\begin{equation}
+  TE = \lvert CT_1 k_1 + CT_2 k_2 + CT_3 k_3 + CT_4 k_4 + CT_5 k_5 + CT_6 k_6 \rvert.
+\end{equation}
+$$
+
+The matrix $B$ and vectors $CH$ and $CT$ can be found in the article linked to. Then after having computed the step we can calculate a new step size
+
+$$
+\begin{equation}
+  h_\text{new} = 0.9 h \left(\frac{\epsilon}{TE}\right)^{1/5}
+\end{equation}
+$$
+
+where $\epsilon$ is a tolerance value we can choose in order to specify the level of accuracy we want to achieve. Then, if $TE > \epsilon$ the error is too big and so we replace $h$ with $h_\text{new}$ and repeat the step. We perform this iteration until $TE < \epsilon$. And then in the next step we use this value of $h_\mathrm{new}$ as the new $h$.
 ___
 
 ## 4 A simple pin-hole camera model
@@ -255,9 +333,217 @@ ___
 
 ### 5.3 The ZAMO and ergosphere
 
+One of the Killing vectors of the Kerr metric is the following
+
+$$
+\begin{equation}
+    R^\mu = \left(\partial_\phi\right)^\mu = \left(0, 0, 0, 1\right)
+\end{equation}
+$$
+
+This is related to rotational symmetry, and we can therefore identify the following conserved quantity
+
+$$
+\begin{equation}
+    L \equiv g_{\mu \nu} R^\mu p^\nu = g_{\phi \nu} p^\nu = g_{\phi \phi} p^\phi + g_{t\phi} p^t
+\end{equation}
+$$
+
+along a geodesic. Consider now the expression for $L$ at $\theta = \pi/2$ as $r \to \infty$. Then $g_{t\phi} \to 0$ and $g_{\phi \phi} \to r^2$. So $L \to r^2 p^\phi$. And $p^\phi$ reduces to an angular velocity in flat space. So this is the standard definition of angular momentum (per unit mass) in flat space. Meaning that the conserved quantity $L$ corresponds to the angular momentum of an object infinitely far away, in the asymptotically flat region of the spacetime. We can now consider releasing a particle from infinitely far away with $L = 0$ and letting it fall along a geodesic. Then we have $g_{t\phi} p^t + g_{\phi \phi} p^\phi = 0$, meaning that 
+
+$$
+\begin{equation}
+  %\label{eq: frame_dragging_p_phi}
+  p^\phi = -\frac{g_{t\phi}}{g_{\phi \phi}}p^t,
+\end{equation}
+$$
+
+which is to say that the particle gains an angular velocity even though it starts off falling with zero angular momentum. Observers following geodesics with $L = 0$ are called \textit{Zero Angular Momentum Observers} (ZAMO). The phenomenon causing ZAMO frames to move along with the rotation of the black hole is called \textit{frame dragging}. It turns out that frame dragging has quite dramatic consequences for the motion of particles around a rotating black hole. Consider a photon in the equatorial plane moving only in the $\phi$ direction. Then
+
+$$
+\begin{equation*}
+  ds^2 = 0 = g_{tt} dt^2 + 2g_{t\phi} dtd\phi + g_{\phi \phi} d\phi^2 \quad \implies \quad g_{\phi \phi} \left(\frac{d\phi}{dt}\right)^2 + 2g_{t\phi} \frac{d\phi}{dt} + g_{tt} = 0.
+\end{equation*}
+$$
+
+This means that 
+
+$$
+\begin{equation*}
+  \frac{d\phi}{dt} = -\frac{g_{t\phi}}{g_{\phi \phi}} \pm \sqrt{\frac{g_{t\phi}^2}{g_{\phi \phi}^2} - \frac{g_{tt}}{g_{\phi \phi}}}
+\end{equation*}
+$$
+
+Consider this at the surface where $\Sigma = 2r$, meaning $g_{tt} = 0$. Then the two solutions are
+
+$$
+\begin{equation}
+  %\label{eq: frame_dragging_angular_velocity}
+  \frac{d\phi}{dt} = 0, \quad \frac{d\phi}{dt} = - \frac{2g_{t\phi}}{g_{\phi \phi}} = \frac{a}{2 + a^2}
+\end{equation}
+$$
+
+The second solution is just a photon which moves along with the rotation of the black hole. The other solution is a photon which is instantaneously at rest in the BL coordinates. This is to say that at this boundary where $g_{tt} = 0$ no particles can move against the rotation of the black hole. This is also true for the region below this boundary, which is called the *ergosphere*. For $g_{tt}$ to be zero, we need $\Sigma = 2r$, meaning 
+
+$$
+\begin{align*}
+    &r^2 + a^2 \cos^2\theta - 2r = 0 \\ \\
+    \implies &r = 1 \pm \sqrt{1 - a^2 \cos^2\theta}.
+\end{align*}
+$$
+
+Clearly there are two solutions, so there is both an inner and outer ergosphere boundary just like with the inner and outer event horizons. The following figure illustrates how the event horizons and ergosphere boundaries look with a slice of these surfaces in the $xz$-plane. This illustration is for $a = 0.99$.
+
+![EH and ergosphere](../images/miscellaneous/EH_and_ergosphere.png)
+
+We can also show the effects of frame dragging, which is done in Figure \ref{fig: gridlines}. Here the inward pointing curves represent photon geodesics with $L = 0$. And the dashed red circle represents the boundary of the ergosphere, while the filled black circle represents the event horizon of the black hole. Clearly the photon geodesics are forced to move with the rotation of the black hole. 
+
+![Gridlines](../images/miscellaneous/gridlines.png)
+
+Frame dragging will be important because, while observers stationary in the BL coordinates might feel quite natural to work with, they no longer exist at all points outside the event horizon in the Kerr spacetime, in particular it is impossible inside the ergosphere. The simple generalization we instead consider is to rather work in ZAMO frames, because there exist local ZAMO frames even inside the ergosphere. 
+
 ### 5.4 Rest frame to ZAMO to global transformation
 
-#### 5.4.1 Relativistic aberration
+When we emit rays from our camera the components of the four-vectors describing these rays are initialized in the rest frame of the camera. But when solving the geodesic equation we are working in the global BL frame. So we need a way to transform four-vectors from the camera's rest frame to the global frame. This is where the concept of *tetrads* becomes relevant. 
+
+#### 5.4.1 Tetrads
+
+Tetrads, also called *frame fields*, is a set of orthonormal vectors which form a local inertial frame. So the tetrads take us from the global coordinate system in which the metric is $g_{\mu \nu}$ to the local one in which the metric is that of Minkowski $\eta_{\mu \nu}$. The tetrads $e_m^{\;\mu}$ are therefore defined by
+
+$$
+    g_{\mu \nu} e_m^{\; \mu} e_n^{\; \nu} = \eta_{mn}.
+$$
+
+Keep in mind that Latin indices are here used to refer to the indices in the local inertial frame. We also have the dual tetrads $e^{*m}_\mu$, also called the co-frame field, defined through
+
+$$
+\begin{equation}
+  e_m^{\mu} e^{*m}_{\nu} = \delta_\nu^\mu, \quad e_m^{\mu} e^{*n}_{\mu} = \delta_m^n.
+\end{equation}
+$$
+
+From [here](http://physics.unm.edu/Courses/Finley/p581/Handouts/Kerr/kerrnew.pdf) and [here](https://arxiv.org/abs/1506.01473v2) we have that the frame fields for the local ZAMO frame are given by
+
+$$
+\begin{align*}
+  e_t^{\mu} &= \delta_t^\mu\sqrt{\frac{\Lambda}{\Delta \Sigma}} + \delta_\phi^\mu \frac{2ar}{\sqrt{\Lambda \Delta \Sigma}} \label{eq: vierbein_tmu} \hspace{1.1cm}\\ \\
+  e_r^{\mu} &= \delta_r^\mu \sqrt{\frac{\Delta}{\Sigma}} \label{eq: vierbein_rmu}\\ \\
+  e_\theta^{\mu} &= \delta_\theta^\mu \frac{1}{\sqrt{\Sigma}} \label{eq: vierbein_thetamu}\\ \\
+  e_\phi^{\mu} &= \delta_\phi^\mu \sqrt{\frac{\Sigma}{\Lambda}}\frac{1}{\sin \theta}. \label{eq: vierbein_phimu}
+\end{align*}
+$$
+
+while the co-frame fields are given by 
+
+$$
+\begin{align*}
+  e^{*t}_{\mu} &= \delta_\mu^t \sqrt{\frac{\Delta \Sigma}{\Lambda}} \label{eq: vierbein^tmu}\\ \\
+  e^{*r}_{\mu} &= \delta_\mu^r \sqrt{\frac{\Sigma}{\Delta}} \label{eq: vierbein^rmu} \\ \\
+  e^{*\theta}_{\mu} &= \delta_\mu^\theta \sqrt{\Sigma} \label{eq: vierbein^thetamu}\\ \\
+  e^{*\phi}_{\mu} &= -\delta_\mu^t \frac{2ar\sin\theta}{\sqrt{\Lambda \Sigma}} + \delta_\mu^\phi \sin\theta \sqrt{\frac{\Lambda}{\Sigma}}. \label{eq: vierbein^phimu}
+\end{align*}
+$$
+
+To transform a vector $x^m$ from the local ZAMO frame to the global frame we then do the following
+
+$$
+\begin{equation}
+    x'^\mu = e_m^{\mu} x^m.
+\end{equation}
+$$
+
+And the inverse naturally follows
+
+$$
+\begin{equation}
+    x^m = e^{*m}_{\mu} x'^\mu.
+\end{equation}
+$$
+
+#### 5.4.2 Relativistic aberration
+
+The steps 
+
+1. Compute the local velocity of the camera in the local ZAMO frame.
+2. Lorentz transform the initial photon four-momentum from the instantaneous rest frame of the camera to the local ZAMO frame.
+3. Transform the four-momentum of the photon from hte local ZAMO frame to the global frame using the ZAMO tetrads.
+
+___
+##### Step 1
+
+The camera's four-velocity is will primarily be expressed in the global frame. Let's call the four-velocity in that frame $u^\mu$. Imagine then a ZAMO frame at the same position as the camera. The four-velocity of the camera in the ZAMO tetrad frame is given by
+
+$$
+\begin{equation}
+    \tilde{u}^m = e^m_{\mu} u^\mu
+\end{equation}
+$$
+
+Since this four-velocity is measured in a local inertial frame it can also be expressed as 
+
+$$
+\begin{equation}
+    \tilde{u}^m = \gamma \left(1, \vec{v}\right),
+\end{equation}
+$$
+
+where $\gamma = \frac{1}{\sqrt{1 - \vec{v}^2}}$ and $\vec{v}$ is the local velocity of the camera in the ZAMO frame. Thne $\gamma = \tilde{u}^t$, and so the components $v^i$ of the local velocity $\vec{v}$ of the camera in the ZAMO frame are given by 
+
+$$
+\begin{equation}
+    v^i = \frac{\tilde{u}^i}{\gamma} = \frac{\tilde{u}^i}{\tilde{u}^t}
+\end{equation}
+$$
+
+That concludes step 1. 
+
+___ 
+##### Step 2
+
+Consider now the rays that we emit from our camera. We now need to transform these to the local ZAMO frame. This is just a Lorentz transformation, whose general form is the following (see for example [2])
+
+$$
+\begin{equation}
+  \Lambda^m_{\;\;n} = \left[\begin{matrix}\gamma && -\gamma v^x && -\gamma v^y && -\gamma v^z\ \\
+                          -\gamma v^x && 1 + \left(\gamma - 1\right)\frac{\left(v^x\right)^2}{\vec{v}^2} && \left(\gamma - 1\right) \frac{v^x v^y}{\vec{v}^2} && \left(\gamma - 1\right)\frac{v^x v^z}{\vec{v}^2} \\
+                          -\gamma v^y && \left(\gamma - 1\right)\frac{v^x v^y}{\vec{v}^2} && 1 + \left(\gamma - 1\right)\frac{\left(v^y\right)^2}{\vec{v}^2} && \left(\gamma - 1\right)\frac{v^y v^z}{\vec{v}^2} \\
+                          -\gamma v^z && \left(\gamma - 1\right)\frac{v^x v^z}{\vec{v}^2} && \left(\gamma - 1\right)\frac{v^y v^z}{\vec{v}^2} && 1 + \left(\gamma - 1\right)\frac{\left(v^z\right)^2}{\vec{v}^2}
+                         \end{matrix}\right]
+\end{equation}
+$$
+
+in Cartesian coordinates. But the velocit components $v^i$ we have are in BL coordinates. So we first have to convert the velocity vector $\vec{v}$ from BL to Cartesian coordinates. We know that the components of the velocity vector in Cartesian coordinates are 
+
+$$
+\begin{align*}
+  v^x &= \frac{1}{\sqrt{r^2 + a^2\cos^2\theta}}\left[r\sin\theta \cos\phi \,v^r + \sqrt{r^2 + a^2}\cos\theta \cos\phi \,v^\theta\right] - \sin\phi \,v^\phi \\ \\
+  v^y &= \frac{1}{\sqrt{r^2 + a^2 \cos^2\theta}}\left[r\sin\theta \sin\phi \,v^r + \sqrt{r^2 + a^2}\cos\theta \sin\phi \,v^\theta\right] + \cos\phi \,v^\phi \\ \\
+  v^z &= \frac{1}{\sqrt{r^2 + a^2 \cos^2\theta}}\left[\sqrt{r^2 + a^2}\cos\theta \,v^r - r\sin\theta \,v^\theta\right].
+\end{align*}
+$$
+
+when the components are $v^r$, $v^\theta$ and $v^\phi$ in BL coordinates. Let's call the four-momentum of the initial photon expressed in Cartesian coordinates in the camera rest frame $\tilde{p}'^m$. In the ZAMO frame the four-momentum is then given by the unprimed 
+
+$$
+\begin{equation}
+    %\label{eq: camera_four_mom_ZAMO}
+    \tilde{p}^m = \Lambda^m_n\left(\vec{v}\right) \tilde{p}'^n
+\end{equation}
+$$
+
+Then we move back into BL coordinates. And the coordinate transformation is then simply given by the matrix in $\eqref{eq: unit_vector_relation}$. 
+___
+##### Step 3
+
+The final step is then rather simple. The four-momentum of the ray in the global frame is simply 
+
+$$
+\begin{equation}
+    p^\mu = e_m^{\; \mu} \tilde{p}^m.
+\end{equation}
+$$
+
+___
 
 ### 5.5 Free-falling camera
 
@@ -393,3 +679,5 @@ ___
 ## 16 References 
 
 [1] Sean M. Carroll. Spacetime and Geometry: An Introduction to General Relativity. Cambridge University Press, 2019
+
+[2] Masud Mansuripur. An exact derivation of the thomas precession rate using the lorentz transformation. In Henri-Jean M. Drouhin, Jean-Eric Wegrowe, and Manijeh Razeghi, editors, Spintronics XIII. SPIE, August 2020
