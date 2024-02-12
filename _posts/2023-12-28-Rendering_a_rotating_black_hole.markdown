@@ -676,6 +676,17 @@ ___
 
 ## 15 Gallery
 
+Sample gallery:
+
+![Absolutely godlike](../images/black_hole_renders/below_pretty.png)
+![Close up](../images/black_hole_renders/close_up.png)
+![Hot disk](../images/black_hole_renders/hot_disk_amazing.png)
+![Hot jet](../images/black_hole_renders/hot_jet.png)
+![Clear redshift](../images/black_hole_renders/Render3.png)
+![R1](../images/black_hole_renders/R1.png)
+![Far away](../images/black_hole_renders/MBRender2.png)
+![Shadow](../images/black_hole_renders/flat_edge.png)
+
 ## 16 References 
 
 [1] Sean M. Carroll. Spacetime and Geometry: An Introduction to General Relativity. Cambridge University Press, 2019
