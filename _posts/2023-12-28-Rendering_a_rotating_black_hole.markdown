@@ -6,7 +6,7 @@ tags: [black holes]
 math: true
 ---
 
-![alt text](../images/miscellaneous/geodesics.gif)
+![Evolution of the renders](../images/miscellaneous/evolution.gif)
 
 ## 1 Introduction
 
