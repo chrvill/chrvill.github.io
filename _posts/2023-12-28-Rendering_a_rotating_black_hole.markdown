@@ -685,6 +685,7 @@ Sample gallery:
 ![Hot disk](../images/black_hole_renders/hot_disk_amazing.png)
 ![Hot jet](../images/black_hole_renders/hot_jet.png)
 ![Clear redshift](../images/black_hole_renders/Render3.png)
+![Aberration](../images/black_hole_renders/aberration.png)
 ![R1](../images/black_hole_renders/R1.png)
 ![Far away](../images/black_hole_renders/MBRender2.png)
 ![Shadow](../images/black_hole_renders/flat_edge.png)
