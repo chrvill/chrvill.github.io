@@ -7,7 +7,7 @@ math: true
 ---
 
 ![Evolution of the renders](../images/miscellaneous/evolution.gif)
-
+![Fly-by](../images/black_hole_renders/fly-by.gif)
 ## 1 Introduction
 
 ### 1.1 Goal
@@ -555,29 +555,274 @@ ___
 
 ## 6 Redshift 
 
+Consider an observer at some point $P$ in spacetime with four-velocity $u^\mu$ in some coordinate system. Assume we also have a photon with four-momentum $p^\mu = \frac{dx^\mu}{d\lambda}$ at the same point $P$. The frequency that the observer measures for the photon at $P$ is 
+
+$$
+\begin{equation}
+  \label{eq: frequency_definition}
+  \nu = -p^\mu u_\mu = -g_{\mu \rho} p^\mu u^\rho,
+\end{equation}
+$$
+
+which is of course coordinate invariant. Here redshift is of interest because we have an "observer" at the accretion disk around the black hole that emits light with certain frequencies, and that light is then observed by the camera at another point in spacetime (Of course in our simulation it's the other way around, but in reality the photon would be emitted by the accretion disk and be observed by the camera). And since we have solved the geodesic equation for the rays we already know the four-momentum of the photons at all points along their geodesics. In particular we know their four-momenta at the disk and at the camera. Consider a point on the disk with coordinates $(r, \theta, \phi)$ and let the camera be at $(R, \Theta, \Phi)$. Let the parameter $\lambda$ equal 0 at the camera and $\lambda_1 > 0$ at the point on the disk. We will call the four-velocity of the relevant point on the disk $u^\mu_\mathrm{disk}$ and the four-velocity of teh camera $u^\mu_\mathrm{camera}$. Then the redshift $(1 + z)$ for the light emitted at the disk and observed by our camera is given by 
+
+$$
+\begin{equation}
+  \label{eq: redshift_factor} 
+  1 + z = \frac{\lambda_\mathrm{camera}}{\lambda_\mathrm{disk}} = \frac{\nu_\mathrm{disk}}{\nu_\mathrm{camera}} = \frac{g_{\mu \nu}\left(r, \theta, \phi\right) p^\mu\left(\lambda = \lambda_1\right) u^\nu_\mathrm{disk}}{g_{\mu \nu}\left(R, \Theta, \Phi\right) p^\mu \left(\lambda = 0\right) u^\nu_\mathrm{camera}}
+\end{equation}
+$$
+
+where $\nu_\mathrm{disk}$ and $\nu_\mathrm{camera}$ are the frequencies measured at the disk and camera respectively. And $\lambda_\mathrm{disk}$ and $\lambda_\mathrm{camera}$ are the measured wavelengths at the disk and camera. This general expression has the advantage that it doesn't assume anything about the motion of neither the disk nor the camera. So this places no restrictions on how we can move our camera around (apart from the local velocity not exceeding $c$ of course) or what kind of velocity distribution the disk can have. Also note that by "redshift" we really mean both redshift and blueshift. We are just referring to both decrease and increase in wavelength under the same umbrella term for simplicity (this is really just a habit from cosmology, where we only deal with redshift). It is also important to note that $\eqref{eq: redshift_factor}$ accounts for both the Doppler-like redshift caused by motion and the gravitational redshift. Both of these two kinds of redshift are baked into the metric itself. 
+
 ### 6.1 Why does it happen
 
 ### 6.2 Gravitational & Doppler redshift
 
 ### 6.3 Velocity distribution for the accretion disk
+
+The accretion disk is in reality moving in a spiral towards the black hole. But when dealing with the physics here we will simplify and assume all points on the disk move in circular orbits. From [3] we know that the four-velocity of a massive particle in a prograde, circular orbit in the equatorial plane around a Kerr black hole is given by $u^\mu = \left(u^t, 0, 0, u^\phi\right)$, where 
+
+$$
+\begin{equation}
+  u^\phi = \frac{\sqrt{Mr}}{r\sqrt{r^2 - 3Mr + 2\lvert a\rvert \sqrt{Mr}}}.\tag{53}
+\end{equation}
+$$
+
+And $u^t$ is of course determined by the condition $u^\mu u_\mu = -1$. 
 ___
 
 ## 7 Colors
 
-### 7.1 What colors are hot things
+Determining the color of the pixels in the image is of course crucial for the visualizations, and there are multiple ways of doing this. We could just say that each point on the disk and in the jet emits radiation at a certain wavelength. And then we could redshift this according to the description above to get an idea of how light from different parts of the scene is redshifted. That can look something like this 
 
-### 7.2 Why a blackbody
+[Render of single-color emission]
 
-### 7.3 Redshift and apparent temperature
+But this is not very realistic. The disk and jet will emit light at all wavelengths, but the particular distribution of light over the wavelengths can be very complicated. Therefore, in order to perform a simplification here, we will assume that the disk and jet act as *blackbodies*. For our purposes all this means is that the distribution of light over the wavelengths is given by the *Planck distribution*, also called the *blackbody distribution*
 
-### 7.4 Color theory
+$$
+\begin{equation}
+  I_{\lambda}\left(\lambda; T\right) = \frac{2h c^2}{\lambda^5} \frac{1}{e^{hc/\lambda k_B T} - 1},\tag{60}
+\end{equation} 
+$$
 
-### 7.5 From temperature to color
+where $h$ and $k_B$ are Planck's constant and Boltzmann's constant respectively. $T$ is the temperature of a particular point on the disk/jet and $\lambda$ is wavelength. This is an *intensity* distribution, and describes how much light is emitted at each wavelength. Now we need a way to convert an intensity distribution to an RGB color that the screen can output. 
+
+The relative amounts of the visible wavelengths that are emitted determines the color of the object. Unfortunately our eyes do not perceive and respond to all visible wavelengths of light equally. So converting an intensity distribution $I_\lambda$, which represents the light that is *actually* observed, to the color our eyes *see* is far from trivial. The procedure for calculating an RGB color comes in two main steps: converting a spectrum to so-called *tristimulus values* $X, Y$ and $Z$, and then converting the tristimulus values to RGB values. We found [5] [this](https://color.org/chardata/rgb/sRGB.pdf) and [this](https://en.wikipedia.org/wiki/SRGB) to be particularly helpful here. 
+
+Assume now that we have a blackbody at some temperature $T$. We can find the tristimulus values $X, Y$ and $Z$ using the so-called *color matching functions* $\bar{x}, \bar{y}$ and $\bar{z}$, which describe how our eyes respond to different wavelengths. The $X, Y$ and $Z$ values are calculated in the following way
+
+$$
+\begin{align*}
+  X &= \int_{\mathrm{380 nm}}^{\mathrm{780 nm}} I_\lambda \left(\lambda; T\right) \bar{x}\left(\lambda\right)d\lambda \tag{61} \\ \\
+  Y &= \int_{\mathrm{380 nm}}^{\mathrm{780 nm}} I_\lambda \left(\lambda; T\right) \bar{y}\left(\lambda\right)d\lambda \tag{62}\\ \\
+  Z &= \int_{\mathrm{380 nm}}^{\mathrm{780 nm}} I_\lambda \left(\lambda; T\right) \bar{z}\left(\lambda\right)d\lambda. \tag{63}
+\end{align*}
+$$
+
+Approximations to these color matching functions can be found in [6]. But it turns out that at low temperatures these approximations are not accurate enough anymore. So we will instead be using the lookup table given in [7]. In the following figure we have plotted the color matching functions as functions of wavelength. The $x$-axis represents wavelength $\lambda$ in nm, while the $y$-axis represents the output of the color matching functions, which can be taken to have units such that $X, Y$ and $Z$ are dimensionless.
+
+![color-matching-functions](../images/miscellaneous/color_matching_functions.png)
+
+While we have color-coded the different color matching functions, the three values $X, Y$ and $Z$ do not directly correspond to red, green and blue. Instead $X, Y$ and $Z$ live in an abstract color space. 
+
+### 7.1 The chromaticity diagram
+
+When we talk about colors we tend to group them into "classes" of colors that are similar, like greens, reds blues etc. And we have an intuition that some of those colors are really the same basic color, just at different brightnesses, or more precisely *luminances*. And the quantity that is the same between different *luminances* is called the *chromaticity*. 
+
+To explain this in more detail we can study the *chromaticity diagram*. This is a 2d plot which shows the chromaticities corresponding to different points in $XYZ$ space. And the color matching functions give us a map between intensity distributions/spectra and the $XYZ$ space. Consider now a spectrum consisting entirely of a single wavelength $\lambda_0$ - which is to say monochromatic light. We can represent this mathematically by $I_\lambda\left(\lambda\right) = \delta\left(\lambda - \lambda_0\right)$ (nevermind the units or the scaling), where $\delta\left(x - y\right)$ is the Dirac-delta "function". Plugging this into (61) - (63) gives 
+
+$$
+\begin{align*}
+  X &= \bar{x}\left(\lambda_0\right) \tag{64}\\ \\
+  Y &= \bar{y}\left(\lambda_0\right) \tag{65}\\ \\
+  Z &= \bar{z}\left(\lambda_0\right).\tag{66}
+\end{align*}
+$$
+
+If we let $\lambda_0$ vary over the visible range we can trace out the curve in $XYZ$ space made by the wavelengths in the visible spectrum. But in order to visualize this space in 2d we define the new coordinates $x$ and $y$ through
+
+$$
+\begin{align*}
+  x &= \frac{X}{X + Y + Z} \tag{67}\\ \\
+  y &= \frac{Y}{X + Y + Z} \tag{68}.
+\end{align*}
+$$
+
+It also naturally follows that we can define $z = \frac{Z}{X + Y + Z} = 1 - x - y$. We can now plot the $(x, y)$ coordinates of the monochromatic spectra, and the resulting curve is called the *spectral locus*. This is shown in the following figure. The marked points show where different wavelengths fall on the spectral locus. 
+
+![chromaticity-diagram-without-planckian-locus](../images/miscellaneous/chromaticity_diagram_without_planckian_locus.png)
+
+This spectral locus is the boundary of the chromaticity diagram mentioned earlier, and which is shown in [this](https://en.wikipedia.org/wiki/CIE_1931_color_space) Wikipedia article. Here we have colored in the different points along the spectral locus according to which RGB colors they correspond to. Of course we have not yet explained how we can compute these RGB colors from the $XYZ$ values, but we get to that later. 
+
+We can also calculate the curve in the chromaticity diagram which represents the color of blackbodies at different temperatures. This just involves calculating $X, Y$and $Z$ from the spectrum $I_\lambda\left(\lambda; T\right)$ for varying $T$. The resulting curve in $(x, y)$ coordinates is called the *Planckian locus* (or equivalently the *blackbody locus*). Plotted together with the spectral locus the result we get is shown in the following figure. Here the thick curve represents the Planckian locus. We have again calculated the RGB color for each point along the Planckian locus. 
+
+### 7.2 Transformation from XYZ to RGB 
+
+Now we can discuss how you actually get from $X, Y$ and $Z$ to RGB values. There are many different RGB color spaces designed for outputting colors to a screen, and these different RGB color spaces are defined by their so-called *primaries*. When choosing an RGB color space we choose which primaries, red, green and blue to use. These primaries correspond to the vertices in the colored triangle in the following figure.  
+
+![sRGB-gamut](../images/miscellaneous/SRGB_chromaticity_CIE1931.svg){:width="500px"}
+
+The set of points inside the triangle between the primaries is called the *gamut* of the RGB space, and makes up the colors that the given RGB space can represent. And since different RGB spaces have different primaries it follows that the sets of colors that they can represent are also different. 
+
+The points inside the gamut are linear combinations of the primaries, so the primaries form a basis for the RGB space. Red $R$, green $G$ and blue $B$ being the primaries are of course written as 
+
+$$
+\begin{equation}
+  R = \left[\begin{matrix}
+              1 \\
+              0 \\
+              0
+             \end{matrix}\right], \quad
+  G = \left[\begin{matrix}
+                0 \\
+                1 \\
+                0
+             \end{matrix}\right], \quad
+  B = \left[\begin{matrix}
+              0 \\
+              0 \\
+              1
+             \end{matrix}\right].\tag{69}
+\end{equation}
+$$
+
+in the RGB basis. We also have an $XYZ$ basis, in which the primaries can be written as 
+
+$$
+\begin{equation}
+  R = \left[\begin{matrix}
+              X_\mathrm{R} \\
+              Y_\mathrm{R} \\
+              Z_\mathrm{R}
+             \end{matrix}\right], \quad
+  G = \left[\begin{matrix}
+                X_\mathrm{G} \\
+                Y_\mathrm{G} \\
+                Z_\mathrm{G}
+             \end{matrix}\right], \quad
+  B = \left[\begin{matrix}
+              X_\mathrm{B} \\
+              Y_\mathrm{B} \\
+              Z_\mathrm{B}
+             \end{matrix}\right].\tag{70}
+\end{equation}
+$$
+
+The problem of finding the RGB values fro some given set of $XYZ$ values then translates into finding the coordinate transformation between the RGB coordinates and the $XYZ$ coordinates. We can write the transformation as 
+
+$$
+\begin{equation}
+  \left[\begin{matrix}
+          R \\
+          G \\
+          B
+        \end{matrix}\right] = M\left[\begin{matrix}
+                                      X \\
+                                      Y \\
+                                      Z
+                                     \end{matrix}\right]\tag{71}
+\end{equation}
+$$
+
+where $M$ is the transformation matrix we want to find. The standard way of specifying the primaries of an RGB color space is by giving the $x, y$ and $Y$ values of the primaries. So in order to work with the $X, Y$ and $Z$ values we first have to calculate the unknown $X$ and $Z$ values. From (67) we see that 
+
+$$
+\begin{equation}
+    X = \left(X + Y + Z\right)x = \frac{x}{y}Y.\tag{72}
+\end{equation}
+$$
+
+And likewise $Z = \frac{z}{y}Y$. Now we want to find the linear transformation $M$ relating the primaries expressed in the RGB basis to the primaries expressed in the XYZ basis, that is
+
+$$
+\begin{equation}
+  \left[\begin{matrix}
+          1 & 0 & 0 \\
+          0 & 1 & 0 \\
+          0 & 0 & 1
+        \end{matrix}\right] = M\left[\begin{matrix}
+                                        X_\mathrm{R} & X_\mathrm{G} & X_\mathrm{B} \\
+                                        Y_\mathrm{R} & Y_\mathrm{G} & Y_\mathrm{B} \\
+                                        Z_\mathrm{R} & Z_\mathrm{G} & Z_\mathrm{B}
+                                     \end{matrix}\right] \equiv MA\tag{73}
+\end{equation}
+$$
+
+where we have defined the matrix $A$ as the matrix containing the $XYZ$ coordinates of the primaries. Then the coordinate transformation matrix $M$ from earlier is just $A^{-1}$. We have of course just assumed that $A$ has an inverse, but we are physicists here, not mathematicians. 
+
+In order to actually compute the values of the entries in $M$ we need to know the $x, y$ and $Y$ values of the primaries. sRGB, which is the color space we will be working with, has the following primaries
+
+$$
+\begin{equation}
+  \left[\begin{matrix}
+          x_\mathrm{R} \\
+          y_\mathrm{R} \\
+          Y_\mathrm{R}
+        \end{matrix}\right] = \left[\begin{matrix}
+                                      0.64 \\
+                                      0.33 \\
+                                      0.2126
+                                    \end{matrix}\right], \quad\quad
+  \left[\begin{matrix}
+          x_\mathrm{G} \\
+          y_\mathrm{G} \\
+          Y_\mathrm{G}
+        \end{matrix}\right] = \left[\begin{matrix}
+                                      0.3 \\
+                                      0.6 \\
+                                      0.7152
+                                    \end{matrix}\right], \quad\quad
+  \left[\begin{matrix}
+          x_\mathrm{B} \\
+          y_\mathrm{B} \\
+          Y_\mathrm{B}
+        \end{matrix}\right] = \left[\begin{matrix}
+                                      0.15 \\
+                                      0.06 \\
+                                      0.0722
+                                    \end{matrix}\right].\tag{74}
+\end{equation}
+$$
+
+With these values we get
+
+$$
+\begin{equation}
+  M = \left[\begin{matrix}
+              3.24156456 & -1.53766524 & -0.49870224 \\
+              -0.96920119 & 1.87588535 & 0.04155324 \\
+              0.05562416 & -0.20395525 & 1.05685902
+            \end{matrix}\right]\tag{75}
+\end{equation}
+$$
+
+It is also typically advised to perform a final non-linear correction after this linear transformation. But our results looked better without this non-linear correction, so we chose to omit it. 
+
+### 7.3 Redshifted colors
+
+Remember that the reason we wanted to find the transformation from $XYZ$ to RGB was that we know how to calculate the $XYZ$ values corresponding to a given spectrum. So with this coordinate transformation in hand we can convert a spectrum into an RGB color. This is of interest to us here because we know the temperature $T$ and redshift $(1 + z)$ of points on the accretion disk and jet. So we can calculate the blackbody spectrum of each point and convert that to an RGB color to display on screen. Incorporating redshift into this is actually very easy. Consider a blackbody spectrum redshifted such that $\lambda_\text{shifted} = \left(1 + z\right)\lambda$. Then 
+
+$$
+\begin{align*}
+    I_{\lambda}\left(\lambda_\text{shifted}; T\right) &= \frac{2h c^2 \left(1 + z\right)^5}{\lambda_\text{shifted}^5} \frac{1}{e^{hc \left(1 + z\right)/\lambda_\text{shifted} k_B T} - 1} \\ \\
+    &= \frac{2hc^2 \left(1 + z\right)^5}{\lambda_\text{shifted}^5} \frac{1}{e^{hc/\lambda_\text{shifted} k_B T_\text{shifted}} - 1}, \tag{76}
+\end{align*}
+$$
+
+with $T_\text{shifted} \equiv \frac{T}{1 + z}$. Notice now that this is also a blackbody spectrum, evaluated at a "redshifted temperature". And we have an additional vertical scaling by $(1 + z)^5$. From earlier we know that relativistic beaming modifies the observed intensity by a factor $(1 + z)^{-5}$, and when applying this to (76) these factors of $(1 + z)$ cancel out. This means that we can actually just use the unmodified blackbody spectrum $I_\lambda$, just with a temperature $T_\mathrm{shifted} = \frac{T}{1 + z}$. So this accounts for relativistic beaming. 
+
+We can plot the map showing the blackbody color for different combinations of $T$ and $1 + z$. This is shown in the following figure for temperatures $T \in \left[200, 10000\right]$ K and for $(1 + z) \in \left[0.1, 2\right]$.
+
+![temp-redshift-map](../images/miscellaneous/temp_redshift_map.png)
 
 ### 7.6 Example 1: Redshift
 
+[Low temperature disk and jet with clear redshift and beaming turned off, no camera motion]
+
 ### 7.7 Example 2: Relativistic beaming
 
+[Same as above]
 ___
 
 ## 8 Review
@@ -608,7 +853,8 @@ ___
 
 ## 10 Light travel delay
 
-### 10.1 What
+One aspect of the visualizations which might not be obvious is that we have to take into account how long it takes light to travel from each part of the disk to the camera. Since it takes different amounts of time for light from different parts of the disk to reach us the photons that we receive at some time $t$ must have been emitted from the different parts of the disk at different times. So if we for example take our image at global time $t$ and it takes a time $t_\mathrm{A}$ for light from a point A on the disk to reach us, then the light that reaches us at time $t$ must have left A at time $t - t_\mathrm{A}$. So when the travel time $t_\mathrm{A}$ differs between the points on the disk the parts of the disk we see will correspond to different emission times. Let us assume we have a function $f(\vec{x}, t)$ which calculates the density at the position $\vec{x}$ on the disk evaluated at global time $t$. Then the density that the camera actually observes at point $\vec{x}_i$ when it takes an image at time $t$ is $f(\vec{x}_i, t - t_i)$, where $t$ is the time when the image is taken and $t_i$ is the time it takes light to travel from point $\vec{x}_i$ on the disk to the camera. 
+
 
 ### 10.2 Simple non-relativistic example
 
@@ -616,8 +862,17 @@ ___
 
 ### 10.4 Disk delay angle
 
+A convenient aspect of the geodesic tracing here is that we already calculate this travel time in the global coordinate system when we solve the geodesic equation. And since we assume that each point on the disk moves along a circular orbit this correction due to the travel time only requires a correction for the angle that a given point on the disk moves during the travel time. Furthermore, since the four-velocity of the points on the disk is constant this angular correction is particularly simple:
+
+$$
+\begin{equation}
+    \Delta \phi = \int_0^{t_\mathrm{travel}} \frac{d\phi}{dt'} dt' = \int_0^{t_\mathrm{travel}} \frac{d\phi}{d\tau} \frac{d\tau}{dt'} dt' = \frac{u^\phi}{u^t}t_\mathrm{travel},\tag{59}
+\end{equation}
+$$
+
 ### 10.5 Example
 
+[Render with clear effects of travel time delay]
 ___
 
 ## 11 The astrophysical jet
@@ -689,9 +944,20 @@ Sample gallery:
 ![R1](../images/black_hole_renders/R1.png)
 ![Far away](../images/black_hole_renders/MBRender2.png)
 ![Shadow](../images/black_hole_renders/flat_edge.png)
+![Epic jet](../images/black_hole_renders/epic_jet.png)
 
 ## 16 References 
 
 [1] Sean M. Carroll. Spacetime and Geometry: An Introduction to General Relativity. Cambridge University Press, 2019
 
 [2] Masud Mansuripur. An exact derivation of the thomas precession rate using the lorentz transformation. In Henri-Jean M. Drouhin, Jean-Eric Wegrowe, and Manijeh Razeghi, editors, Spintronics XIII. SPIE, August 2020
+
+[3] Z. Kh. Kurmakaev. Circular orbits in the Kerr metric. , 18:110, August 1974
+
+[4] Eric Bruneton. Real-time high-quality rendering of non-rotating black holes, 2020
+
+[5] Philippe Colantoni. Color space transformations. 2006
+
+[6] Chris Wyman et al. Simple analytic approximations to the cie xyz color matching  functions. 2013
+
+[7] Kasajima Ichiro. Plotting colors on color circle: Interconversion between xyz values and rgb color system. Current Trends in Analytical and Bioanalytical Chemistry, 1, 05 2017
