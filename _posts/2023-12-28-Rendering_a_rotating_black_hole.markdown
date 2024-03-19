@@ -8,6 +8,7 @@ math: true
 
 ![Evolution of the renders](../images/miscellaneous/evolution.gif)
 ![Fly-by](../images/black_hole_renders/fly-by.gif)
+
 ## 1 Introduction
 
 ### 1.1 Goal
@@ -32,7 +33,7 @@ The spacetime around a rotating (charge-neutral) black hole is described by the 
 
 $$
 \begin{equation}
-    \label{eq: Kerr_metric} \tag{1}
+\tag{1}
     ds^2 = g_{tt}dt^2 + g_{rr}dr^2 + g_{\theta\theta}d\theta^2 + g_{\phi\phi}d\phi^2 + g_{t\phi}\left(dtd\phi + d\phi dt\right),
 \end{equation}
 $$
@@ -64,9 +65,9 @@ and where $a = \frac{J}{M}$ describes the angular momentum of the black hole, wh
 
 $$
 \begin{align*}
-    x &= \sqrt{r^2 + a^2}\sin\theta\cos\phi, \label{eq: x_BL} \tag{2} \\
-    y &= \sqrt{r^2 + a^2}\sin\theta\sin\phi, \label{eq: y_BL} \tag{3} \\
-    z &= r\cos\theta. \label{eq: z_BL} \tag{4}
+    x &= \sqrt{r^2 + a^2}\sin\theta\cos\phi, \tag{2} \\
+    y &= \sqrt{r^2 + a^2}\sin\theta\sin\phi, \tag{3} \\
+    z &= r\cos\theta. \tag{4}
 \end{align*}
 $$
 
@@ -111,13 +112,12 @@ $$
 
 If we now divide everything by $M^2$ we can completely eliminate it from the equations by also defining $ds' = \frac{ds}{M}$. For reasons of brevity we will omit all the primes with the implicit understanding that all quantities are dimensionless. And if we ever want to convert to normal physics units we need to multiply by $M$ and add appropriate factors of $G$ and $c$.
 
-#### Coordinate transformation between Cartesian and Boyer-Lindquist coordinates
+#### 2.2.3 Coordinate transformation between Cartesian and Boyer-Lindquist coordinates
 
 We will need to convert vectors between Cartesian and BL coordinates multiple times, so a coordinate transformation between these systems is necessary. Deriving this is most easily done by studying an infinitesimal displacement vector $d\vec{r}$ expressed in the two coordinate systems. This can be written as 
 
 $$
 \begin{equation}
-  \label{eq: infinitesimal_displacement_Cartesian}
   d\vec{r} = dx \; \vec{\hat{x}} + dy \; \vec{\hat{y}} + dz \; \vec{\hat{z}}
 \end{equation}
 $$
@@ -126,7 +126,6 @@ in Cartesian, and
 
 $$
 \begin{equation}
-  \label{eq: infinitesimal_displacement_spheroidal}
   d\vec{r} = Rdr \; \vec{\hat{r}} + \Theta d\theta \; \vec{\hat{\theta}} + \Phi d\phi \; \vec{\hat{\phi}}
 \end{equation}
 $$
@@ -166,7 +165,6 @@ And thus the unit vector $\vec{\hat{r}}$ is given by
 
 $$
 \begin{equation}
-  \label{eq: r_unit_vector}
   \vec{\hat{r}} = \frac{1}{\sqrt{r^2 + a^2\cos^2\theta}}\left[r\sin\theta \cos\phi \; \vec{\hat{x}} + r\sin\theta \sin\phi \; \vec{\hat{y}} + \sqrt{r^2 + a^2}\cos\theta \; \vec{\hat{z}}\right].
 \end{equation}
 $$
@@ -184,7 +182,6 @@ We can therefore write the relation between the BL unit vectors and the Cartesia
 
 $$
 \begin{equation}  
-  \label{eq: unit_vector_relation}
   \left[\begin{matrix}
           \vec{\hat{r}} \\ \\
           \vec{\hat{\theta}} \\ \\
@@ -202,30 +199,26 @@ $$
 $$
 
 Let us call this coordinate transformation matrix $M$. It is fairly easy to check that this is an orthogonal matrix, meaning that $M^{-1} = M^T$ (just compute $M^T M$, which is equal to $\mathbb{I}$ for orthogonal matrices $M$). And in that case the inverse transformation, from BL to Cartesian coordinates, is given by $M^T$. Now, of course this is the coordinate transformation between the Cartesian and BL *basis vectors*. And we want the transformation between *vector components*. But it turns out the coordinate transformation for the vector components is the same as for the basis vectors, as is shown by Lutz Lehmann [here](https://math.stackexchange.com/questions/3493647/do-coordinate-components-transform-in-the-same-or-opposite-way-as-their-bases). 
-
-### 2.3 Geodesics
 ___
 
-## 3 Tracing geodesics in curved spacetime
+## 3 General Relativistic Raymarching
 
-#### 3.1.2 The geodesic equation 
+#### 3.1 The geodesic equation 
 
 In order to visualize the black hole we need to trace *geodesics* in the Kerr spacetime, which we do by solving the *geodesic equation*
 
 $$
 \begin{equation}
-  \label{eq: geodesic_equation} \tag{5}
   \frac{d^2 x^\mu}{d\lambda^2} + \Gamma^\mu_{\rho \sigma}\frac{dx^\rho}{d\lambda}\frac{dx^\sigma}{d\lambda} = 0,
 \end{equation}
 $$
 
-where $x^\mu$ is the four-position of a photon, and $\lambda$ is an affine parameter for the geodesic, chosen such that $p^\mu \equiv \frac{dx^\mu}{d\lambda}$ is the four-momentum of the photon. $\Gamma^\mu_{\rho \sigma}$ are the *Christoffel symbols* of the metric. Equation $\eqref{eq: geodesic_equation}$ is completely general, and we of course need explicit expressions for the geodesic equation for each value of $\mu$. But computing the Christoffel symbols tends to be very tedious work, and certainly so for the Kerr metric. So instead of deriving the Christoffel symbols by hand we use the Sympy package in Python to derive them, and thus also explicit expressions for each component of the geodesic equation. Code for doing this can be found [here](https://github.com/chrvill/Geodesic_EOM_deriver).
+where $x^\mu$ is the four-position of a photon, and $\lambda$ is an affine parameter for the geodesic, chosen such that $p^\mu \equiv \frac{dx^\mu}{d\lambda}$ is the four-momentum of the photon. $\Gamma^\mu_{\rho \sigma}$ are the *Christoffel symbols* of the metric. Equation $\eqref{eq: geodesic_equation}$ is completely general, and we of course need explicit expressions for the geodesic equation for each value of $\mu$. But computing the Christoffel symbols tends to be very tedious work, and certainly so for the Kerr metric. So instead of deriving the Christoffel symbols by hand we use the Sympy package in Python to derive them, and thus also explicit expressions for each component of the geodesic equation. Code for doing this can be found [here](https://github.com/chrvill/Black-hole-GR).
 
 We have the normalization requirement
 
 $$
 \begin{equation}
-    \label{eq: normalization} \tag{6}
     p_\nu p^\nu = \mu
 \end{equation}
 $$
@@ -234,7 +227,6 @@ with $\mu = 0$ for massless particles like photons and $\mu = -1$ for massive pa
 
 $$
 \begin{equation}
-    \label{eq: normalization_explicit} \tag{7}
     g_{tt} \left(p^t\right)^2 + g_{rr}\left(p^r\right)^2 + g_{\theta\theta} \left(p^\theta\right)^2 + g_{\phi \phi}\left(p^\phi\right)^2 + 2g_{t\phi} p^t p^\phi = \mu
 \end{equation}
 $$
@@ -243,7 +235,6 @@ When we choose initial directions for our rays we will essentially provide the s
 
 $$
 \begin{equation}
-    \label{eq: p^t expression} \tag{8}
     p^t = -\frac{g_{t\phi}}{g_{tt}} p^\phi \pm \sqrt{\left(\frac{g_{t\phi}}{g_{tt}} p^\phi\right)^2 - \frac{1}{g_{tt}}\left(g_{rr} \left(p^r\right)^2 + g_{\theta\theta} \left(p^\theta\right)^2 + g_{\phi \phi} \left(p^\phi\right)^2 - \mu\right)}
 \end{equation}
 $$
@@ -258,7 +249,6 @@ Numerically \eqref{eq: geodesic_equation} is just a completely standard second o
 
 $$
 \begin{equation}
-    \label{eq: general_diff_eq} \tag{9}
   \frac{dy}{dt} = f(t, y).
 \end{equation}
 $$
@@ -309,6 +299,16 @@ $$
 $$
 
 where $\epsilon$ is a tolerance value we can choose in order to specify the level of accuracy we want to achieve. Then, if $TE > \epsilon$ the error is too big and so we replace $h$ with $h_\text{new}$ and repeat the step. We perform this iteration until $TE < \epsilon$. And then in the next step we use this value of $h_\mathrm{new}$ as the new $h$.
+
+### 3.4 Example geodesics 
+
+The following animations show sets of 10 geodesics for massless particles around a Kerr black hole with $a = 1$. These are prograde orbits that start with an initial angular velocity in the same direction as the rotation of the black hole. 
+
+![prograde-geodesics](../images/miscellaneous/geodesics_prograde.gif)
+
+While these are retrograde orbits with initial angular velocity in the opposite direction. 
+
+![retrograde-geodesics](../images/miscellaneous/geodesics_retrograde.gif)
 ___
 
 ## 4 A simple pin-hole camera model
@@ -329,11 +329,13 @@ ___
 
 ## 5 The non-stationary camera
 
-### 5.1 Basic frame of reference transformation
+### 5.1 The motivation
 
-### 5.3 The ZAMO and ergosphere
+Up until this point the camera has been stationary (by which we mean stationary in the BL coordinates). But it's of course more general to let the camera move in any arbitrary way. This also introduces *relativistic_aberration* and *redshift*/*blueshift*, which we'll go into detail on in a bit. So in addition to just being more general, having a moving camera also induces very interesting visual effects. This more general setup will also very easily allow us to put the camera on a geodesic by just solving the geodesic equation for the camera (keeping in mind that the camera is of course massive, so $\mu = -1$). But before we get into the details on how we do this we should discuss the concept of a *ZAMO* and the *ergosphere*. 
 
-One of the Killing vectors of the Kerr metric is the following
+### 5.2 The ZAMO and ergosphere
+
+In GR we can find quantities which are conserved along geodesics by using the concept of \textit{Killing vectors} (note that this section is inspired by \cite{carroll}). These are vectors $K^\mu$ such that $K_\mu p^\mu$ is conserved along a geodesic. One of the Killing vectors of the Kerr metric is the following
 
 $$
 \begin{equation}
@@ -341,24 +343,25 @@ $$
 \end{equation}
 $$
 
-This is related to rotational symmetry, and we can therefore identify the following conserved quantity
+This Killing vector is related to rotational symmetry, and we can therefore identify the following conserved quantity analogous to an angular momentum
+
+$$
+\begin{align*}
+    L &\equiv g_{\mu \nu} R^\mu p^\nu \\ \\
+    &= g_{\phi \nu} p^\nu \\ \\
+    &= g_{\phi \phi} p^\phi + g_{t\phi} p^t
+\end{align*}
+$$
+
+along a geodesic. Consider now the expression for $L$ at $\theta = \pi/2$ as $r \to \infty$. Then $g_{t\phi} \to 0$ and $g_{\phi \phi} \to r^2$. So $L \to r^2 p^\phi$. And $p^\phi$ reduces to an angular velocity in flat space. So this is the standard definition of angular momentum in flat space. Meaning that the conserved quantity $L$ corresponds to the angular momentum of an object infinitely far away, in the asymptotically flat region of the spacetime. We can now consider releasing a particle from infinitely far away with $L = 0$ and letting it fall along a geodesic. Then we have $g_{t\phi} p^t + g_{\phi \phi} p^\phi = 0$, meaning that 
 
 $$
 \begin{equation}
-    L \equiv g_{\mu \nu} R^\mu p^\nu = g_{\phi \nu} p^\nu = g_{\phi \phi} p^\phi + g_{t\phi} p^t
-\end{equation}
-$$
-
-along a geodesic. Consider now the expression for $L$ at $\theta = \pi/2$ as $r \to \infty$. Then $g_{t\phi} \to 0$ and $g_{\phi \phi} \to r^2$. So $L \to r^2 p^\phi$. And $p^\phi$ reduces to an angular velocity in flat space. So this is the standard definition of angular momentum (per unit mass) in flat space. Meaning that the conserved quantity $L$ corresponds to the angular momentum of an object infinitely far away, in the asymptotically flat region of the spacetime. We can now consider releasing a particle from infinitely far away with $L = 0$ and letting it fall along a geodesic. Then we have $g_{t\phi} p^t + g_{\phi \phi} p^\phi = 0$, meaning that 
-
-$$
-\begin{equation}
-  \label{eq: frame_dragging_p_phi}
   p^\phi = -\frac{g_{t\phi}}{g_{\phi \phi}}p^t,
 \end{equation}
 $$
 
-which is to say that the particle gains an angular velocity even though it starts off falling with zero angular momentum. Observers following geodesics with $L = 0$ are called \textit{Zero Angular Momentum Observers} (ZAMO). The phenomenon causing ZAMO frames to move along with the rotation of the black hole is called \textit{frame dragging}. It turns out that frame dragging has quite dramatic consequences for the motion of particles around a rotating black hole. Consider a photon in the equatorial plane moving only in the $\phi$ direction. Then
+which is to say that the particle gains an angular velocity even though it starts off falling with zero angular momentum. Observers following geodesics with $L = 0$ are called *Zero Angular Momentum Observers* (ZAMO). The phenomenon causing ZAMO frames to move along with the rotation of the black hole is called *frame dragging*. It turns out that frame dragging has quite dramatic consequences for the motion of particles around a rotating black hole. Consider a photon in the equatorial plane moving only in the $\phi$ direction. Then
 
 $$
 \begin{equation*}
@@ -378,12 +381,13 @@ Consider this at the surface where $\Sigma = 2r$, meaning $g_{tt} = 0$. Then the
 
 $$
 \begin{equation}
-  \label{eq: frame_dragging_angular_velocity}
   \frac{d\phi}{dt} = 0, \quad \frac{d\phi}{dt} = - \frac{2g_{t\phi}}{g_{\phi \phi}} = \frac{a}{2 + a^2}
 \end{equation}
 $$
 
-The second solution is just a photon which moves along with the rotation of the black hole. The other solution is a photon which is instantaneously at rest in the BL coordinates. This is to say that at this boundary where $g_{tt} = 0$ no particles can move against the rotation of the black hole. This is also true for the region below this boundary, which is called the *ergosphere*. For $g_{tt}$ to be zero, we need $\Sigma = 2r$, meaning 
+The second solution is just a photon which moves along with the rotation of the black hole. The other solution is a photon which is instantaneously at rest in the BL coordinates. This is to say that at this boundary where $g_{tt} = 0$ no particles can move against the rotation of the black hole. This is also true for the region below this boundary, which is called the *ergosphere*. 
+
+So this surface where $g_{tt} = 0$ seems special, in that here photons can be instantaneously at rest in the BL coordinates. It is therefore interesting to find out how this surface looks. For $g_{tt}$ to be zero, we need $\Sigma = 2r$, meaning 
 
 $$
 \begin{align*}
@@ -392,9 +396,9 @@ $$
 \end{align*}
 $$
 
-Clearly there are two solutions, so there is both an inner and outer ergosphere boundary just like with the inner and outer event horizons. The following figure illustrates how the event horizons and ergosphere boundaries look with a slice of these surfaces in the $xz$-plane. This illustration is for $a = 0.99$.
+Clearly there are two solutions, so there is both an inner and outer ergosphere boundary just like with the inner and outer event horizons. The following figure illustrates how the event horizons and ergosphere boundaries look with a slice of these surfaces in the $xz$-plane as we vary $a$ from 0 to 1. 
 
-![EH and ergosphere](../images/miscellaneous/EH_and_ergosphere.png)
+![ergosphere-and-EH](../images/miscellaneous/ergosphere_and_EH.gif)
 
 We can also show the effects of frame dragging, which is done in Figure \ref{fig: gridlines}. Here the inward pointing curves represent photon geodesics with $L = 0$. And the dashed red circle represents the boundary of the ergosphere, while the filled black circle represents the event horizon of the black hole. Clearly the photon geodesics are forced to move with the rotation of the black hole. 
 
