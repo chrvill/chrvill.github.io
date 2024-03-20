@@ -27,13 +27,19 @@ ___
 
 #### 2.2.1 The Schwarzschild solution
 
+$$
+\begin{equation}
+  ds^2 = -\left(1 - \frac{2M}{r}\right)dt^2 + \left(1 - \frac{2M}{r}\right)^{-1} dr^2 + r^2 \left(d\theta^2 + \sin^2\theta d\phi^2\right) \tag{1}
+\end{equation}
+$$
+
 #### 2.2.2 The Kerr solution
 
 The spacetime around a rotating (charge-neutral) black hole is described by the *Kerr metric*. This metric is commonly given in Boyer-Lindquist (BL) coordinates, where the line element takes the following form
 
 $$
 \begin{equation}
-\tag{1}
+\tag{2}
     ds^2 = g_{tt}dt^2 + g_{rr}dr^2 + g_{\theta\theta}d\theta^2 + g_{\phi\phi}d\phi^2 + g_{t\phi}\left(dtd\phi + d\phi dt\right),
 \end{equation}
 $$
@@ -65,18 +71,18 @@ and where $a = \frac{J}{M}$ describes the angular momentum of the black hole, wh
 
 $$
 \begin{align*}
-    x &= \sqrt{r^2 + a^2}\sin\theta\cos\phi, \tag{2} \\
-    y &= \sqrt{r^2 + a^2}\sin\theta\sin\phi, \tag{3} \\
-    z &= r\cos\theta. \tag{4}
+    x &= \sqrt{r^2 + a^2}\sin\theta\cos\phi, \tag{3} \\
+    y &= \sqrt{r^2 + a^2}\sin\theta\sin\phi, \tag{4} \\
+    z &= r\cos\theta. \tag{5}
 \end{align*}
 $$
 
 In order for the math to be cleaner in the code we'll introduce the dimensionless quantities
 
 $$
-\begin{equation}
+\begin{equation*}
   r' = \frac{r}{M}, \quad a' = \frac{a}{M}, \quad t' = \frac{t}{M}
-\end{equation}
+\end{equation*}
 $$
 
 Then
@@ -110,7 +116,7 @@ $$
 \end{align*}
 $$
 
-If we now divide everything by $M^2$ we can completely eliminate it from the equations by also defining $ds' = \frac{ds}{M}$. For reasons of brevity we will omit all the primes with the implicit understanding that all quantities are dimensionless. And if we ever want to convert to normal physics units we need to multiply by $M$ and add appropriate factors of $G$ and $c$.
+If we now divide everything by $M^2$ we can completely eliminate it from the equations by also defining $ds' = \frac{ds}{M}$. For reasons of brevity we will omit all the primes with the implicit understanding that all quantities are dimensionless. And if we ever want to convert to normal physical units we need to multiply by $M$ and add appropriate factors of $G$ and $c$.
 
 #### 2.2.3 Coordinate transformation between Cartesian and Boyer-Lindquist coordinates
 
@@ -118,6 +124,7 @@ We will need to convert vectors between Cartesian and BL coordinates multiple ti
 
 $$
 \begin{equation}
+  \tag{6}
   d\vec{r} = dx \; \vec{\hat{x}} + dy \; \vec{\hat{y}} + dz \; \vec{\hat{z}}
 \end{equation}
 $$
@@ -126,6 +133,7 @@ in Cartesian, and
 
 $$
 \begin{equation}
+  \tag{7}
   d\vec{r} = Rdr \; \vec{\hat{r}} + \Theta d\theta \; \vec{\hat{\theta}} + \Phi d\phi \; \vec{\hat{\phi}}
 \end{equation}
 $$
@@ -143,10 +151,11 @@ $$
 \end{align*}
 $$
 
-Matching the terms containing $dr$ in $\eqref{eq: infinitesimal_displacement_Cartesian}$ and $\eqref{eq: infinitesimal_displacement_spheroidal}$, by inserting the terms in $dx, dy$ and $dz$ containing $dr$ into $\eqref{eq: infinitesimal_displacement_Cartesian}$ we get
+Matching the terms containing $dr$ in (6) and (7), by inserting the terms in $dx, dy$ and $dz$ containing $dr$ into (6) we get
 
 $$
 \begin{equation}
+  \tag{8}
   R\vec{\hat{r}} = \frac{r}{\sqrt{r^2 + a^2}}\sin\theta \cos\phi \; \vec{\hat{x}} + \frac{r}{\sqrt{r^2 + a^2}}\sin\theta \sin\phi \; \vec{\hat{y}} + \cos\theta \;\vec{\hat{z}}
 \end{equation}
 $$
@@ -165,7 +174,7 @@ And thus the unit vector $\vec{\hat{r}}$ is given by
 
 $$
 \begin{equation}
-  \vec{\hat{r}} = \frac{1}{\sqrt{r^2 + a^2\cos^2\theta}}\left[r\sin\theta \cos\phi \; \vec{\hat{x}} + r\sin\theta \sin\phi \; \vec{\hat{y}} + \sqrt{r^2 + a^2}\cos\theta \; \vec{\hat{z}}\right].
+  \vec{\hat{r}} = \frac{1}{\sqrt{r^2 + a^2\cos^2\theta}}\left[r\sin\theta \cos\phi \; \vec{\hat{x}} + r\sin\theta \sin\phi \; \vec{\hat{y}} + \sqrt{r^2 + a^2}\cos\theta \; \vec{\hat{z}}\right]. \tag{9}
 \end{equation}
 $$
 
@@ -194,11 +203,11 @@ $$
                                                 \vec{\hat{x}} \\ \\ 
                                                 \vec{\hat{y}} \\ \\
                                                 \vec{\hat{z}}
-                                                          \end{matrix}\right]
+                                                          \end{matrix}\right]\tag{10}
 \end{equation}
 $$
 
-Let us call this coordinate transformation matrix $M$. It is fairly easy to check that this is an orthogonal matrix, meaning that $M^{-1} = M^T$ (just compute $M^T M$, which is equal to $\mathbb{I}$ for orthogonal matrices $M$). And in that case the inverse transformation, from BL to Cartesian coordinates, is given by $M^T$. Now, of course this is the coordinate transformation between the Cartesian and BL *basis vectors*. And we want the transformation between *vector components*. But it turns out the coordinate transformation for the vector components is the same as for the basis vectors, as is shown by Lutz Lehmann [here](https://math.stackexchange.com/questions/3493647/do-coordinate-components-transform-in-the-same-or-opposite-way-as-their-bases). 
+Let us call this coordinate transformation matrix $M$. It is fairly easy to check that this is an orthogonal matrix, meaning that $M^{-1} = M^T$ (just compute $M^T M$, which is equal to $\mathbb{I}$ for orthogonal matrices $M$). And in that case the inverse transformation, from BL to Cartesian coordinates, is given by $M^T$. Now, of course this is the coordinate transformation between the Cartesian and BL *basis vectors*. And we want the transformation between *vector components*. But it turns out the coordinate transformation for the vector components is the same as for the basis vectors, as is shown by Lutz Lehmann in . 
 ___
 
 ## 3 General Relativistic Raymarching
@@ -209,16 +218,17 @@ In order to visualize the black hole we need to trace *geodesics* in the Kerr sp
 
 $$
 \begin{equation}
-  \frac{d^2 x^\mu}{d\lambda^2} + \Gamma^\mu_{\rho \sigma}\frac{dx^\rho}{d\lambda}\frac{dx^\sigma}{d\lambda} = 0,
+  \frac{d^2 x^\mu}{d\lambda^2} + \Gamma^\mu_{\rho \sigma}\frac{dx^\rho}{d\lambda}\frac{dx^\sigma}{d\lambda} = 0,\tag{11}
 \end{equation}
 $$
 
-where $x^\mu$ is the four-position of a photon, and $\lambda$ is an affine parameter for the geodesic, chosen such that $p^\mu \equiv \frac{dx^\mu}{d\lambda}$ is the four-momentum of the photon. $\Gamma^\mu_{\rho \sigma}$ are the *Christoffel symbols* of the metric. Equation $\eqref{eq: geodesic_equation}$ is completely general, and we of course need explicit expressions for the geodesic equation for each value of $\mu$. But computing the Christoffel symbols tends to be very tedious work, and certainly so for the Kerr metric. So instead of deriving the Christoffel symbols by hand we use the Sympy package in Python to derive them, and thus also explicit expressions for each component of the geodesic equation. Code for doing this can be found [here](https://github.com/chrvill/Black-hole-GR).
+where $x^\mu$ is the four-position of a photon, and $\lambda$ is an affine parameter for the geodesic, chosen such that $p^\mu \equiv \frac{dx^\mu}{d\lambda}$ is the four-momentum of the photon. $\Gamma^\mu_{\rho \sigma}$ are the *Christoffel symbols* of the metric. Equation (11) is completely general, and we of course need explicit expressions for the geodesic equation for each value of $\mu$. But computing the Christoffel symbols tends to be very tedious work, and certainly so for the Kerr metric. So instead of deriving the Christoffel symbols by hand we use the Sympy package in Python to derive them, and thus also explicit expressions for each component of the geodesic equation. Code for doing this can be found [here](https://github.com/chrvill/Black-hole-GR).
 
 We have the normalization requirement
 
 $$
 \begin{equation}
+  \tag{12}
     p_\nu p^\nu = \mu
 \end{equation}
 $$
@@ -227,6 +237,7 @@ with $\mu = 0$ for massless particles like photons and $\mu = -1$ for massive pa
 
 $$
 \begin{equation}
+    \tag{13}
     g_{tt} \left(p^t\right)^2 + g_{rr}\left(p^r\right)^2 + g_{\theta\theta} \left(p^\theta\right)^2 + g_{\phi \phi}\left(p^\phi\right)^2 + 2g_{t\phi} p^t p^\phi = \mu
 \end{equation}
 $$
@@ -235,6 +246,7 @@ When we choose initial directions for our rays we will essentially provide the s
 
 $$
 \begin{equation}
+    \tag{14}
     p^t = -\frac{g_{t\phi}}{g_{tt}} p^\phi \pm \sqrt{\left(\frac{g_{t\phi}}{g_{tt}} p^\phi\right)^2 - \frac{1}{g_{tt}}\left(g_{rr} \left(p^r\right)^2 + g_{\theta\theta} \left(p^\theta\right)^2 + g_{\phi \phi} \left(p^\phi\right)^2 - \mu\right)}
 \end{equation}
 $$
@@ -249,11 +261,12 @@ Numerically \eqref{eq: geodesic_equation} is just a completely standard second o
 
 $$
 \begin{equation}
+  \tag{15}
   \frac{dy}{dt} = f(t, y).
 \end{equation}
 $$
 
-Our second order equations of motion can of course be expressed in terms of first order DEs by just by writing the corresponding equations for $\frac{dx^\mu}{d\lambda}$ and $\frac{d^2 x^\mu}{d\lambda^2}$. With an appropriate choice of variable timestep the geodesic equation could most likely be solved using for example the 4th order Runge-Kutta integration scheme. But here, due to an unrelated error that will be discussed later, we chose to use the \textit{Runge-Kutta-Fehlberg} scheme, abbreviated RKF45. This is, as the name implies, also in the family of Runge-Kutta methods. The main benefit of using this scheme is that it allows us to calculate an adaptive timestep $h$ very easily - the scheme itself can choose a small timestep when needed and revert to a bigger timestep when things evolve slowly. The scheme itself is similar to 4th order Runge-Kutta, and is described in detail [here]https://en.wikipedia.org/wiki/Runge%E2%80%93Kutta%E2%80%93Fehlberg_method), where we use the table listed under "FORMULA 2". It is a 4th order accurate method where we perform a few more function evaluations in order to obtain a measure of the error associated with the scheme. When the right hand side of the differential equation is not explicitly a function of time, like here, the algorithm can be written as
+Our second order equations of motion can of course be expressed in terms of first order DEs by just by writing the corresponding equations for $\frac{dx^\mu}{d\lambda}$ and $\frac{d^2 x^\mu}{d\lambda^2}$. With an appropriate choice of variable timestep the geodesic equation could most likely be solved using for example the 4th order Runge-Kutta integration scheme. But here, due to an unrelated error that will be discussed later, we chose to use the \textit{Runge-Kutta-Fehlberg} scheme, abbreviated RKF45. This is, as the name implies, also in the family of Runge-Kutta methods. The main benefit of using this scheme is that it allows us to calculate an adaptive timestep $h$ very easily - the scheme itself can choose a small timestep when needed and revert to a bigger timestep when things evolve slowly. The scheme itself is similar to 4th order Runge-Kutta, and is described in detail in [3], where we use the table listed under "FORMULA 2". It is a 4th order accurate method where we perform a few more function evaluations in order to obtain a measure of the error associated with the scheme. When the right hand side of the differential equation is not explicitly a function of time, like here, the algorithm can be written as
 
 $$
 \begin{align*}
@@ -270,6 +283,7 @@ which can be written more succinctly as
 
 $$
 \begin{equation}
+    \tag{16}
     k_n = f\left(y + \sum_{i = 1}^{n - 1} B_{ni}k_i h\right).
 \end{equation}
 $$
@@ -278,6 +292,7 @@ The approximation to the function value at the next step is then
 
 $$
 \begin{equation}
+  \tag{17}
   y(t + h) = y(t) + CH_1 k_1 + CH_2 k_2 + CH_3 k_3 + CH_4 k_4 + CH_5 k_5 + CH_6 k_6,
 \end{equation}
 $$
@@ -286,6 +301,7 @@ and the estimate of the error is
 
 $$
 \begin{equation}
+  \tag{18}
   TE = \lvert CT_1 k_1 + CT_2 k_2 + CT_3 k_3 + CT_4 k_4 + CT_5 k_5 + CT_6 k_6 \rvert.
 \end{equation}
 $$
@@ -294,6 +310,7 @@ The matrix $B$ and vectors $CH$ and $CT$ can be found in the article linked to. 
 
 $$
 \begin{equation}
+  \tag{19}
   h_\text{new} = 0.9 h \left(\frac{\epsilon}{TE}\right)^{1/5}
 \end{equation}
 $$
@@ -335,10 +352,11 @@ Up until this point the camera has been stationary (by which we mean stationary 
 
 ### 5.2 The ZAMO and ergosphere
 
-In GR we can find quantities which are conserved along geodesics by using the concept of \textit{Killing vectors} (note that this section is inspired by \cite{carroll}). These are vectors $K^\mu$ such that $K_\mu p^\mu$ is conserved along a geodesic. One of the Killing vectors of the Kerr metric is the following
+In GR we can find quantities which are conserved along geodesics by using the concept of *Killing vectors* (note that this section is inspired by [1]). These are vectors $K^\mu$ such that $K_\mu p^\mu$ is conserved along a geodesic. One of the Killing vectors of the Kerr metric is the following
 
 $$
 \begin{equation}
+    \tag{20}
     R^\mu = \left(\partial_\phi\right)^\mu = \left(0, 0, 0, 1\right)
 \end{equation}
 $$
@@ -349,7 +367,7 @@ $$
 \begin{align*}
     L &\equiv g_{\mu \nu} R^\mu p^\nu \\ \\
     &= g_{\phi \nu} p^\nu \\ \\
-    &= g_{\phi \phi} p^\phi + g_{t\phi} p^t
+    &= g_{\phi \phi} p^\phi + g_{t\phi} p^t \tag{21}
 \end{align*}
 $$
 
@@ -357,6 +375,7 @@ along a geodesic. Consider now the expression for $L$ at $\theta = \pi/2$ as $r 
 
 $$
 \begin{equation}
+  \tag{22}
   p^\phi = -\frac{g_{t\phi}}{g_{\phi \phi}}p^t,
 \end{equation}
 $$
@@ -373,7 +392,7 @@ This means that
 
 $$
 \begin{equation*}
-  \frac{d\phi}{dt} = -\frac{g_{t\phi}}{g_{\phi \phi}} \pm \sqrt{\frac{g_{t\phi}^2}{g_{\phi \phi}^2} - \frac{g_{tt}}{g_{\phi \phi}}}
+  \frac{d\phi}{dt} = -\frac{g_{t\phi}}{g_{\phi \phi}} \pm \sqrt{\frac{g_{t\phi}^2}{g_{\phi \phi}^2} - \frac{g_{tt}}{g_{\phi \phi}}} \tag{23}
 \end{equation*}
 $$
 
@@ -381,7 +400,7 @@ Consider this at the surface where $\Sigma = 2r$, meaning $g_{tt} = 0$. Then the
 
 $$
 \begin{equation}
-  \frac{d\phi}{dt} = 0, \quad \frac{d\phi}{dt} = - \frac{2g_{t\phi}}{g_{\phi \phi}} = \frac{a}{2 + a^2}
+  \frac{d\phi}{dt} = 0, \quad \frac{d\phi}{dt} = - \frac{2g_{t\phi}}{g_{\phi \phi}} = \frac{a}{2 + a^2}\tag{24}
 \end{equation}
 $$
 
@@ -392,7 +411,7 @@ So this surface where $g_{tt} = 0$ seems special, in that here photons can be in
 $$
 \begin{align*}
     &r^2 + a^2 \cos^2\theta - 2r = 0 \\ \\
-    \implies &r = 1 \pm \sqrt{1 - a^2 \cos^2\theta}.
+    \implies &r = 1 \pm \sqrt{1 - a^2 \cos^2\theta}.\tag{25}
 \end{align*}
 $$
 
@@ -415,25 +434,28 @@ When we emit rays from our camera the components of the four-vectors describing 
 Tetrads, also called *frame fields*, is a set of orthonormal vectors which form a local inertial frame. So the tetrads take us from the global coordinate system in which the metric is $g_{\mu \nu}$ to the local one in which the metric is that of Minkowski $\eta_{\mu \nu}$. The tetrads $e_m^{\;\mu}$ are therefore defined by
 
 $$
+\begin{equation}
+    \tag{26}
     g_{\mu \nu} e_m^{\; \mu} e_n^{\; \nu} = \eta_{mn}.
+\end{equation}
 $$
 
 Keep in mind that Latin indices are here used to refer to the indices in the local inertial frame. We also have the dual tetrads $e^{*m}_\mu$, also called the co-frame field, defined through
 
 $$
-\begin{equation}
+\begin{equation*}
   e_m^{\mu} e^{*m}_{\nu} = \delta_\nu^\mu, \quad e_m^{\mu} e^{*n}_{\mu} = \delta_m^n.
-\end{equation}
+\end{equation*}
 $$
 
-From (gotta find that paper again) and [here](https://arxiv.org/abs/1506.01473v2) we have that the frame fields for the local ZAMO frame are given by
+From [4] and (gotta find that paper again) we have that the frame fields for the local ZAMO frame are given by
 
 $$
 \begin{align*}
-  e_t^{\mu} &= \delta_t^\mu\sqrt{\frac{\Lambda}{\Delta \Sigma}} + \delta_\phi^\mu \frac{2ar}{\sqrt{\Lambda \Delta \Sigma}} \label{eq: vierbein_tmu} \hspace{1.1cm}\\ \\
-  e_r^{\mu} &= \delta_r^\mu \sqrt{\frac{\Delta}{\Sigma}} \label{eq: vierbein_rmu}\\ \\
-  e_\theta^{\mu} &= \delta_\theta^\mu \frac{1}{\sqrt{\Sigma}} \label{eq: vierbein_thetamu}\\ \\
-  e_\phi^{\mu} &= \delta_\phi^\mu \sqrt{\frac{\Sigma}{\Lambda}}\frac{1}{\sin \theta}. \label{eq: vierbein_phimu}
+  e_t^{\mu} &= \delta_t^\mu\sqrt{\frac{\Lambda}{\Delta \Sigma}} + \delta_\phi^\mu \frac{2ar}{\sqrt{\Lambda \Delta \Sigma}}  \hspace{1.1cm}\\ \\
+  e_r^{\mu} &= \delta_r^\mu \sqrt{\frac{\Delta}{\Sigma}} \\ \\
+  e_\theta^{\mu} &= \delta_\theta^\mu \frac{1}{\sqrt{\Sigma}} \\ \\
+  e_\phi^{\mu} &= \delta_\phi^\mu \sqrt{\frac{\Sigma}{\Lambda}}\frac{1}{\sin \theta}. 
 \end{align*}
 $$
 
@@ -441,10 +463,10 @@ while the co-frame fields are given by
 
 $$
 \begin{align*}
-  e^{*t}_{\mu} &= \delta_\mu^t \sqrt{\frac{\Delta \Sigma}{\Lambda}} \label{eq: vierbein^tmu}\\ \\
-  e^{*r}_{\mu} &= \delta_\mu^r \sqrt{\frac{\Sigma}{\Delta}} \label{eq: vierbein^rmu} \\ \\
-  e^{*\theta}_{\mu} &= \delta_\mu^\theta \sqrt{\Sigma} \label{eq: vierbein^thetamu}\\ \\
-  e^{*\phi}_{\mu} &= -\delta_\mu^t \frac{2ar\sin\theta}{\sqrt{\Lambda \Sigma}} + \delta_\mu^\phi \sin\theta \sqrt{\frac{\Lambda}{\Sigma}}. \label{eq: vierbein^phimu}
+  e^{*t}_{\mu} &= \delta_\mu^t \sqrt{\frac{\Delta \Sigma}{\Lambda}} \\ \\
+  e^{*r}_{\mu} &= \delta_\mu^r \sqrt{\frac{\Sigma}{\Delta}}  \\ \\
+  e^{*\theta}_{\mu} &= \delta_\mu^\theta \sqrt{\Sigma} \\ \\
+  e^{*\phi}_{\mu} &= -\delta_\mu^t \frac{2ar\sin\theta}{\sqrt{\Lambda \Sigma}} + \delta_\mu^\phi \sin\theta \sqrt{\frac{\Lambda}{\Sigma}}. 
 \end{align*}
 $$
 
@@ -452,6 +474,7 @@ To transform a vector $x^m$ from the local ZAMO frame to the global frame we the
 
 $$
 \begin{equation}
+    \tag{27}
     x'^\mu = e_m^{\mu} x^m.
 \end{equation}
 $$
@@ -460,6 +483,7 @@ And the inverse naturally follows
 
 $$
 \begin{equation}
+    \tag{28}
     x^m = e^{*m}_{\mu} x'^\mu.
 \end{equation}
 $$
@@ -479,6 +503,7 @@ The camera's four-velocity is will primarily be expressed in the global frame. L
 
 $$
 \begin{equation}
+    \tag{29}
     \tilde{u}^m = e^m_{\mu} u^\mu
 \end{equation}
 $$
@@ -487,6 +512,7 @@ Since this four-velocity is measured in a local inertial frame it can also be ex
 
 $$
 \begin{equation}
+    \tag{30}
     \tilde{u}^m = \gamma \left(1, \vec{v}\right),
 \end{equation}
 $$
@@ -495,6 +521,7 @@ where $\gamma = \frac{1}{\sqrt{1 - \vec{v}^2}}$ and $\vec{v}$ is the local veloc
 
 $$
 \begin{equation}
+    \tag{31}
     v^i = \frac{\tilde{u}^i}{\gamma} = \frac{\tilde{u}^i}{\tilde{u}^t}
 \end{equation}
 $$
@@ -504,7 +531,7 @@ That concludes step 1.
 ___ 
 ##### Step 2
 
-Consider now the rays that we emit from our camera. We now need to transform these to the local ZAMO frame. This is just a Lorentz transformation, whose general form is the following (see for example [2])
+Consider now the rays that we emit from our camera. We now need to transform these to the local ZAMO frame. This is just a Lorentz transformation, whose general form is the following (see for example [5])
 
 $$
 \begin{equation}
@@ -512,7 +539,7 @@ $$
                           -\gamma v^x && 1 + \left(\gamma - 1\right)\frac{\left(v^x\right)^2}{\vec{v}^2} && \left(\gamma - 1\right) \frac{v^x v^y}{\vec{v}^2} && \left(\gamma - 1\right)\frac{v^x v^z}{\vec{v}^2} \\
                           -\gamma v^y && \left(\gamma - 1\right)\frac{v^x v^y}{\vec{v}^2} && 1 + \left(\gamma - 1\right)\frac{\left(v^y\right)^2}{\vec{v}^2} && \left(\gamma - 1\right)\frac{v^y v^z}{\vec{v}^2} \\
                           -\gamma v^z && \left(\gamma - 1\right)\frac{v^x v^z}{\vec{v}^2} && \left(\gamma - 1\right)\frac{v^y v^z}{\vec{v}^2} && 1 + \left(\gamma - 1\right)\frac{\left(v^z\right)^2}{\vec{v}^2}
-                         \end{matrix}\right]
+                         \end{matrix}\right]\tag{32}
 \end{equation}
 $$
 
@@ -530,12 +557,12 @@ when the components are $v^r$, $v^\theta$ and $v^\phi$ in BL coordinates. Let's 
 
 $$
 \begin{equation}
-    \label{eq: camera_four_mom_ZAMO}
+    \tag{33}
     \tilde{p}^m = \Lambda^m_n\left(\vec{v}\right) \tilde{p}'^n
 \end{equation}
 $$
 
-Then we move back into BL coordinates. And the coordinate transformation is then simply given by the matrix in $\eqref{eq: unit_vector_relation}$. 
+Then we move back into BL coordinates. And the coordinate transformation is then simply given by the matrix in (10). 
 
 ___
 
@@ -545,6 +572,7 @@ The final step is then rather simple. The four-momentum of the ray in the global
 
 $$
 \begin{equation}
+    \tag{34}
     p^\mu = e_m^{\; \mu} \tilde{p}^m.
 \end{equation}
 $$
@@ -563,7 +591,7 @@ Consider an observer at some point $P$ in spacetime with four-velocity $u^\mu$ i
 
 $$
 \begin{equation}
-  \label{eq: frequency_definition}
+  \tag{35}
   \nu = -p^\mu u_\mu = -g_{\mu \rho} p^\mu u^\rho,
 \end{equation}
 $$
@@ -572,12 +600,12 @@ which is of course coordinate invariant. Here redshift is of interest because we
 
 $$
 \begin{equation}
-  \label{eq: redshift_factor} 
+  \tag{36}
   1 + z = \frac{\lambda_\mathrm{camera}}{\lambda_\mathrm{disk}} = \frac{\nu_\mathrm{disk}}{\nu_\mathrm{camera}} = \frac{g_{\mu \nu}\left(r, \theta, \phi\right) p^\mu\left(\lambda = \lambda_1\right) u^\nu_\mathrm{disk}}{g_{\mu \nu}\left(R, \Theta, \Phi\right) p^\mu \left(\lambda = 0\right) u^\nu_\mathrm{camera}}
 \end{equation}
 $$
 
-where $\nu_\mathrm{disk}$ and $\nu_\mathrm{camera}$ are the frequencies measured at the disk and camera respectively. And $\lambda_\mathrm{disk}$ and $\lambda_\mathrm{camera}$ are the measured wavelengths at the disk and camera. This general expression has the advantage that it doesn't assume anything about the motion of neither the disk nor the camera. So this places no restrictions on how we can move our camera around (apart from the local velocity not exceeding $c$ of course) or what kind of velocity distribution the disk can have. Also note that by "redshift" we really mean both redshift and blueshift. We are just referring to both decrease and increase in wavelength under the same umbrella term for simplicity (this is really just a habit from cosmology, where we only deal with redshift). It is also important to note that $\eqref{eq: redshift_factor}$ accounts for both the Doppler-like redshift caused by motion and the gravitational redshift. Both of these two kinds of redshift are baked into the metric itself. 
+where $\nu_\mathrm{disk}$ and $\nu_\mathrm{camera}$ are the frequencies measured at the disk and camera respectively. And $\lambda_\mathrm{disk}$ and $\lambda_\mathrm{camera}$ are the measured wavelengths at the disk and camera. This general expression has the advantage that it doesn't assume anything about the motion of neither the disk nor the camera. So this places no restrictions on how we can move our camera around (apart from the local velocity not exceeding $c$ of course) or what kind of velocity distribution the disk can have. Also note that by "redshift" we really mean both redshift and blueshift. We are just referring to both decrease and increase in wavelength under the same umbrella term for simplicity (this is really just a habit from cosmology, where we only deal with redshift). It is also important to note that (36) accounts for both the Doppler-like redshift caused by motion and the gravitational redshift. Both of these two kinds of redshift are baked into the metric itself. 
 
 ### 6.1 Why does it happen
 
@@ -585,11 +613,11 @@ where $\nu_\mathrm{disk}$ and $\nu_\mathrm{camera}$ are the frequencies measured
 
 ### 6.3 Velocity distribution for the accretion disk
 
-The accretion disk is in reality moving in a spiral towards the black hole. But when dealing with the physics here we will simplify and assume all points on the disk move in circular orbits. From [3] we know that the four-velocity of a massive particle in a prograde, circular orbit in the equatorial plane around a Kerr black hole is given by $u^\mu = \left(u^t, 0, 0, u^\phi\right)$, where 
+The accretion disk is in reality moving in a spiral towards the black hole. But when dealing with the physics here we will simplify and assume all points on the disk move in circular orbits. From [6] we know that the four-velocity of a massive particle in a prograde, circular orbit in the equatorial plane around a Kerr black hole is given by $u^\mu = \left(u^t, 0, 0, u^\phi\right)$, where 
 
 $$
 \begin{equation}
-  u^\phi = \frac{\sqrt{Mr}}{r\sqrt{r^2 - 3Mr + 2\lvert a\rvert \sqrt{Mr}}}.\tag{53}
+  u^\phi = \frac{\sqrt{Mr}}{r\sqrt{r^2 - 3Mr + 2\lvert a\rvert \sqrt{Mr}}}.\tag{37}
 \end{equation}
 $$
 
@@ -606,25 +634,25 @@ But this is not very realistic. The disk and jet will emit light at all waveleng
 
 $$
 \begin{equation}
-  I_{\lambda}\left(\lambda; T\right) = \frac{2h c^2}{\lambda^5} \frac{1}{e^{hc/\lambda k_B T} - 1},\tag{60}
+  I_{\lambda}\left(\lambda; T\right) = \frac{2h c^2}{\lambda^5} \frac{1}{e^{hc/\lambda k_B T} - 1},\tag{38}
 \end{equation} 
 $$
 
 where $h$ and $k_B$ are Planck's constant and Boltzmann's constant respectively. $T$ is the temperature of a particular point on the disk/jet and $\lambda$ is wavelength. This is an *intensity* distribution, and describes how much light is emitted at each wavelength. Now we need a way to convert an intensity distribution to an RGB color that the screen can output. 
 
-The relative amounts of the visible wavelengths that are emitted determines the color of the object. Unfortunately our eyes do not perceive and respond to all visible wavelengths of light equally. So converting an intensity distribution $I_\lambda$, which represents the light that is *actually* observed, to the color our eyes *see* is far from trivial. The procedure for calculating an RGB color comes in two main steps: converting a spectrum to so-called *tristimulus values* $X, Y$ and $Z$, and then converting the tristimulus values to RGB values. We found [5] [this](https://color.org/chardata/rgb/sRGB.pdf) and [this](https://en.wikipedia.org/wiki/SRGB) to be particularly helpful here. 
+The relative amounts of the visible wavelengths that are emitted determines the color of the object. Unfortunately our eyes do not perceive and respond to all visible wavelengths of light equally. So converting an intensity distribution $I_\lambda$, which represents the light that is *actually* observed, to the color our eyes *see* is far from trivial. The procedure for calculating an RGB color comes in two main steps: converting a spectrum to so-called *tristimulus values* $X, Y$ and $Z$, and then converting the tristimulus values to RGB values. We found [8], [9] and [10] to be particularly helpful here. 
 
 Assume now that we have a blackbody at some temperature $T$. We can find the tristimulus values $X, Y$ and $Z$ using the so-called *color matching functions* $\bar{x}, \bar{y}$ and $\bar{z}$, which describe how our eyes respond to different wavelengths. The $X, Y$ and $Z$ values are calculated in the following way
 
 $$
 \begin{align*}
-  X &= \int_{\mathrm{380 nm}}^{\mathrm{780 nm}} I_\lambda \left(\lambda; T\right) \bar{x}\left(\lambda\right)d\lambda \tag{61} \\ \\
-  Y &= \int_{\mathrm{380 nm}}^{\mathrm{780 nm}} I_\lambda \left(\lambda; T\right) \bar{y}\left(\lambda\right)d\lambda \tag{62}\\ \\
-  Z &= \int_{\mathrm{380 nm}}^{\mathrm{780 nm}} I_\lambda \left(\lambda; T\right) \bar{z}\left(\lambda\right)d\lambda. \tag{63}
+  X &= \int_{\mathrm{380 nm}}^{\mathrm{780 nm}} I_\lambda \left(\lambda; T\right) \bar{x}\left(\lambda\right)d\lambda \tag{39} \\ \\
+  Y &= \int_{\mathrm{380 nm}}^{\mathrm{780 nm}} I_\lambda \left(\lambda; T\right) \bar{y}\left(\lambda\right)d\lambda \tag{40}\\ \\
+  Z &= \int_{\mathrm{380 nm}}^{\mathrm{780 nm}} I_\lambda \left(\lambda; T\right) \bar{z}\left(\lambda\right)d\lambda. \tag{41}
 \end{align*}
 $$
 
-Approximations to these color matching functions can be found in [6]. But it turns out that at low temperatures these approximations are not accurate enough anymore. So we will instead be using the lookup table given in [7]. In the following figure we have plotted the color matching functions as functions of wavelength. The $x$-axis represents wavelength $\lambda$ in nm, while the $y$-axis represents the output of the color matching functions, which can be taken to have units such that $X, Y$ and $Z$ are dimensionless.
+Approximations to these color matching functions can be found in [12]. But it turns out that at low temperatures these approximations are not accurate enough anymore. So we will instead be using the lookup table given in [13]. In the following figure we have plotted the color matching functions as functions of wavelength. The $x$-axis represents wavelength $\lambda$ in nm, while the $y$-axis represents the output of the color matching functions, which can be taken to have units such that $X, Y$ and $Z$ are dimensionless.
 
 ![color-matching-functions](../images/miscellaneous/color_matching_functions.png)
 
@@ -634,13 +662,13 @@ While we have color-coded the different color matching functions, the three valu
 
 When we talk about colors we tend to group them into "classes" of colors that are similar, like greens, reds blues etc. And we have an intuition that some of those colors are really the same basic color, just at different brightnesses, or more precisely *luminances*. And the quantity that is the same between different *luminances* is called the *chromaticity*. 
 
-To explain this in more detail we can study the *chromaticity diagram*. This is a 2d plot which shows the chromaticities corresponding to different points in $XYZ$ space. And the color matching functions give us a map between intensity distributions/spectra and the $XYZ$ space. Consider now a spectrum consisting entirely of a single wavelength $\lambda_0$ - which is to say monochromatic light. We can represent this mathematically by $I_\lambda\left(\lambda\right) = \delta\left(\lambda - \lambda_0\right)$ (nevermind the units or the scaling), where $\delta\left(x - y\right)$ is the Dirac-delta "function". Plugging this into (61) - (63) gives 
+To explain this in more detail we can study the *chromaticity diagram*. This is a 2d plot which shows the chromaticities corresponding to different points in $XYZ$ space. And the color matching functions give us a map between intensity distributions/spectra and the $XYZ$ space. Consider now a spectrum consisting entirely of a single wavelength $\lambda_0$ - which is to say monochromatic light. We can represent this mathematically by $I_\lambda\left(\lambda\right) = \delta\left(\lambda - \lambda_0\right)$ (nevermind the units or the scaling), where $\delta\left(x - y\right)$ is the Dirac-delta "function". Plugging this into (39) - (41) gives 
 
 $$
 \begin{align*}
-  X &= \bar{x}\left(\lambda_0\right) \tag{64}\\ \\
-  Y &= \bar{y}\left(\lambda_0\right) \tag{65}\\ \\
-  Z &= \bar{z}\left(\lambda_0\right).\tag{66}
+  X &= \bar{x}\left(\lambda_0\right) \tag{42}\\ \\
+  Y &= \bar{y}\left(\lambda_0\right) \tag{43}\\ \\
+  Z &= \bar{z}\left(\lambda_0\right).\tag{44}
 \end{align*}
 $$
 
@@ -648,8 +676,8 @@ If we let $\lambda_0$ vary over the visible range we can trace out the curve in 
 
 $$
 \begin{align*}
-  x &= \frac{X}{X + Y + Z} \tag{67}\\ \\
-  y &= \frac{Y}{X + Y + Z} \tag{68}.
+  x &= \frac{X}{X + Y + Z} \tag{45}\\ \\
+  y &= \frac{Y}{X + Y + Z} \tag{46}.
 \end{align*}
 $$
 
@@ -657,7 +685,7 @@ It also naturally follows that we can define $z = \frac{Z}{X + Y + Z} = 1 - x - 
 
 ![chromaticity-diagram-without-planckian-locus](../images/miscellaneous/chromaticity_diagram_without_planckian_locus.png)
 
-This spectral locus is the boundary of the chromaticity diagram mentioned earlier, and which is shown in [this](https://en.wikipedia.org/wiki/CIE_1931_color_space) Wikipedia article. Here we have colored in the different points along the spectral locus according to which RGB colors they correspond to. Of course we have not yet explained how we can compute these RGB colors from the $XYZ$ values, but we get to that later. 
+This spectral locus is the boundary of the chromaticity diagram mentioned earlier, and which is shown in [11]. Here we have colored in the different points along the spectral locus according to which RGB colors they correspond to. Of course we have not yet explained how we can compute these RGB colors from the $XYZ$ values, but we get to that later. 
 
 We can also calculate the curve in the chromaticity diagram which represents the color of blackbodies at different temperatures. This just involves calculating $X, Y$and $Z$ from the spectrum $I_\lambda\left(\lambda; T\right)$ for varying $T$. The resulting curve in $(x, y)$ coordinates is called the *Planckian locus* (or equivalently the *blackbody locus*). Plotted together with the spectral locus the result we get is shown in the following figure. Here the thick curve represents the Planckian locus. We have again calculated the RGB color for each point along the Planckian locus. 
 
@@ -687,7 +715,7 @@ $$
               0 \\
               0 \\
               1
-             \end{matrix}\right].\tag{69}
+             \end{matrix}\right].\tag{47}
 \end{equation}
 $$
 
@@ -709,7 +737,7 @@ $$
               X_\mathrm{B} \\
               Y_\mathrm{B} \\
               Z_\mathrm{B}
-             \end{matrix}\right].\tag{70}
+             \end{matrix}\right].\tag{48}
 \end{equation}
 $$
 
@@ -725,15 +753,15 @@ $$
                                       X \\
                                       Y \\
                                       Z
-                                     \end{matrix}\right]\tag{71}
+                                     \end{matrix}\right]\tag{49}
 \end{equation}
 $$
 
-where $M$ is the transformation matrix we want to find. The standard way of specifying the primaries of an RGB color space is by giving the $x, y$ and $Y$ values of the primaries. So in order to work with the $X, Y$ and $Z$ values we first have to calculate the unknown $X$ and $Z$ values. From (67) we see that 
+where $M$ is the transformation matrix we want to find. The standard way of specifying the primaries of an RGB color space is by giving the $x, y$ and $Y$ values of the primaries. So in order to work with the $X, Y$ and $Z$ values we first have to calculate the unknown $X$ and $Z$ values. From (45) we see that 
 
 $$
 \begin{equation}
-    X = \left(X + Y + Z\right)x = \frac{x}{y}Y.\tag{72}
+    X = \left(X + Y + Z\right)x = \frac{x}{y}Y.\tag{50}
 \end{equation}
 $$
 
@@ -749,7 +777,7 @@ $$
                                         X_\mathrm{R} & X_\mathrm{G} & X_\mathrm{B} \\
                                         Y_\mathrm{R} & Y_\mathrm{G} & Y_\mathrm{B} \\
                                         Z_\mathrm{R} & Z_\mathrm{G} & Z_\mathrm{B}
-                                     \end{matrix}\right] \equiv MA\tag{73}
+                                     \end{matrix}\right] \equiv MA\tag{51}
 \end{equation}
 $$
 
@@ -785,7 +813,7 @@ $$
                                       0.15 \\
                                       0.06 \\
                                       0.0722
-                                    \end{matrix}\right].\tag{74}
+                                    \end{matrix}\right].\tag{52}
 \end{equation}
 $$
 
@@ -794,10 +822,10 @@ With these values we get
 $$
 \begin{equation}
   M = \left[\begin{matrix}
-              3.24156456 & -1.53766524 & -0.49870224 \\
-              -0.96920119 & 1.87588535 & 0.04155324 \\
-              0.05562416 & -0.20395525 & 1.05685902
-            \end{matrix}\right]\tag{75}
+              \;\;\;3.24156456 & -1.53766524 & -0.49870224 \\
+              -0.96920119 & \;\;\;1.87588535 & \;\;\;0.04155324 \\
+              \;\;\;0.05562416 & -0.20395525 & \;\;\;1.05685902
+            \end{matrix}\right]\tag{53}
 \end{equation}
 $$
 
@@ -810,11 +838,11 @@ Remember that the reason we wanted to find the transformation from $XYZ$ to RGB 
 $$
 \begin{align*}
     I_{\lambda}\left(\lambda_\text{shifted}; T\right) &= \frac{2h c^2 \left(1 + z\right)^5}{\lambda_\text{shifted}^5} \frac{1}{e^{hc \left(1 + z\right)/\lambda_\text{shifted} k_B T} - 1} \\ \\
-    &= \frac{2hc^2 \left(1 + z\right)^5}{\lambda_\text{shifted}^5} \frac{1}{e^{hc/\lambda_\text{shifted} k_B T_\text{shifted}} - 1}, \tag{76}
+    &= \frac{2hc^2 \left(1 + z\right)^5}{\lambda_\text{shifted}^5} \frac{1}{e^{hc/\lambda_\text{shifted} k_B T_\text{shifted}} - 1}, \tag{54}
 \end{align*}
 $$
 
-with $T_\text{shifted} \equiv \frac{T}{1 + z}$. Notice now that this is also a blackbody spectrum, evaluated at a "redshifted temperature". And we have an additional vertical scaling by $(1 + z)^5$. From earlier we know that relativistic beaming modifies the observed intensity by a factor $(1 + z)^{-5}$, and when applying this to (76) these factors of $(1 + z)$ cancel out. This means that we can actually just use the unmodified blackbody spectrum $I_\lambda$, just with a temperature $T_\mathrm{shifted} = \frac{T}{1 + z}$. So this accounts for relativistic beaming. 
+with $T_\text{shifted} \equiv \frac{T}{1 + z}$. Notice now that this is also a blackbody spectrum, evaluated at a "redshifted temperature". And we have an additional vertical scaling by $(1 + z)^5$. From earlier we know that relativistic beaming modifies the observed intensity by a factor $(1 + z)^{-5}$, and when applying this to (54) these factors of $(1 + z)$ cancel out. This means that we can actually just use the unmodified blackbody spectrum $I_\lambda$, just with a temperature $T_\mathrm{shifted} = \frac{T}{1 + z}$. So this accounts for relativistic beaming. 
 
 We can plot the map showing the blackbody color for different combinations of $T$ and $1 + z$. This is shown in the following figure for temperatures $T \in \left[200, 10000\right]$ K and for $(1 + z) \in \left[0.1, 2\right]$.
 
@@ -870,7 +898,7 @@ A convenient aspect of the geodesic tracing here is that we already calculate th
 
 $$
 \begin{equation}
-    \Delta \phi = \int_0^{t_\mathrm{travel}} \frac{d\phi}{dt'} dt' = \int_0^{t_\mathrm{travel}} \frac{d\phi}{d\tau} \frac{d\tau}{dt'} dt' = \frac{u^\phi}{u^t}t_\mathrm{travel},\tag{59}
+    \Delta \phi = \int_0^{t_\mathrm{travel}} \frac{d\phi}{dt'} dt' = \int_0^{t_\mathrm{travel}} \frac{d\phi}{d\tau} \frac{d\tau}{dt'} dt' = \frac{u^\phi}{u^t}t_\mathrm{travel},\tag{55}
 \end{equation}
 $$
 
@@ -954,14 +982,26 @@ Sample gallery:
 
 [1] Sean M. Carroll. Spacetime and Geometry: An Introduction to General Relativity. Cambridge University Press, 2019
 
-[2] Masud Mansuripur. An exact derivation of the thomas precession rate using the lorentz transformation. In Henri-Jean M. Drouhin, Jean-Eric Wegrowe, and Manijeh Razeghi, editors, Spintronics XIII. SPIE, August 2020
+[2] https://math.stackexchange.com/questions/3493647/do-coordinate-components-transform-in-the-same-or-opposite-way-as-their-bases
 
-[3] Z. Kh. Kurmakaev. Circular orbits in the Kerr metric. , 18:110, August 1974
+[3] https://en.wikipedia.org/wiki/Runge%E2%80%93Kutta%E2%80%93Fehlberg_method
 
-[4] Eric Bruneton. Real-time high-quality rendering of non-rotating black holes, 2020
+[4] https://arxiv.org/abs/1506.01473v2
 
-[5] Philippe Colantoni. Color space transformations. 2006
+[5] Masud Mansuripur. An exact derivation of the thomas precession rate using the lorentz transformation. In Henri-Jean M. Drouhin, Jean-Eric Wegrowe, and Manijeh Razeghi, editors, Spintronics XIII. SPIE, August 2020
 
-[6] Chris Wyman et al. Simple analytic approximations to the cie xyz color matching  functions. 2013
+[6] Z. Kh. Kurmakaev. Circular orbits in the Kerr metric. , 18:110, August 1974
 
-[7] Kasajima Ichiro. Plotting colors on color circle: Interconversion between xyz values and rgb color system. Current Trends in Analytical and Bioanalytical Chemistry, 1, 05 2017
+[7] Eric Bruneton. Real-time high-quality rendering of non-rotating black holes, 2020
+
+[8] Philippe Colantoni. Color space transformations. 2006
+
+[9] https://color.org/chardata/rgb/sRGB.pdf
+
+[10] https://en.wikipedia.org/wiki/SRGB
+
+[11] https://en.wikipedia.org/wiki/CIE_1931_color_space
+
+[12] Chris Wyman et al. Simple analytic approximations to the cie xyz color matching  functions. 2013
+
+[13] Kasajima Ichiro. Plotting colors on color circle: Interconversion between xyz values and rgb color system. Current Trends in Analytical and Bioanalytical Chemistry, 1, 05 2017
