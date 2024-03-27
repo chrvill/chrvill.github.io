@@ -21,9 +21,11 @@ ___
 
 ## 2 Fundamental black hole physics
 
-### 2.1 Special relativity
+### 2.1 Qualitative explanation
 
-### 2.2 General relativity and the metric 
+Black holes arise out of a theory called *general relativity*, which is currently our best model for how gravity works. General relativity encompasses many strange phenomena that might be familiar to you, like length contraction, time dilation and gravitational lensing of light. These phenomena will all affect the visualizations, so it's useful to have at least a qualitative understanding of what's going on. 
+
+Length contraction is the phenomenon where the length of physical objects 
 
 #### 2.2.1 The Schwarzschild solution
 
@@ -688,6 +690,8 @@ It also naturally follows that we can define $z = \frac{Z}{X + Y + Z} = 1 - x - 
 This spectral locus is the boundary of the chromaticity diagram mentioned earlier, and which is shown in [11]. Here we have colored in the different points along the spectral locus according to which RGB colors they correspond to. Of course we have not yet explained how we can compute these RGB colors from the $XYZ$ values, but we get to that later. 
 
 We can also calculate the curve in the chromaticity diagram which represents the color of blackbodies at different temperatures. This just involves calculating $X, Y$and $Z$ from the spectrum $I_\lambda\left(\lambda; T\right)$ for varying $T$. The resulting curve in $(x, y)$ coordinates is called the *Planckian locus* (or equivalently the *blackbody locus*). Plotted together with the spectral locus the result we get is shown in the following figure. Here the thick curve represents the Planckian locus. We have again calculated the RGB color for each point along the Planckian locus. 
+
+![chromaticity-diagram-with-planckian-locus](../images/miscellaneous/chromaticity_diagram_with_planckian_locus.png)
 
 ### 7.2 Transformation from XYZ to RGB 
 
